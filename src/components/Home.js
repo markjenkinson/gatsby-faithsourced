@@ -12,7 +12,7 @@ const Home = (props) => (
     <div id="home" style={props.timeout ? {display: 'none'} : {}}>
 		<section id="one" className="tiles">
 			<article>
-				<div className="ribbon ribbon-top-right"><div><span><a href="https://www.facebook.com/events/276193739977566/" target="_blank">Next Meetup<br /><strong>Sunday <span className="font-custom">t</span> May 5</strong></a></span></div></div>
+				<div className="ribbon ribbon-top-right"><div><span><a href="https://www.facebook.com/events/276193739977566/" target="_blank">Next Meetup<br /><strong>Sunday <span className="font-custom">t</span> June 9</strong></a></span></div></div>
 				<header className="major">
 					<span className="image"><img src={icon_fullstackfaith} alt="" /></span>
 					<h3>Full Stack <span className="font-custom">Faith</span><br />Meetups</h3>

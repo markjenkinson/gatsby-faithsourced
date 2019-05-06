@@ -90,8 +90,8 @@ class Main extends React.Component {
 			<h2 className="major">Full Stack <span className="font-custom">Faith</span> Meetups</h2>
 			<p>The term "full stack" is used to describe the well rounded developer. Full Stack <span className="font-custom">faith</span> is a <strong>FREE</strong> monthly meetup where faith lessons + developer talk + pancakes = growth that is personal,	professional,	practical and delicious.</p>
 			<p>Full Stack <span className="font-custom">faith</span> is a community to <strong>GROW</strong> together, being well rounded in both our faith and professional development.</p>
-			<a href="https://www.facebook.com/events/276193739977566/" target="_blank" className="button right">RSVP to Attend</a>
-			<p>Join us <strong>May 5th</strong> for&nbsp;:</p>
+			<a href="https://www.facebook.com/events/545554882518122/" target="_blank" className="button right">RSVP to Attend</a>
+			<p>Join us <strong>Sunday, June 9th at 7pm </strong> for&nbsp;:</p>
 			<ol>
 				<li>developer tutorials</li>
 				<li>technology discussions</li>
