@@ -5,6 +5,8 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import '../assets/scss/main.scss'
 
+import Footer from '../components/Footer'
+
 const Layout = ({ children, location }) => {
 
   let content;
@@ -17,11 +19,17 @@ const Layout = ({ children, location }) => {
     )
   } else {
     content = (
-      <div id="wrapper" className="page">
-        <div>
-          {children}
-        </div>
-      </div>
+		<div id="page" className="body blurred">
+			<div id="wrapper">
+				<div id="main" style={{display:'flex'}}>
+					<article className="active timeout">
+        				{children}
+        			</article>
+				</div>
+				<Footer/>
+			</div>
+		<div id="bg"></div>
+		</div>
     )
   }
 
