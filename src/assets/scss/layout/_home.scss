@@ -27,7 +27,7 @@
 			transition-delay: #{_duration(delay)};
 		}
 		
-		.body.is-article-visible & {
+		.body.blurred & {
 			opacity: 0;
 			transition-delay: #{_duration(transition)};
 		}

@@ -165,7 +165,7 @@
 			}
 		}
 
-		.body.is-article-visible & {
+		.body.blurred & {
 			@include vendor('transform', 'scale(0.95)');
 			@include vendor('filter', 'blur(0.1rem)');
 			opacity: 0;

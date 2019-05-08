@@ -53,7 +53,7 @@
 			z-index: 1;
 		}
 
-		.body.is-article-visible & {
+		.body.blurred & {
 			&:after {
 				@include vendor('transform', 'scale(1.0825)');
 				@include vendor('filter', 'blur(0.2rem)');

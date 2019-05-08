@@ -25,10 +25,16 @@
 			text-transform: uppercase;
 		}
 
-		.body.is-article-visible & {
+		.body.blurred & {
 			@include vendor('transform', 'scale(0.95)');
 			@include vendor('filter', 'blur(0.1rem)');
 			opacity: 0;
+		}
+		
+		#page.body.blurred & {
+			@include vendor('transform', 'scale(1)');
+			@include vendor('filter', 'blur(0)');
+			opacity: 1;
 		}
 
 		.body.is-loading & {
