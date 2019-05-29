@@ -92,6 +92,11 @@
 		}
 
 		@include breakpoint(small) {			
+			&.banner {
+				margin: -4.5rem -2.5rem 2.5rem -2rem;
+				width: calc(100% + 4rem);
+			}
+			
 			&.main {
 				margin: (_size(element-margin) * 1) 0;
 			}

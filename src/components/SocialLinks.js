@@ -9,6 +9,7 @@ const SocialLinks = (props) => (
 		<li><a href="https://www.youtube.com/channel/UCjN3B-FahTVt2qqc8mMkntQ" target="_blank" className="icon fa-youtube"><span className="label">YouTube</span></a></li>
 		<li><a href="https://instagram.com/faithsourced" target="_blank" className="icon fa-instagram"><span className="label">Instagram</span></a></li>
 		<li><a href="https://github.com/faithsourced" target="_blank" className="icon fa-github"><span className="label">GitHub</span></a></li>
+		<li><a href="/rss.xml" target="_blank" className="icon fa-rss"><span className="label">RSS</span></a></li>
 	</ul>
 )
 

@@ -8,9 +8,12 @@ module.exports = {
      url: "https://faithsourced.com"
   },
   plugins: [
+	'gatsby-transformer-sharp',
+	'gatsby-plugin-sharp',
+	'gatsby-transformer-remark',
     'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'Faith Sourced Software Foundation',
         short_name: 'Faith Sourced',
@@ -19,9 +22,89 @@ module.exports = {
         theme_color: '#2c393f',
         display: 'standalone',
         icon: 'src/images/favicon-512x512.png', // This path is relative to the root of the site.
-      },
+		},
     },
     'gatsby-plugin-sass',
-    'gatsby-plugin-offline'
+    'gatsby-plugin-offline',
+	{
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/src/blog`,
+        name: "blog",
+		},
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/src/images`,
+        name: "images",
+		},
+    },
+    {
+	resolve: 'gatsby-source-thirdparty',
+	options: {
+		url: 'https://api.faithsourced.com/conveyor/modules/news/api/public/v1/posts/?news_group_id=1&start=0&limit=6', // The url, this should be the endpoint you are attempting to pull data from
+		name: 'Posts', // Name of the data to be downloaded.  Will show in graphQL or be saved to a file using this name
+		payloadKey: 'posts',
+		},
+	},
+    {
+      resolve: 'gatsby-plugin-remote-images',
+      options: {
+        nodeType: 'thirdParty__Posts',
+        imagePath: 'image_1_url',
+        name: 'image_1_local',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl: url
+                site_url: url
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allThirdPartyPosts } }) => {
+              return allThirdPartyPosts.edges.map(edge => {
+                return Object.assign({}, edge.node, {
+                  description: edge.node.excerpt,
+                  date: edge.node.date,
+                  url: site.siteMetadata.siteUrl + edge.node.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.slug
+                })
+              })
+            },
+            query: `
+              {
+                allThirdPartyPosts(
+                  sort: { order: DESC, fields: [date] }
+                ) {
+                  edges {
+                    node {
+                      title
+                      date
+                      excerpt
+                      image_1_url
+                      slug
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Faith Sourced Blog",
+          },
+        ],
+      },
+    },
   ],
 }

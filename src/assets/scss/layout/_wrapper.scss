@@ -38,4 +38,17 @@
 		&.page {
 			@include vendor('justify-content', 'flex-start');
 		}
+		
+		.date-line {
+			display: block;
+			text-align: center;
+			width: 100%;
+			font-size: 0.6em;
+			text-transform: uppercase;
+			margin-bottom: 1rem;
+			
+			i {
+				margin-right: 10px;
+			}
+		}
 	}

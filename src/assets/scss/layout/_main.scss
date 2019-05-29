@@ -24,7 +24,7 @@
 				'opacity #{_duration(article)} ease-in-out',
 				'transform #{_duration(article)} ease-in-out'
 			));
-			@include padding(2.5rem, 2.5rem, (2rem, 0, 1rem, 0));
+			@include padding(2.5rem, 2.5rem, (2rem, 0, 2.5rem, 0));
 			position: relative;
 			width: 40rem;
 			max-width: 100%;
@@ -49,6 +49,7 @@
 			.close {
 				display: block;
 				position: absolute;
+				border: none;
 				top: 0;
 				right: 0;
 				width: 4rem;
@@ -87,8 +88,158 @@
 				}
 			}
 			
+			.previous {
+				display: block;
+				position: absolute;
+				border: none;
+				top: 0;
+				left: 0;
+				width: 4rem;
+				height: 4rem;
+				cursor: pointer;
+				text-indent: 4rem;
+				overflow: hidden;
+				white-space: nowrap;
+
+				&:before {
+					@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0.75rem;
+					left: 0.75rem;
+					width: 2.5rem;
+					height: 2.5rem;
+					border-radius: 100%;
+					background-position: center;
+					background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="5" y1="10" x2="13" y2="18" /><line x1="13" y1="2" x2="5" y2="10" /></svg>');
+					background-size: 20px 20px;
+					background-repeat: no-repeat;
+				}
+
+				&:hover {
+					&:before {
+						background-color: _palette(bg-overlay);
+					}
+				}
+
+				&:active {
+					&:before {
+						background-color: _palette(border-bg-alt);
+					}
+				}
+			}
+			
+			.next {
+				display: block;
+				position: absolute;
+				border: none;
+				top: 0;
+				right: 0;
+				width: 4rem;
+				height: 4rem;
+				cursor: pointer;
+				text-indent: 4rem;
+				overflow: hidden;
+				white-space: nowrap;
+
+				&:before {
+					@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0.75rem;
+					left: 0.75rem;
+					width: 2.5rem;
+					height: 2.5rem;
+					border-radius: 100%;
+					background-position: center;
+					background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="5" y1="18" x2="13" y2="10" /><line x1="13" y1="10" x2="5" y2="2" /></svg>');
+					background-size: 20px 20px;
+					background-repeat: no-repeat;
+				}
+
+				&:hover {
+					&:before {
+						background-color: _palette(bg-overlay);
+					}
+				}
+
+				&:active {
+					&:before {
+						background-color: _palette(border-bg-alt);
+					}
+				}
+			}
+			
+			.home {
+				display: block;
+				position: absolute;
+				border: none;
+				top: 0;
+				left: calc(50% - 2rem);
+				width: 4rem;
+				height: 4rem;
+				cursor: pointer;
+				text-indent: 4rem;
+				overflow: hidden;
+				white-space: nowrap;
+
+				&:before {
+					@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0.75rem;
+					left: 0.75rem;
+					width: 2.5rem;
+					height: 2.5rem;
+					border-radius: 100%;
+					background-position: center;
+					background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="18" y1="14" x2="10" y2="6" /><line x1="10" y1="6" x2="2" y2="14" /></svg>');
+					background-size: 20px 20px;
+					background-repeat: no-repeat;
+				}
+
+				&:hover {
+					&:before {
+						background-color: _palette(bg-overlay);
+					}
+				}
+
+				&:active {
+					&:before {
+						background-color: _palette(border-bg-alt);
+					}
+				}
+			}
+			
 			h2 {
 				text-align: center;
+			}
+			
+			blockquote p:last-of-type {
+				margin: 0;
+			}
+			
+			.pagination-bar {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				height: 4rem;
+				
+				&.top {
+					top: 0;					
+				}
+				
+				&.bottom {
+					bottom: 0;
+				}
+			}
+			
+			p>img {
+				width: calc(100% + 5rem);
+				margin: 0 -2.5rem 2rem -2.5rem;
 			}
 			
 			.logo {
@@ -133,7 +284,12 @@
 
 		@include breakpoint(xsmall) {
 			article {
-				@include padding(2rem, 1.5rem, (1rem, 0, 0.5rem, 0));
+				@include padding(2rem, 1.5rem, (1rem, 0, 3rem, 0));
+				
+				p>img {
+					width: calc(100% + 3rem);
+					margin: 0 -1.5rem 2rem -1.5rem;
+				}
 			}
 		}
 	}
