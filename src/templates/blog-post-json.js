@@ -20,7 +20,7 @@ function BlogPost(props) {
 					{ property: 'og:site_name', content: 'Faith Sourced Software Foundation' },
 					{ property: 'og:title', content: '<+blog> '+post.title },
 					{ property: 'og:url', content: 'https://faithsourced.com/'+post.slug},
-					{ property: 'og:image', content: post.image_1_local.childImageSharp.fluid.src},
+					{ property: 'og:image', content: 'https://faithsourced.com/'+post.image_1_local.childImageSharp.fluid.src},
 					{ property: 'og:description', content: post.excerpt },
 				]}>
 				<html lang="en" />
