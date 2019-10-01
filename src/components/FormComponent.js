@@ -37,10 +37,9 @@ class FormComponent extends React.Component {
 	render() {
 		return (
 			<div className='col'>
-				<form method="POST" data-netlify="true" onSubmit={this.handleSubmit}>
+				<form method="POST" data-netlify="true" onSubmit={this.handleSubmit} name={this.props.data.name}>
 					<div className={this.state.isSubmitted ? 'fadeOut' : 'fadeIn'}>
 						<h2 className="major" dangerouslySetInnerHTML={{ __html: this.props.data.name}} />
-						<input type="hidden" name="form-name" value={this.props.data.name} />
 						{this.props.data.thirdParty_fields && this.props.data.thirdParty_fields.map(( field ) => (
 							<div className="form-fields">
 							{field.type === "text_block" &&
