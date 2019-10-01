@@ -1,23 +1,78 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { graphql, StaticQuery } from 'gatsby'
 
 const Header = (props) => (
     <header id="header" style={props.timeout ? {display: 'none'} : {}}>
-        <div className="logo" alt="Faith Sourced Logo"></div>
+        {props.title && props.glyph &&
+            <div className="logo-glyph" alt={props.title}></div>
+		}
         <div className="content">
             <div className="inner">
-                <h1 className="wordmark">Faith Sourced Software Foundation</h1>
-                <p className="tagline">Software as a Service</p>
+                {props.title && props.wordmark && 
+                	<h1 className="logo-wordmark">{props.title}</h1>
+                }
+                {props.title && !props.wordmark && 
+                	<h1>{props.title}</h1>
+                }
+                {props.slogan &&
+                	<p className="tagline">{props.slogan}</p>
+                }
             </div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('about')}}>About&nbsp;Us</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('faith')}}>Our&nbsp;Faith</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onScrollTo('Blog')}}>Blog</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('contact')}}>Contact</a></li>
-            </ul>
-        </nav>
+        {props.onOpenArticle &&
+			<nav>
+				<ul>
+					<StaticQuery
+						query={graphql`
+							query PrimaryMenuQuery {
+								allThirdPartyPages {
+									edges {
+										node {
+											nav_level
+											parent_id
+											type
+											name
+											slug
+											link_url
+											link_target
+											link_mode
+											link_hash
+										}
+									}
+								}
+							}
+						`}
+						render={data => (
+							data.allThirdPartyPages.edges.map(({ node }, i) => {
+								if(node.nav_level === '1' && node.parent_id === '0') {
+									if(node.type === 'link') {
+										var target = '_parent';
+										if(node.link_target === 1) {
+											target = '_blank';
+										}
+										if(node.link_mode === 'internal') {
+											if(node.link_hash) {
+												return <li key={i}><a href="javascript:;" onClick={() => {props.onScrollTo(node.link_hash)}}>{node.name}</a></li>
+											}
+											else {
+												return <li key={i}><a href={node.link_url} target={target}>{node.name}</a></li>
+											}
+										}
+										else {
+											return <li key={i}><a href={node.link_url} target={target}>{node.name}</a></li>
+										}
+									}
+									else {
+										return <li key={i}><a href="javascript:;" onClick={() => {props.onOpenArticle(node.slug)}}>{node.name}</a></li>
+									}
+								}
+							})
+						)}
+					/>
+				</ul>
+			</nav>
+        }
     </header>
 )
 

@@ -30,20 +30,10 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 			cursor: default;
-			height: 50vh;
+			height: 60vh;
 			min-height: 500px;
 			position: relative;
 			width: 33.333%;
-			
-			.image {
-				text-align: center;
-				width: 100%; /** required for ie11 fix **/
-			}
-			
-			.image img {
-				display: inline;
-				max-width: 66%;
-			}
 
 			header {
 				position: relative;

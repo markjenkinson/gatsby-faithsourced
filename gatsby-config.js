@@ -1,110 +1,182 @@
+require("dotenv").config({
+	path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
-  siteMetadata: {
-    title: "Faith Sourced Software Foundation",
-    author: "",
-    description: "Faith Sourced is a community of software developers using their skills for Jesus. We call it Software as a Service where Christ is the center of all we are and do. Faith Sourced is our contribution to the cause of Christ, and His church. Faith Sourced is our chance to use our uniquely technical skills for purposes that are eternal, united under one banner: the gospel of Jesus Christ. The software we build is freely available to the body of Christ, for His glory.",
-     keywords: "software,developer,code,open source,faith,christian,jesus,church,meetups,toronto,canada",
-     thumbnail: "https://faithsourced.com/icons/icon-512x512.png",
-     url: "https://faithsourced.com"
-  },
-  plugins: [
-	'gatsby-transformer-sharp',
-	'gatsby-plugin-sharp',
-	'gatsby-transformer-remark',
-    'gatsby-plugin-react-helmet',
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: 'Faith Sourced Software Foundation',
-        short_name: 'Faith Sourced',
-        start_url: '/',
-        background_color: '#2c393f',
-        theme_color: '#2c393f',
-        display: 'standalone',
-        icon: 'src/images/favicon-512x512.png', // This path is relative to the root of the site.
+	plugins: [
+		'gatsby-transformer-sharp',
+		'gatsby-plugin-sharp',
+		'gatsby-transformer-remark',
+		'gatsby-plugin-sass',
+		'gatsby-plugin-react-helmet',
+		{
+		resolve: 'gatsby-plugin-manifest', options: {
+				name: `${process.env.GATSBY_PLUGIN_MANIFEST_NAME}`,
+				short_name: `${process.env.GATSBY_PLUGIN_MANIFEST_SHORTNAME}`,
+				start_url: '/',
+				background_color: `${process.env.GATSBY_PLUGIN_MANIFEST_BGCOLOR}`,
+				theme_color: `${process.env.GATSBY_PLUGIN_MANIFEST_THEMECOLOR}`,
+				display: 'standalone',
+				icon: 'src/images/favicon.png', // This path is relative to the root of the site.
+			},
 		},
-    },
-    'gatsby-plugin-sass',
-    'gatsby-plugin-offline',
-	{
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/blog`,
-        name: "blog",
+		'gatsby-plugin-offline', // always list after `gatsby-plugin-manifest`
+		{
+		resolve: 'gatsby-source-filesystem', options: {
+				path: `${__dirname}/src/images`,
+				name: "images",
+			},
 		},
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/images`,
-        name: "images",
+		{
+		resolve: 'gatsby-source-thirdparty', options: {
+				url: `${process.env.GATSBY_API_URL}/news/api/public/v1/posts/?news_group_id=1&start=0&limit=3`,
+				name: 'Posts',
+				payloadKey: 'posts',
+			},
 		},
-    },
-    {
-	resolve: 'gatsby-source-thirdparty',
-	options: {
-		url: 'https://api.faithsourced.com/conveyor/modules/news/api/public/v1/posts/?news_group_id=1&start=0&limit=6', // The url, this should be the endpoint you are attempting to pull data from
-		name: 'Posts', // Name of the data to be downloaded.  Will show in graphQL or be saved to a file using this name
-		payloadKey: 'posts',
+		{
+		resolve: 'gatsby-source-thirdparty', options: {
+				url: `${process.env.GATSBY_API_URL}/core/api/public/v1/pages/`,
+				name: 'Pages', 
+				payloadKey: 'pages'
+			},
 		},
-	},
-    {
-      resolve: 'gatsby-plugin-remote-images',
-      options: {
-        nodeType: 'thirdParty__Posts',
-        imagePath: 'image_1_url',
-        name: 'image_1_local',
-      },
-    },
-    {
-      resolve: `gatsby-plugin-feed`,
-      options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl: url
-                site_url: url
-              }
-            }
-          }
-        `,
-        feeds: [
-          {
-            serialize: ({ query: { site, allThirdPartyPosts } }) => {
-              return allThirdPartyPosts.edges.map(edge => {
-                return Object.assign({}, edge.node, {
-                  description: edge.node.excerpt,
-                  date: edge.node.date,
-                  url: site.siteMetadata.siteUrl + '/' + edge.node.slug,
-                  guid: site.siteMetadata.siteUrl + '/' + edge.node.slug
-                })
-              })
-            },
-            query: `
-              {
-                allThirdPartyPosts(
-                  sort: { order: DESC, fields: [date] }
-                ) {
-                  edges {
-                    node {
-                      title
-                      date
-                      excerpt
-                      image_1_url
-                      slug
-                    }
-                  }
-                }
-              }
-            `,
-            output: "/rss.xml",
-            title: "Faith Sourced Blog",
-          },
-        ],
-      },
-    },
-  ],
+		{
+		resolve: 'gatsby-source-thirdparty', options: {
+				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v1/`,
+				name: 'Preferences', 
+				payloadKey: 'preferences',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Preferences',
+				imagePath: 'logo_bitmap',
+				name: 'logo_bitmap_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Preferences',
+				imagePath: 'logo_wordmark_img',
+				name: 'logo_wordmark_img_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Preferences',
+				imagePath: 'logo_glyph_img',
+				name: 'logo_glyph_img_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Preferences',
+				imagePath: 'logo_favicon_img',
+				name: 'logo_favicon_img_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Preferences',
+				imagePath: 'site_bg_img',
+				name: 'site_bg_img_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Posts',
+				imagePath: 'image_1_url',
+				name: 'image_1_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Pages',
+				imagePath: 'sections[].components[].object.image_1_url',
+				name: 'image_1_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Pages',
+				imagePath: 'sections[].section.image_1_url',
+				name: 'image_1_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Pages',
+				imagePath: 'tile_icon_url',
+				name: 'tile_icon_local',
+			},
+		},
+		{
+		resolve: `gatsby-plugin-feed`, options: {
+				query: `
+					{
+						allThirdPartyPreferences {
+							edges {
+								node {
+									site_name
+									site_title
+									meta_description
+									site_url
+								}
+							}
+						}
+						allThirdPartyPosts {
+							edges {
+								node {
+									news_group_name
+								}
+							}
+						}
+					}
+				`,
+				setup: ({ query: { allThirdPartyPreferences, allThirdPartyPosts } }) => {
+					return {
+						title: allThirdPartyPreferences.edges[0].node.site_title+' | '+allThirdPartyPosts.edges[0].node.news_group_name,
+						description: allThirdPartyPreferences.edges[0].node.meta_description,
+						siteUrl: allThirdPartyPreferences.edges[0].node.site_url,
+						site_url: allThirdPartyPreferences.edges[0].node.site_url,
+					};
+				},
+				feeds: [
+					{
+						serialize: ({ query: { allThirdPartyPreferences, allThirdPartyPosts } }) => {
+							return allThirdPartyPosts.edges.map(edge => {
+								return Object.assign({}, edge.node, {
+									description: edge.node.excerpt,
+									date: edge.node.date,
+									url: allThirdPartyPreferences.edges[0].node.site_url + '/' + edge.node.slug,
+									guid: allThirdPartyPreferences.edges[0].node.site_url + '/' + edge.node.slug
+								})
+							})
+						},
+						query: `
+							{
+								allThirdPartyPosts(
+									sort: { order: DESC, fields: [date] }
+								) {
+									edges {
+										node {
+											id
+											title
+											date
+											excerpt
+											image_1_url
+											slug
+										}
+									}
+								}
+							}
+						`,
+						output: "/rss.xml",
+						title: "RSS Feed", // temp name, overwritten by above, but if this is missing, a warning will throw
+					},
+				],
+			},
+		},
+	],
 }

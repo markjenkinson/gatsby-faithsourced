@@ -1,0 +1,79 @@
+/* Section */
+	article {
+		section {
+			padding: 0 2.5rem;
+			float: left;
+			width: 100%;
+
+			@include breakpoint(small) {
+				padding: 0 2rem;	
+			}
+
+			@include breakpoint(xsmall) {
+				padding: 0 1.5rem;
+			}
+			
+			&.backgrounded {
+				padding-top: 2.5rem;
+			}
+			
+			.col {
+				float: left;
+				width: 100%;
+				
+				padding-bottom: 2.5rem;
+				
+				@include breakpoint(small) {
+				}
+
+				@include breakpoint(xsmall) {
+				}
+				
+				h2 {
+					text-align: center;
+				}
+			
+				p:last-child, blockquote p:last-child, ul:last-child, ol:last-child {
+					margin: 0;
+				}
+			}
+			
+			&:first-of-type {
+				border-radius: _size(border-radius-top);
+				overflow: hidden;
+				padding-top: 4rem;
+				
+				.col:first-of-type .image:first-of-type {
+					border-radius: _size(border-radius-top);
+					margin-top: -4rem;
+				}
+				
+				@include breakpoint(small) {
+				}
+			
+				@include breakpoint(xsmall) {
+				}
+			}
+		
+			&:last-of-type {
+				border-radius: _size(border-radius-bottom);
+				overflow: hidden;
+				padding-bottom: 4rem;
+				
+				.col:last-of-type {
+					padding-bottom: 0;
+				}
+				
+				.col:last-of-type .image:last-of-type {
+					border-radius: _size(border-radius-bottom);
+					margin-bottom: -4rem;
+				}
+				
+				@include breakpoint(small) {
+				}
+			
+				@include breakpoint(xsmall) {
+				}
+			}
+		}		
+	}

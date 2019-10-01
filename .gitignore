@@ -5,6 +5,10 @@ yarn-error.log
 package-lock.json
 yarn.lock
 
+# Environment variables
+.env.development
+.env.production
+
 # Build directory
 /public
 .DS_Store

@@ -6,58 +6,57 @@
 
 /* Form */
 
-	form {
-		$gutter: _size(element-margin) * 0.75;
+form {
+	$gutter: _size(element-margin) * 0.75;
+	
+	.form-fields {
+		margin: 0 ($gutter * -1 * 0.5) ;
+	}
+	
+	.field {
+		float: left;
+		width: 100%;
+		
+		margin: 0 0 ($gutter * 1) 0;
+		padding: 0 ($gutter * 1 * 0.5) 0 ($gutter * 1 * 0.5);
+		
+		&.half {
+			width: 50%;				
+		}
+	}
 
-		margin: 0 0 (_size(element-margin) * 1.25) 0;
+	> .actions {
+		margin: ($gutter * 1.25) 0 0 0 !important;
+	}
+	
+	.fadeOut {
+		 opacity: 0;
+		 height: 0;
+		 overflow: hidden;
+		 transition: opacity 0.5s 2.5s;
+	}
+	
+	.fadeIn {
+		 opacity: 1;
+		 height: auto;
+		 transition: opacity 0.5s;
+	}
 
+	@include breakpoint(small) {
 		.field {
-			margin: 0 0 ($gutter * 1) 0;
-
-			&.half {
-				width: 50%;
-				float: left;
-				padding: 0 0 0 ($gutter * 1 * 0.5);
-
-				&.first {
-					padding: 0 ($gutter * 1 * 0.5) 0 0;
-				}
-			}
+			margin: 0 0 ($gutter * 0.75) 0;
 		}
 
 		> .actions {
-			margin: ($gutter * 1.25) 0 0 0 !important;
+			margin: ($gutter * 1) 0 0 0 !important;
 		}
+	}
 
-		@include breakpoint(small) {
-			.field {
-				margin: 0 0 ($gutter * 0.75) 0;
-
-				&.half {
-					padding: 0 0 0 ($gutter * 0.75 * 0.5);
-
-					&.first {
-						padding: 0 ($gutter * 0.75 * 0.5) 0 0;
-					}
-				}
-			}
-
-			> .actions {
-				margin: ($gutter * 1) 0 0 0 !important;
-			}
-		}
-
-		@include breakpoint(xsmall) {
-			.field {
-				&.half {
-					width: 100%;
-					float: none;
-					padding: 0;
-
-					&.first {
-						padding: 0;
-					}
-				}
+	@include breakpoint(xsmall) {
+		.field {
+			&.half {
+				width: 100%;
+				float: none;
 			}
 		}
 	}
@@ -105,11 +104,11 @@
 			box-shadow: 0px 0px 30px _size(border-width) _palette(border-bg);
 		}
 	}
-	
+
 	select {
 		@include firefox-only {
 			color: #fff;
-			
+		
 			&:focus {
 				transition: none;
 				color: #fff;
@@ -117,11 +116,11 @@
 			}
 			&:-moz-focusring {
 				color: transparent;
-    			text-shadow: 0 0 0 #fff;
+				text-shadow: 0 0 0 #fff;
 			}
 		}
 	}
-	
+
 	option:not(:checked) {
 		@include firefox-only {
 			color: #fff;
@@ -265,3 +264,4 @@
 		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
+}

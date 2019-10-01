@@ -5,66 +5,89 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import '../assets/scss/main.scss'
 
-import Footer from '../components/Footer'
+import Footer from './Footer'
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children, location, meta_title }) => {
 
   let content;
-
-  if (location && location.pathname === '/') {
-    content = (
-      <div>
-        {children}
-      </div>
-    )
-  } else {
-    content = (
-		<div id="page" className="body blurred">
-			<div id="wrapper">
-				<div id="main" style={{display:'flex'}}>
-					<article className="active timeout">
-        				{children}
-        			</article>
+  
+  if (location) {  
+	  if (location.pathname === '/') {
+		content = (
+		  <>
+			{children}
+		  </>
+		)
+	  }
+	  else if (location.pathname === '/blog' || location.pathname === '/blog/' || location.pathname === '/news/' || location.pathname === '/blog') {
+		content = (
+		  <>
+			{children}
+		  </>
+		)
+	  } else {
+		content = (
+			<div id="page" className="body blurred">
+				<div id="wrapper">
+					<div id="main" style={{display:'flex'}}>
+						<article className="active timeout">
+							{children}
+						</article>
+					</div>
+					<Footer/>
 				</div>
-				<Footer/>
+				<div id="bg"></div>
 			</div>
-			<div id="bg"></div>
-		</div>
-    )
+		)
+	  }
   }
-
+  
   return (
     <StaticQuery
       query={graphql`
-        query SiteMetaDataQuery {
-          site {
-            siteMetadata {
-              title
-              description
-              keywords
-              url
-              thumbnail
-            }
-          }
+        query layoutPrefsQuery {
+          allThirdPartyPreferences {
+			edges {
+			  node {
+				site_name
+				site_title
+				email_address
+				meta_keywords
+				meta_description
+				logo_wordmark_img
+				logo_glyph_img
+				logo_slogan
+				site_bg_img
+			  }
+			}
+		  }
         }
       `}
       render={data => (
-        <>
-          <Helmet
-            title={data.site.siteMetadata.title}
-            meta={[
-              { name: 'description', content: data.site.siteMetadata.description },
-              { name: 'keywords', content: data.site.siteMetadata.keywords },
-              { property: 'og:url', content: data.site.siteMetadata.url + location.pathname},
-              { property: 'og:type', content: 'website' },
-              { property: 'og:title', content: data.site.siteMetadata.title },
-              { property: 'og:image', content: data.site.siteMetadata.thumbnail },
-              { property: 'og:description', content: data.site.siteMetadata.description },
-            ]}
-          >
-            <html lang="en" />
-          </Helmet>
-          {content}
+		<>
+			<>
+				{!meta_title ? (
+						meta_title = data.allThirdPartyPreferences.edges[0].node.site_title
+					):(
+						meta_title = data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title
+					)
+				}
+			</>
+			<Helmet
+				title={meta_title}
+				meta={[
+					{ name: 'description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
+					{ name: 'keywords', content: data.allThirdPartyPreferences.edges[0].node.meta_keywords },
+					{ property: 'og:url', content: location.hostname + location.pathname},
+					{ property: 'og:type', content: 'website' },
+					{ property: 'og:title', content: meta_title },
+					{ property: 'og:image', content: '' },
+					{ property: 'og:description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
+				]}
+			  >
+				<html lang="en" />
+			</Helmet>
+			{content}
         </>
       )}
     />
@@ -72,7 +95,7 @@ const Layout = ({ children, location }) => {
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+	children: PropTypes.node.isRequired,
 }
 
 export default Layout

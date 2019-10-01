@@ -4,26 +4,23 @@
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
 
-/* Image */
-
+/* Image */	
 	.image {
-		border-radius: _size(border-radius);
 		border: 0;
-		display: inline-block;
+		display: block;
 		position: relative;
+		margin: 0 -2.5rem;
 		
-		&.banner {
-			margin: -4.5rem -2.5rem 2.5rem -2.5rem;
+		&.banner, &.hero {			
 			width: calc(100% + 5rem);
-			border-radius: _size(border-radius-top);
 		
 			img {
+				display: block;
 				width: 100%;
-				border-radius: _size(border-radius-top);
 			}
 		}
 		
-		&.banner:before {
+		&.banner:after {
 			@include vendor('pointer-events', 'none');
 			background-image: url('../../images/overlay.png');
 			background-color: _palette(bg-overlay);
@@ -37,15 +34,26 @@
 			top: 0;
 			width: 100%;
 		}
+		
+		&.glyph {
+			width: calc(100% + 5rem);
+			text-align: center;
+			padding: 0px 15%;
+			
+			img {
+				display: inline;
+			}
+		}
 
 		img {
-			border-radius: _size(border-radius);
 			display: block;
+			width: 100%;
 		}
 
 		&.left,
 		&.right {
-			max-width: 40%;
+			margin: 0;
+			width: 40%;
 
 			img {
 				width: 100%;
@@ -74,42 +82,17 @@
 			}
 		}
 
-		&.main {
-			display: block;
-			margin: (_size(element-margin) * 1.25) 0;
-			width: 100%;
-
-			img {
-				width: 100%;
-			}
-		}
-		
-		@include breakpoint(xlarge) {
-			&.banner {
-				margin: -4.5rem -2.5rem 2.5rem -2.5rem;
-				width: calc(100% + 5rem);
-			}
-		}
-
 		@include breakpoint(small) {			
-			&.banner {
-				margin: -4.5rem -2.5rem 2.5rem -2rem;
+			&.banner, &.hero {
+				margin: 0 -2rem;
 				width: calc(100% + 4rem);
-			}
-			
-			&.main {
-				margin: (_size(element-margin) * 1) 0;
 			}
 		}
 
 		@include breakpoint(xsmall) {
-			&.banner {
-				margin: -3rem -1.5rem 1.5rem -1.5rem;
+			&.banner, &.hero {
+				margin: 0 -1.5rem;
 				width: calc(100% + 3rem);
-			}
-			
-			&.main {
-				margin: (_size(element-margin) * 0.75) 0;
 			}
 		}
 	}

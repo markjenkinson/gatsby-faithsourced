@@ -1,9 +1,0 @@
-# Redirect domain aliases to primary domain
-http://faithsourced.ca/* https://faithsourced.com/:splat 301!
-http://faithsourced.org/* https://faithsourced.com/:splat 301!
-http://www.faithsourced.ca/* https://faithsourced.com/:splat 301!
-http://www.faithsourced.org/* https://faithsourced.com/:splat 301!
-https://faithsourced.ca/* https://faithsourced.com/:splat 301!
-https://faithsourced.org/* https://faithsourced.com/:splat 301!
-https://www.faithsourced.ca/* https://faithsourced.com/:splat 301!
-https://www.faithsourced.org/* https://faithsourced.com/:splat 301!

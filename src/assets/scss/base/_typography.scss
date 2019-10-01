@@ -89,7 +89,7 @@
 		}
 
 		&.major {
-			border-bottom: solid _size(border-width) _palette(border-alt);
+			border-bottom: solid _size(border-width) _palette(fg-light);
 			padding-bottom: 0.5rem;
 			margin: 0 0 (_size(element-margin) * 1) 0;
 		}
@@ -105,10 +105,12 @@
 		font-size: 1.5rem;
 		line-height: 1.4;
 		letter-spacing: _font(letter-spacing-heading);
+		text-align: center;
 	}
 
 	h3 {
 		font-size: 1rem;
+		text-align: center;
 	}
 
 	h4 {
@@ -152,6 +154,10 @@
 		font-style: italic;
 		margin: 0 0 _size(element-margin) 0;
 		padding: (_size(element-margin) / 4) 0 (_size(element-margin) / 4) _size(element-margin);
+		
+		p:last-child {
+			margin: 0;
+		}
 	}
 
 	code {
@@ -179,7 +185,7 @@
 
 	hr {
 		border: 0;
-		border-bottom: solid _size(border-width) _palette(border-alt);
+		border-bottom: solid _size(border-width) _palette(fg-light);
 		margin: (_size(element-margin) * 1.375) 0;
 	}
 
