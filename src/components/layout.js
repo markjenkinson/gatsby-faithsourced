@@ -65,22 +65,14 @@ const Layout = ({ children, location, meta_title }) => {
       `}
       render={data => (
 		<>
-			<>
-				{!meta_title ? (
-						meta_title = data.allThirdPartyPreferences.edges[0].node.site_title
-					):(
-						meta_title = data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title
-					)
-				}
-			</>
 			<Helmet
-				title={meta_title}
+				title={!meta_title ? (data.allThirdPartyPreferences.edges[0].node.site_title):(data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title)}
 				meta={[
 					{ name: 'description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
 					{ name: 'keywords', content: data.allThirdPartyPreferences.edges[0].node.meta_keywords },
 					{ property: 'og:url', content: location.hostname + location.pathname},
 					{ property: 'og:type', content: 'website' },
-					{ property: 'og:title', content: meta_title },
+					{ property: 'og:title', content: !meta_title ? (data.allThirdPartyPreferences.edges[0].node.site_title):(data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title) },
 					{ property: 'og:image', content: '' },
 					{ property: 'og:description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
 				]}
