@@ -236,6 +236,11 @@
 				overflow: hidden;
 				background-color: #2c393f;
 				
+				&.default {
+					background-image: url(map-get($theme, "logo_glyph_img"));
+					background-size: contain;
+				}
+				
 				img {
 					width: 100%;
 				}
