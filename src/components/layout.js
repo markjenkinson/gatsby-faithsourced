@@ -64,6 +64,7 @@ const Layout = ({ children, location, meta_title }) => {
 				}
 				logo_slogan
 				site_bg_img
+				site_url
 			  }
 			}
 		  }
@@ -76,10 +77,10 @@ const Layout = ({ children, location, meta_title }) => {
 				meta={[
 					{ name: 'description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
 					{ name: 'keywords', content: data.allThirdPartyPreferences.edges[0].node.meta_keywords },
-					{ property: 'og:url', content: location.protocol +'//'+ location.host + location.pathname},
+					{ property: 'og:url', content: data.allThirdPartyPreferences.edges[0].node.site_url + location.pathname},
 					{ property: 'og:type', content: 'website' },
 					{ property: 'og:title', content: !meta_title ? (data.allThirdPartyPreferences.edges[0].node.site_title):(data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title) },
-					{ property: 'og:image', content: location.protocol + '//' + location.host + data.allThirdPartyPreferences.edges[0].node.logo_favicon_img_local.publicURL },
+					{ property: 'og:image', content: data.allThirdPartyPreferences.edges[0].node.site_url + data.allThirdPartyPreferences.edges[0].node.logo_favicon_img_local.publicURL },
 					{ property: 'og:description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
 				]}
 			  >
