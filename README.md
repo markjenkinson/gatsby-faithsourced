@@ -33,10 +33,3 @@ After pulling from this repo you will want to ensure that any new dependencies a
 cd faithsourced-website
 npm update
 ```
-
-## To-Do List
-* form field validation (currently Netlify does all the backend sanitization and validation but it would be good to have some frontend validation as well)
-* lazy load article banner images (they don't need to be part of the initial load)
-* update blurred background image when you jump to different site sections (with lazy load to minimize initial bandwidth requirments)
-* blog posting (in progress)
-* stripe checkout for Faith Sourced sticker pack promotion (in progress)
