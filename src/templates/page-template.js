@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet'
-import { Link, graphql } from 'gatsby'
+import { Link, navigate, graphql } from 'gatsby'
 import Img from "gatsby-image"
 import striptags from "striptags"
 
@@ -12,9 +12,28 @@ class JSONPage extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			isMenuVisible: false
+			isPanelVisible: false,
+			isMenuVisible: false,
+			loading: '',
+			timeout: false,
+			articleTimeout: false,
+			scrolly: 0
 		}
-		this.handleToggleMenu = this.handleToggleMenu.bind(this)
+		this.handleToggleMenu = this.handleToggleMenu.bind(this);
+	}
+	
+	componentDidMount () {
+		setTimeout(() => {
+			this.setState({isPanelVisible: true});
+			
+			if(window.history.state && window.history.state.scrolly) {
+				this.setState({scrolly: window.history.state.scrolly});
+			}
+		}, 125)
+	}
+	
+	componentWillUnmount () {
+	
 	}
 	
 	handleToggleMenu() {
@@ -23,11 +42,26 @@ class JSONPage extends React.Component {
 		})
 	}
 	
+	handleGotoPage(page) {
+		this.setState({
+			isPanelVisible: false
+		})
+		setTimeout(() => {
+			navigate(page, {
+				state: {
+					loading: '',
+					isPanelVisible: true,
+					scrolly: this.state.scrolly
+				}
+			})
+		}, 125)
+	}
+	
 	render() {
 		const page = this.props.data.thirdPartyPages
 		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
 		const meta_title = striptags(prefs.node.site_title)+' | '+striptags(page.title)
-   		let close = <Link to="/" className="close" alt="Close" title="Close"></Link>
+   		let close = <Link to="/" className="close" onClick={(e) => {e.preventDefault();this.handleGotoPage('/')}} alt="Close" title="Close"></Link>
    		
 		return (
 			<>
@@ -47,7 +81,7 @@ class JSONPage extends React.Component {
 				<div id="page" className={`body blurred ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
 					<div id="wrapper">
 						<div id="main" style={{display:'flex'}}>
-							<article className="active timeout">
+							<article className={`active ${this.state.isPanelVisible ? 'timeout' : ''}`} style={{display:'none'}}>
 								{page.tile_icon_local && 
 									<div className="logo"><Img fluid={page.tile_icon_local.childImageSharp.fluid} /></div>
 								}

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql, StaticQuery } from 'gatsby'
+import { Link, graphql, StaticQuery } from 'gatsby'
 
 const Header = (props) => (
     <header id="header" style={props.timeout ? {display: 'none'} : {}}>
@@ -20,7 +20,7 @@ const Header = (props) => (
                 }
             </div>
         </div>
-        {props.onOpenArticle &&
+        {props.onGotoPage &&
 			<nav>
 				<ul>
 					<StaticQuery
@@ -64,7 +64,9 @@ const Header = (props) => (
 										}
 									}
 									else {
-										return <li key={i}><a href="javascript:;" onClick={() => {props.onOpenArticle(node.slug)}}>{node.name}</a></li>
+										return <li key={i}><Link to={`/${node.slug}`} onClick={(e) => {e.preventDefault();props.onGotoPage(node.slug)}}>{node.name}</Link></li>
+										
+										//<a href="javascript:;" onClick={() => {props.onOpenArticle(node.slug)}}>{node.name}!</a>
 									}
 								}
 							})

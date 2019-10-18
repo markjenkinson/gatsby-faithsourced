@@ -17,6 +17,10 @@
 		z-index: 1;
 
 		&:before, &:after {
+			@include vendor('transition', (
+				'transform #{_duration(article)} ease-in-out',
+				'filter #{_duration(article)} ease-in-out'
+			));
 			content: '';
 			display: block;
 			position: absolute;
@@ -27,25 +31,16 @@
 		}
 
 		&:before {
-			@include vendor('transition', 'background-color #{_duration(bg)} ease-in-out');
-			@include vendor('transition-delay', '#{_duration(intro)}');
-			background-image:		linear-gradient(to top, #{_palette(bg-overlay)}, #{_palette(bg-overlay)}),
-									url('../../images/overlay.png');
-			background-size:		auto,
-									256px 256px;
-			background-position:	center,
-									center;
-			background-repeat:		no-repeat,
-									repeat;
+			background-image:		linear-gradient(to top, #{_palette(bg-overlay)}, #{_palette(bg-overlay)}), url('../../images/overlay.png');
+			background-size:		auto, 256px 256px;
+			background-position:	center, center;
+			background-repeat:		no-repeat, repeat;
 			z-index: 2;
 		}
 
 		&:after {
 			@include vendor('transform', 'scale(1.125)');
-			@include vendor('transition', (
-				'transform #{_duration(article)} ease-in-out',
-				'filter #{_duration(article)} ease-in-out'
-			));
+			
 			background-image:		url(map-get($theme, "site_bg_img"));
 			background-position:	center;
 			background-size:		cover;
@@ -59,10 +54,25 @@
 				@include vendor('filter', 'blur(0.2rem)');
 			}
 		}
+		
+		.body.loaded & {
+			&:before {
+				@include vendor('transition', 'background-color #{_duration(bg)} ease-in-out');
+				@include vendor('transition-delay', '#{_duration(intro)}');
+			}
+		}
 
 		.body.is-loading & {
 			&:before {
 				background-color:	_palette(bg-alt);
+			}
+		}
+		
+		.body.is-menu-visible & {
+			@include vendor('filter', 'blur(0.2em)');
+			
+			&:after {
+				@include vendor('transform', 'scale(1.0825)');
 			}
 		}
 	}

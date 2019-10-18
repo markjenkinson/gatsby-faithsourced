@@ -154,13 +154,6 @@
 		#wrapper {
 			@include vendor('filter', 'blur(0.2em)');
 		}
-		#bg {
-			@include vendor('filter', 'blur(0.2em)');
-		}
-		
-		#bg:after {
-			@include vendor('transform', 'scale(1.0825)');
-		}
 		
 		#toggle {
 			.toggle-burger {

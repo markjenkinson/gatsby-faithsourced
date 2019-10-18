@@ -15,6 +15,7 @@
 			'filter #{_duration(article)} ease-in-out',
 			'opacity #{_duration(article)} ease-in-out',
 		));
+			
 		background-image: -moz-radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
 		background-image: -webkit-radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
 		background-image: -ms-radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
@@ -37,6 +38,14 @@
 				height: calc(3.5rem + 1px);
 				background: _palette(border);
 			}
+		}
+		
+		.body.loaded & {
+			@include vendor('transition', (
+				'transform #{_duration(article)} ease-in-out',
+				'filter #{_duration(article)} ease-in-out',
+				'opacity #{_duration(article)} ease-in-out',
+			));
 		}
 
 		> :first-child {
@@ -69,11 +78,18 @@
 
 			.inner {
 				@include vendor('transition', (
-					'max-height #{_duration(intro)} ease',
-					'padding #{_duration(intro)} ease',
 					'opacity #{_duration(article)} ease-in-out'
 				));
 				@include vendor('transition-delay', '0.25s');
+					
+				.body.loaded & {
+					@include vendor('transition', (
+						'max-height #{_duration(intro)} ease',
+						'padding #{_duration(intro)} ease',
+						'opacity #{_duration(article)} ease-in-out'
+					));
+					@include vendor('transition-delay', '0.25s');
+				}
 				padding: 3rem 2rem;
 				max-height: 40rem;
 				overflow: hidden;
@@ -120,7 +136,8 @@
 				padding-left: 0;
 				border: solid _size(border-width) _palette(border);
 				border-radius: _size(button-radius);
-
+				overflow: hidden;
+				
 				li {
 					padding-left: 0;
 					border-left: solid _size(border-width) _palette(border);

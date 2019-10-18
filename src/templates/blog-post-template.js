@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet'
-import { Link, graphql } from 'gatsby'
+import { Link, navigate, graphql } from 'gatsby'
 import Img from "gatsby-image"
 import striptags from "striptags"
 
@@ -12,20 +12,25 @@ class BlogPost extends React.Component {
 		super(props)
 		this.state = {
 			isMenuVisible: false,
-			loading: 'is-loading',
+			isPanelVisible: false,
 		}
 		this.handleToggleMenu = this.handleToggleMenu.bind(this)
 	}
 	
 	componentDidMount () {
-		if(window.history.state && window.history.state.blurred) {
+		setTimeout(() => {
+			this.setState({isPanelVisible: true});
+		}, 125);
+		
+		if(window.history.state && typeof window.history.state.blurred !== 'undefined') {
 			this.setState({blurred: window.history.state.blurred});
 		}
-		
-		this.timeoutId = setTimeout(() => {
+		else {
 			this.setState({loading: 'loaded'});
-			this.setState({blurred: 'blurred'});
-		}, 250);		
+			this.timeoutId = setTimeout(() => {
+				this.setState({blurred: 'blurred'});
+			}, 325);
+		}
 	}
 
 	componentWillUnmount () {
@@ -38,6 +43,19 @@ class BlogPost extends React.Component {
 		this.setState({
 			isMenuVisible: !this.state.isMenuVisible
 		})
+	}
+	
+	handleGotoPage(page) {
+		this.setState({
+			isPanelVisible: false
+		})
+		
+		setTimeout(() => {
+			navigate(page, {
+				state: {
+				}
+			})
+		}, 125)
 	}
 	
 	render() {
@@ -63,10 +81,10 @@ class BlogPost extends React.Component {
 					]}>
 					<html lang="en" />
 				</Helmet>
-				<div className={`body loaded ${this.state.blurred} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
+				<div id="page" className={`body blurred ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
 					<div id="wrapper">
 						<div id="main" style={{display:'flex'}}>
-							<article className="active timeout">
+							<article className={`active ${this.state.isPanelVisible ? 'timeout' : ''}`} style={{display:'none'}}>
 								<section>
 									<div className="col">
 										<span className="image hero"><Img fluid={post.image_1_local.childImageSharp.fluid} /></span>
@@ -75,7 +93,7 @@ class BlogPost extends React.Component {
 								<section>
 									<div className="pagination-bar top">
 										{prev && (<Link to={prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
-										<Link to="/blog" className="home" alt="Blog" title="Blog">Blog</Link>
+										<Link to="/blog" className="home" onClick={(e) => {e.preventDefault();this.handleGotoPage('/blog')}} alt="Blog" title="Blog"></Link>
 										{next && (<Link to={next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
 									</div>
 									<h1 className="align-center">{post.title}</h1>
@@ -83,7 +101,7 @@ class BlogPost extends React.Component {
 									<div dangerouslySetInnerHTML={{ __html: post.html }} />
 									<div className="pagination-bar bottom">
 										{prev && (<Link to={prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
-										<Link to="/blog" className="home" alt="Blog" title="Blog">Blog</Link>
+										<Link to="/blog" className="home" onClick={(e) => {e.preventDefault();this.handleGotoPage('/blog')}} alt="Blog" title="Blog"></Link>
 										{next && (<Link to={next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
 									</div>
 								</section>
