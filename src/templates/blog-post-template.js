@@ -14,7 +14,8 @@ class BlogPost extends React.Component {
 			isMenuVisible: false,
 			isPanelVisible: false,
 		}
-		this.handleToggleMenu = this.handleToggleMenu.bind(this)
+		this.handleToggleMenu = this.handleToggleMenu.bind(this);
+		this.handleGotoPage = this.handleGotoPage.bind(this);
 	}
 	
 	componentDidMount () {

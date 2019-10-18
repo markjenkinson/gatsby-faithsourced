@@ -20,6 +20,7 @@ class JSONPage extends React.Component {
 			scrolly: 0
 		}
 		this.handleToggleMenu = this.handleToggleMenu.bind(this);
+		this.handleGotoPage = this.handleGotoPage.bind(this);
 	}
 	
 	componentDidMount () {
