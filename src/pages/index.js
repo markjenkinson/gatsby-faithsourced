@@ -34,7 +34,7 @@ class IndexPage extends React.Component {
 	
 	componentWillMount () {
 		// this is a necessary hack to prevent FireFox from a glitchy rendering of the background animation
-		if(typeof this.props.location.state !== 'undefined' && typeof this.props.location.state.isPanelVisible !== 'undefined') {
+		if(this.props.location.state !== null && typeof this.props.location.state !== 'undefined' && typeof this.props.location.state.isPanelVisible !== 'undefined') {
 			this.setState({isPanelVisible: true});
 		}
 	}
