@@ -62,7 +62,7 @@
 			line-height: 5.5rem;
 			border: solid _size(border-width) _palette(border);
 			border-radius: 100%;
-			background-image: url(map-get($theme, "logo_glyph_img"));
+			background-image:		url('../../images/dynamic/logo_glyph.#{map-get($theme, "logo_glyph_img_type")}');
 			background-size: contain;
 			
 			& + .content {
@@ -110,7 +110,7 @@
 					min-width: 280px;
 					height: 20vh;
 					min-height: 200px;
-					background-image: url(map-get($theme, "logo_wordmark_img"));
+					background-image:		url('../../images/dynamic/logo_wordmark.#{map-get($theme, "logo_wordmark_img_type")}');
 					background-repeat: no-repeat;
 					background-position: center;
 

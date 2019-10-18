@@ -17,7 +17,7 @@ module.exports = {
 				background_color: `${process.env.GATSBY_PLUGIN_MANIFEST_BGCOLOR}`,
 				theme_color: `${process.env.GATSBY_PLUGIN_MANIFEST_THEMECOLOR}`,
 				display: 'standalone',
-				icon: 'src/images/favicon.png', // This path is relative to the root of the site.
+				icon: 'src/images/dynamic/favicon.png', // This path is relative to the root of the site.
 			},
 		},
 		'gatsby-plugin-offline', // always list after `gatsby-plugin-manifest`

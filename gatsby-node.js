@@ -39,12 +39,25 @@ exports.createPages = ({ actions, graphql }) => {
 				sitePreferences: allThirdPartyPreferences {
 					edges {
 						node {
+							logo_favicon_img_type
 							logo_favicon_img_local {
 								childImageSharp {
 									fixed(width: 512, height: 512) {
 										src
 									}
 								}
+								publicURL
+							}
+							site_bg_img_type
+							site_bg_img_local {
+								publicURL
+							}
+							logo_wordmark_img_type
+							logo_wordmark_img_local {
+								publicURL
+							}
+							logo_glyph_img_type
+							logo_glyph_img_local {
 								publicURL
 							}
 						}
@@ -101,7 +114,40 @@ exports.createPages = ({ actions, graphql }) => {
 					if (err) {
 						throw err;
 					}
-					fs.writeFile(__dirname +'/src/images/favicon.png', data, function(err) {
+					fs.writeFile(__dirname +'/src/images/dynamic/favicon.'+result.data.sitePreferences.edges[0].node.logo_favicon_img_type, data, function(err) {
+						if(err) {
+							return console.log(err);
+						}
+					});
+				});
+				
+				fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.site_bg_img_local.publicURL, function read(err, data) {
+					if (err) {
+						throw err;
+					}
+					fs.writeFile(__dirname +'/src/images/dynamic/background.'+result.data.sitePreferences.edges[0].node.site_bg_img_type, data, function(err) {
+						if(err) {
+							return console.log(err);
+						}
+					});
+				});
+				
+				fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_wordmark_img_local.publicURL, function read(err, data) {
+					if (err) {
+						throw err;
+					}
+					fs.writeFile(__dirname +'/src/images/dynamic/logo_wordmark.'+result.data.sitePreferences.edges[0].node.logo_wordmark_img_type, data, function(err) {
+						if(err) {
+							return console.log(err);
+						}
+					});
+				});
+				
+				fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_glyph_img_local.publicURL, function read(err, data) {
+					if (err) {
+						throw err;
+					}
+					fs.writeFile(__dirname +'/src/images/dynamic/logo_glyph.'+result.data.sitePreferences.edges[0].node.logo_glyph_img_type, data, function(err) {
 						if(err) {
 							return console.log(err);
 						}

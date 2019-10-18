@@ -34,17 +34,17 @@
 			background-image:		linear-gradient(to top, #{_palette(bg-overlay)}, #{_palette(bg-overlay)}), url('../../images/overlay.png');
 			background-size:		auto, 256px 256px;
 			background-position:	center, center;
-			background-repeat:		no-repeat, repeat;
+			background-repeat:	no-repeat, repeat;
 			z-index: 2;
 		}
 
 		&:after {
 			@include vendor('transform', 'scale(1.125)');
 			
-			background-image:		url(map-get($theme, "site_bg_img"));
+			background-image:		url('../../images/dynamic/background.#{map-get($theme, "site_bg_img_type")}');
 			background-position:	center;
 			background-size:		cover;
-			background-repeat:		no-repeat;
+			background-repeat:	no-repeat;
 			z-index: 1;
 		}
 
