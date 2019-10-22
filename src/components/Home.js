@@ -30,6 +30,13 @@ const Home = (props) => (
 										}
 									}
 								}
+								tile_thumbnail_local {
+									childImageSharp {
+										fluid(maxWidth: 512) {
+											...GatsbyImageSharpFluid
+										}
+									}
+								}
 							}
 						}
 					}
@@ -39,7 +46,7 @@ const Home = (props) => (
 				data.allThirdPartyPages.edges.map(({ node }, i) => (
 					<>
 					{node.type === 'templated_page' && node.nav_level === '3' && node.parent_id === '0' && 
-						<article>
+						<article key={i} className={node.tile_thumbnail_local && "image-tile"} style={ node.tile_thumbnail_local && {backgroundImage: `url(${node.tile_thumbnail_local.childImageSharp.fluid.src})`}}>
 							{node.tile_ribbon_text && 
 								<div className="ribbon ribbon-top-right"><div><span dangerouslySetInnerHTML={{ __html: node.tile_ribbon_text}} /></div></div>
 							}

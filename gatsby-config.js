@@ -112,6 +112,13 @@ module.exports = {
 			},
 		},
 		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Pages',
+				imagePath: 'tile_thumbnail_url',
+				name: 'tile_thumbnail_local',
+			},
+		},
+		{
 		resolve: `gatsby-plugin-feed`, options: {
 				query: `
 					{
