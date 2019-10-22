@@ -66,14 +66,14 @@
 			background-size: contain;
 			
 			& + .content {
+				border-style: solid;
+				border-color: _palette(border);
 				border-top-width: _size(border-width);
+				border-bottom-width: _size(border-width);
 			}
 		}
 		
-		.content {
-			border-style: solid;
-			border-color: _palette(border);
-			border-bottom-width: _size(border-width);
+		.content {			
 			max-width: 100%;
 
 			.inner {
