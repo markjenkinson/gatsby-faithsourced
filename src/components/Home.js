@@ -30,6 +30,7 @@ const Home = (props) => (
 										}
 									}
 								}
+								tile_icon_dummy
 								tile_thumbnail_local {
 									childImageSharp {
 										fluid(maxWidth: 512) {
@@ -37,6 +38,7 @@ const Home = (props) => (
 										}
 									}
 								}
+								tile_thumbnail_dummy
 							}
 						}
 					}
@@ -46,12 +48,12 @@ const Home = (props) => (
 				data.allThirdPartyPages.edges.map(({ node }, i) => (
 					<>
 					{node.type === 'templated_page' && node.nav_level === '3' && node.parent_id === '0' && 
-						<article key={i} className={node.tile_thumbnail_local && "image-tile"} style={ node.tile_thumbnail_local && {backgroundImage: `url(${node.tile_thumbnail_local.childImageSharp.fluid.src})`}}>
+						<article key={i} className={node.tile_thumbnail_dummy === false && "image-tile"} style={(node.tile_thumbnail_dummy === false) ? {backgroundImage: `url(${node.tile_thumbnail_local.childImageSharp.fluid.src})`} : {} }>
 							{node.tile_ribbon_text && 
 								<div className="ribbon ribbon-top-right"><div><span dangerouslySetInnerHTML={{ __html: node.tile_ribbon_text}} /></div></div>
 							}
 							<header className="major">
-								{node.tile_icon_local && 
+								{node.tile_icon_dummy === false && 
 									<span className="image glyph"><Img fluid={node.tile_icon_local.childImageSharp.fluid} /></span>
 								}
 								<h3 dangerouslySetInnerHTML={{ __html: node.name}} />
