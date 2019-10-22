@@ -19,7 +19,7 @@ const Layout = ({ children, location, meta_title }) => {
 		  </>
 		)
 	  }
-	  else if (location.pathname === '/blog' || location.pathname === '/blog/' || location.pathname === '/news/' || location.pathname === '/blog') {
+	  else if (location.pathname === '/blog' || location.pathname === '/blog/' || location.pathname === '/news/' || location.pathname === '/news') {
 		content = (
 		  <>
 			{children}
