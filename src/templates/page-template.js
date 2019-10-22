@@ -83,7 +83,7 @@ class JSONPage extends React.Component {
 					<div id="wrapper">
 						<div id="main" style={{display:'flex'}}>
 							<article className={`active ${this.state.isPanelVisible ? 'timeout' : ''}`} style={{display:'none'}}>
-								{page.tile_icon_local && 
+								{page.tile_icon_dummy === false && 
 									<div className="logo"><Img fluid={page.tile_icon_local.childImageSharp.fluid} /></div>
 								}
 								<Sections slug={page.slug} />
