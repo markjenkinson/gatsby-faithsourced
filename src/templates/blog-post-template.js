@@ -72,7 +72,6 @@ class BlogPost extends React.Component {
 					meta={[
 						{ name: 'description', content: post.excerpt },
 						{ property: 'og:type', content: 'article' },
-						{ property: 'article:author', content: prefs.node.site_name },
 						{ property: 'article:publisher', content: prefs.node.site_url },
 						{ property: 'og:site_name', content: prefs.node.site_name },
 						{ property: 'og:title', content: meta_title },
