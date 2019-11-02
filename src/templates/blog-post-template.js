@@ -72,12 +72,12 @@ class BlogPost extends React.Component {
 					meta={[
 						{ name: 'description', content: post.excerpt },
 						{ property: 'og:type', content: 'article' },
-						{ property: 'article:author', content: this.props.location.origin },
-						{ property: 'article:publisher', content: this.props.location.origin },
+						{ property: 'article:author', content: prefs.node.site_url },
+						{ property: 'article:publisher', content: prefs.node.site_url },
 						{ property: 'og:site_name', content: prefs.node.site_name },
 						{ property: 'og:title', content: meta_title },
-						{ property: 'og:url', content: this.props.location.href},
-						{ property: 'og:image', content: this.props.location.origin+post.image_1_local.childImageSharp.fluid.src},
+						{ property: 'og:url', content: prefs.node.site_url+'/'+post.slug},
+						{ property: 'og:image', content: prefs.node.site_url+post.image_1_local.childImageSharp.fluid.src},
 						{ property: 'og:description', content: post.excerpt },
 					]}>
 					<html lang="en" />
@@ -152,6 +152,7 @@ query postQuery($slug: String!) {
 			logo_glyph_img
 			logo_slogan
 			site_bg_img
+			site_url
 		  }
 		}
 	}
