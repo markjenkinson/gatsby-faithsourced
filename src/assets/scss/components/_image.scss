@@ -22,7 +22,6 @@
 		
 		&.banner:after {
 			@include vendor('pointer-events', 'none');
-			background-image: url('../../images/overlay.png');
 			background-color: _palette(bg-overlay);
 			border-radius: _size(border-radius-top);
 			content: '';
