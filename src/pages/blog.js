@@ -69,7 +69,6 @@ class BlogPage extends React.Component {
 							<section id="blog" className="tiles" ref={(section) => { this.Blog = section; }}>
 								{postListJSON.edges.map(({ node }, i) => (
 									<article className="image-tile" key={i} style={{backgroundImage: `url(${node.image_1_local.childImageSharp.fluid.src})`}}>
-										<div className="ribbon ribbon-top-right"><div><span><strong>{node.news_group_name}</strong></span></div></div>
 										<header className="major">
 											<h3>{node.title}</h3>
 											<span className="date-line"><i className="fa fa-calendar"></i>{node.date}</span>
