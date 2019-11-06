@@ -5,185 +5,200 @@
 ///
 
 /* Menu */
-	#toggle {
-		position: fixed;
-		top: 10px;
-		right: 20px;
-		z-index: 10003;
-		width: 50px;
-		height: 40px;
-		
-		.toggle-burger {
-			display: block;
-			position: relative;
-			width: 100%;
-			height: 100%;
-			cursor: pointer;
-			outline: none;
-			border: none;
+#toggle {
+	position: fixed;
+	top: 10px;
+	right: 20px;
+	z-index: 10003;
+	width: 50px;
+	height: 40px;
 	
-			span {
-				top: calc(50% - 1.5px);
-			
-				&, &:before, &:after {
-					position: absolute;
+	.toggle-burger {
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+		outline: none;
+		border: none;
+
+		span {
+			top: calc(50% - 1.5px);
+		
+			&, &:before, &:after {
+				position: absolute;
+				display: block;
+				cursor: pointer;
+				border-radius: 6px;
+				height: 4px;
+				width: 100%;
+				background: _palette(accent);
+				content: '';
+				transition: all .3s ease;
+			}
+		
+			&:before {
+				top: -10px;
+			}
+
+			&:after {
+				bottom: -10px;
+			}
+		}
+	}
+}
+
+#menu {
+	@include vendor('transition', (
+		'transform #{_duration(menu)} ease',
+		'opacity #{_duration(menu)} ease',
+		'visibility #{_duration(menu)}'
+	));
+	@include vendor('align-items', 'center');
+	@include vendor('display', 'flex');
+	@include vendor('justify-content', 'center');
+	@include vendor('pointer-events', 'none');
+	background: transparentize(_palette(bg), 0.2);
+	box-shadow: none;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	visibility: hidden;
+	width: 100%;
+	z-index: _misc(z-index-base) + 2;
+	
+	@include breakpoint(xsmall) {
+		padding: 0;
+	}
+
+	.inner {
+		@include vendor('transition', (
+			'transform #{_duration(menu)} ease-out',
+			'opacity #{_duration(menu)} ease',
+			'visibility #{_duration(menu)}'
+		));
+		@include vendor('transform', 'scale(0.85)');
+		-webkit-overflow-scrolling: touch;
+		max-width: 100%;
+		max-height: 100vh;
+		opacity: 0;
+		overflow: auto;
+		text-align: center;
+		visibility: hidden;
+		width: 100%;
+		padding: 0 38%;
+
+		> :first-child {
+			margin-top: _size(element-margin);
+		}
+
+		> :last-child {
+			margin-bottom: (_size(element-margin) * 1.5);
+		}
+		
+		@include breakpoint(xsmall) {
+			width: 100%;
+			padding: 0 4rem;
+		}
+		
+		@include breakpoint(xxsmall) {
+			width: 100%;
+			padding: 0 2rem;
+		}
+	}
+
+	ul {
+		margin: 0 0 (_size(element-margin) * 0.5) 0;
+
+		&.links {
+			list-style: none;
+			padding: 0;
+
+			> li {
+				padding: 0;				
+				> a:not(.button) {
+					padding: 1.5em 0;
+					border: 0;
+					border-top: solid 1px _palette(border);
 					display: block;
-					cursor: pointer;
-					border-radius: 6px;
-					height: 4px;
-					width: 100%;
-					background: _palette(accent);
-					content: '';
-					transition: all .3s ease;
+					font-size: 1.5em;
+					letter-spacing: _font(letter-spacing-alt);
+					line-height: 1.1em;
+					text-decoration: none;
+					text-transform: uppercase;
+					
+					&:hover {
+						color: _palette(accent);
+					}
+					
+					&.active {
+						font-weight: _font(weight-bold);
+						cursor: default;
+						
+						&:hover {
+							color: _palette(border);
+						}
+					}
 				}
-			
+
+				> .button {
+					display: block;
+					margin: 0.5em 0 0 0;
+				}
+
+				&:first-child {
+					> a:not(.button) {
+						border-top: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+body.is-ie {
+	#menu {
+		background: transparentize(_palette(bg-alt), 0.025);
+	}
+}
+
+.body.is-menu-visible {
+	#wrapper {
+		@include vendor('filter', 'blur(0.2em)');
+	}
+	
+	#toggle {
+		.toggle-burger {
+			span {
+				background-color: transparent;
+		
+				&:before, &:after {
+					top: 0;
+				}
+		
 				&:before {
-					top: -10px;
+					transform: rotate(45deg);
 				}
 
 				&:after {
-					bottom: -10px;
+					transform: rotate(-45deg);
 				}
 			}
 		}
 	}
 
 	#menu {
-		@include vendor('transition', (
-			'transform #{_duration(menu)} ease',
-			'opacity #{_duration(menu)} ease',
-			'visibility #{_duration(menu)}'
-		));
-		@include vendor('align-items', 'center');
-		@include vendor('display', 'flex');
-		@include vendor('justify-content', 'center');
-		@include vendor('pointer-events', 'none');
-		background: transparentize(_palette(bg), 0.2);
-		box-shadow: none;
-		height: 100%;
-		left: 0;
-		opacity: 0;
-		overflow: hidden;
-		padding: 3em 2em;
-		position: fixed;
-		top: 0;
-		visibility: hidden;
-		width: 100%;
-		z-index: _misc(z-index-base) + 2;
+		@include vendor('pointer-events', 'auto');
+		opacity: 1;
+		visibility: visible;
 
 		.inner {
-			@include vendor('transition', (
-				'transform #{_duration(menu)} ease-out',
-				'opacity #{_duration(menu)} ease',
-				'visibility #{_duration(menu)}'
-			));
-			@include vendor('transform', 'scale(0.85)');
-			-webkit-overflow-scrolling: touch;
-			max-width: 100%;
-			max-height: 100vh;
-			opacity: 0;
-			overflow: auto;
-			text-align: center;
-			visibility: hidden;
-			width: 18em;
-
-			> :first-child {
-				margin-top: _size(element-margin);
-			}
-
-			> :last-child {
-				margin-bottom: (_size(element-margin) * 1.5);
-			}
-		}
-
-		ul {
-			margin: 0 0 (_size(element-margin) * 0.5) 0;
-
-			&.links {
-				list-style: none;
-				padding: 0;
-
-				> li {					
-					> a:not(.button) {
-						padding: 1.5em 0;
-						border: 0;
-						border-top: solid 1px _palette(border);
-						display: block;
-						font-size: 1.5em;
-						letter-spacing: _font(letter-spacing-alt);
-						line-height: 1.1em;
-						text-decoration: none;
-						text-transform: uppercase;
-						
-						&:hover {
-							color: _palette(accent);
-						}
-						
-						&.active {
-							font-weight: _font(weight-bold);
-							cursor: default;
-							
-							&:hover {
-								color: _palette(border);
-							}
-						}
-					}
-
-					> .button {
-						display: block;
-						margin: 0.5em 0 0 0;
-					}
-
-					&:first-child {
-						> a:not(.button) {
-							border-top: 0 !important;
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	body.is-ie {
-		#menu {
-			background: transparentize(_palette(bg-alt), 0.025);
-		}
-	}
-
-	.body.is-menu-visible {
-		#wrapper {
-			@include vendor('filter', 'blur(0.2em)');
-		}
-		
-		#toggle {
-			.toggle-burger {
-				span {
-					background-color: transparent;
-			
-					&:before, &:after {
-						top: 0;
-					}
-			
-					&:before {
-						transform: rotate(45deg);
-					}
-
-					&:after {
-						transform: rotate(-45deg);
-					}
-				}
-			}
-		}
-
-		#menu {
-			@include vendor('pointer-events', 'auto');
+			@include vendor('transform', 'none');
 			opacity: 1;
 			visibility: visible;
-
-			.inner {
-				@include vendor('transform', 'none');
-				opacity: 1;
-				visibility: visible;
-			}
 		}
 	}
+}
