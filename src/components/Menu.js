@@ -7,7 +7,7 @@ class Menu extends React.Component {
 		const location_path = this.props.location.pathname.replace(/^\/+/, '')
 		return (
 			<div id="toggle-menu">
-				<nav id="toggle"><a className="toggle-burger" onClick={this.props.onToggleMenu} href="javascript:;"><span></span></a></nav>
+				<nav id="toggle"><button className="toggle-burger" onClick={this.props.onToggleMenu} href="javascript:;"><span></span></button></nav>
 				<nav id="menu">
 					<div className="inner">
 						<ul className="links">					
