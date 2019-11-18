@@ -70,7 +70,7 @@ class BlogPage extends React.Component {
 								{postListJSON.edges.map(({ node }, i) => (
 									<article className="image-tile" key={i} style={{backgroundImage: `url(${node.image_1_local.childImageSharp.fluid.src})`}}>
 										<header className="major">
-											<h3>{node.title}</h3>
+											<h2 className="title">{node.title}</h2>
 											<span className="date-line"><i className="fa fa-calendar"></i>{node.date}</span>
 											<p>{node.excerpt}</p>
 										</header>

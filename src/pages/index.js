@@ -137,7 +137,7 @@ class IndexPage extends React.Component {
 									<article className="image-tile" key={i} style={{backgroundImage: `url(${node.image_1_local.childImageSharp.fluid.src})`}}>
 										<div className="ribbon ribbon-top-right"><div><span><strong>{node.news_group_name}</strong></span></div></div>
 										<header className="major">
-											<h3>{node.title}</h3>
+											<h2 className="title">{node.title}</h2>
 											<span className="date-line"><i className="fa fa-calendar"></i>{node.date}</span>
 											<p>{node.excerpt}</p>
 										 </header>
