@@ -56,7 +56,7 @@ const Home = (props) => (
 								{node.tile_icon_dummy === false && 
 									<span className="image glyph"><Img fluid={node.tile_icon_local.childImageSharp.fluid} /></span>
 								}
-								<h3 dangerouslySetInnerHTML={{ __html: node.name}} />
+								<h2 className="title" dangerouslySetInnerHTML={{ __html: node.name}} />
 								{node.tile_text && 
 									<p dangerouslySetInnerHTML={{ __html: node.tile_text}} />
 								}
