@@ -45,6 +45,24 @@ article {
 			p:last-child, blockquote p:last-child, ul:last-child, ol:last-child {
 				margin: 0;
 			}
+			
+			.video-container {
+				margin: 0 -2.5rem;
+				height: 0; 
+				padding-bottom: 64.25%; /*16:9*/
+				overflow: hidden;
+				
+				@include breakpoint(small) {
+					margin: 0 -2.5rem;
+					padding-bottom: 64.25%; /*16:9*/
+				}
+				
+				@include breakpoint(xsmall) {
+					margin: 0 -1.5rem;
+					padding-bottom: 63.25%; /*16:9*/
+				}
+			}
+			
 		}
 		
 		&:first-of-type {

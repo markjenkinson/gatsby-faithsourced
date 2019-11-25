@@ -5,6 +5,7 @@ import { Parallax, Background } from 'react-parallax'
 import TextBlockComponent from '../components/TextBlockComponent'
 import QuickImageComponent from '../components/QuickImageComponent'
 import FormComponent from '../components/FormComponent'
+import VideoComponent from '../components/VideoComponent'
 
 class Section extends React.Component {
 	render() {
@@ -20,6 +21,9 @@ class Section extends React.Component {
 					}
 					{components.component.module === "forms" && 
 						<FormComponent params={components.options} data={components.object} onCloseArticle={this.props.onCloseArticle} />
+					}
+					{components.component.module === "multimedia" && 
+						<VideoComponent params={components.options} data={components.object} />
 					}
 					</>
 				))}

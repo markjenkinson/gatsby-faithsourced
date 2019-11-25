@@ -72,6 +72,8 @@ class Sections extends React.Component {
 													}
 													publicURL
 												}
+												file_name
+												youtube_id
 												custom_submit_button_text
 												thank_you_title
 												thank_you_text
