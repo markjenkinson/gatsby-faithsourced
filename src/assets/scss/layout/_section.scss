@@ -47,10 +47,16 @@ article {
 			}
 			
 			.video-container {
+				position: relative;
 				margin: 0 -2.5rem;
 				height: 0; 
 				padding-bottom: 64.25%; /*16:9*/
 				overflow: hidden;
+				
+				iframe {
+					position: absolute;
+					height: 100%;
+				}
 				
 				@include breakpoint(small) {
 					margin: 0 -2.5rem;
