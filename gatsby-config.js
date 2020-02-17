@@ -49,6 +49,13 @@ module.exports = {
 			},
 		},
 		{
+		resolve: 'gatsby-source-thirdparty', options: {
+				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v1/`,
+				name: 'SocialChannels', 
+				payloadKey: 'social',
+			},
+		},
+		{
 		resolve: 'gatsby-plugin-remote-images', options: {
 				nodeType: 'thirdParty__Preferences',
 				imagePath: 'logo_bitmap',
