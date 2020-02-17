@@ -105,15 +105,15 @@
 			}
 			
 			h1.logo-wordmark {
-					text-indent: -999999px;
-					width: 50vw;
-					min-width: 280px;
-					height: 20vh;
-					min-height: 200px;
-					background-image:		url('../../images/dynamic/logo_wordmark.#{map-get($theme, "logo_wordmark_img_type")}');
-					background-repeat: no-repeat;
-					background-position: center;
-
+				display: inline-block;
+				text-indent: -999999px;
+				width: 50vw;
+				min-width: 280px;
+				height: 20vh;
+				min-height: 200px;
+				background-image: url('../../images/dynamic/logo_wordmark.#{map-get($theme, "logo_wordmark_img_type")}');
+				background-repeat: no-repeat;
+				background-position: center;
 			}
 
 			p.tagline {
