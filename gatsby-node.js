@@ -73,19 +73,21 @@ exports.createPages = ({ actions, graphql }) => {
 				const blogPostTemplate = path.resolve('./src/templates/blog-post-template.js')
 				const posts = result.data.blogPosts.edges
 				
-				posts.filter(node => node.thirdParty_id > 0).forEach(({ node }, index) => {
-					const prev = index === posts.length - 1 ? null : posts[index + 1].node
-					const next = index === 0 ? null : posts[index - 1].node
+				posts.forEach(({ node }, index) => {
+					if(node.thirdParty_id > 0) {
+						const prev = index === posts.length - 1 ? null : posts[index + 1].node
+						const next = index === 0 ? null : posts[index - 1].node
 					
-					createPage({
-						path: `${node.slug}`,
-						component: blogPostTemplate,
-						context: {
-							slug: node.slug,
-							prev,
-							next,
-						},
-					})
+						createPage({
+							path: `${node.slug}`,
+							component: blogPostTemplate,
+							context: {
+								slug: node.slug,
+								prev,
+								next,
+							},
+						})
+					}
 				})
 				
 				const pageTemplate = path.resolve('./src/templates/page-template.js')
