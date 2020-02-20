@@ -93,10 +93,10 @@ export default BlogPage
 
 export const blogRollQuery = graphql`
 	query BlogRollQuery {
-		allThirdPartyPosts(sort: { order: DESC, fields: [date] }) {
+		allThirdPartyPosts(filter: {thirdParty_id: {gt: 0}}, sort: { order: DESC, fields: [date] }) {
 			edges {
 				node {
-					id
+					thirdParty_id
 					title
 					news_group_name
 					image_1_url

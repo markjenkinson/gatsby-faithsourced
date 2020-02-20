@@ -19,7 +19,7 @@ exports.createPages = ({ actions, graphql }) => {
 				) {
 					edges {
 						node {
-							id
+							thirdParty_id
 							title
 							slug
 						}
@@ -73,7 +73,7 @@ exports.createPages = ({ actions, graphql }) => {
 				const blogPostTemplate = path.resolve('./src/templates/blog-post-template.js')
 				const posts = result.data.blogPosts.edges
 				
-				posts.forEach(({ node }, index) => {
+				posts.filter(node => node.thirdParty_id > 0).forEach(({ node }, index) => {
 					const prev = index === posts.length - 1 ? null : posts[index + 1].node
 					const next = index === 0 ? null : posts[index - 1].node
 					
