@@ -61,30 +61,34 @@ class BlogPage extends React.Component {
 		const page = this.props.data.thirdPartyPages;
 		
 		return (
-			<Layout location={this.props.location} meta_title={page.title}>
-				<div className={`body ${this.state.isPanelVisible ? 'blurred' : ''} ${this.state.blurred} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
-					<div id="wrapper">
-						<Header timeout={this.state.timeout} title={`${page.name ? page.name : 'Blog'}`} />
-						<div id="page" style={this.state.timeout ? {display: 'none'} : {}}>
-							<section id="blog" className="tiles" ref={(section) => { this.Blog = section; }}>
-								{postListJSON.edges.map(({ node }, i) => (
-									<article className="image-tile" key={i} style={{backgroundImage: `url(${node.image_1_local.childImageSharp.fluid.src})`}}>
-										<header className="major">
-											<h2 className="title">{node.title}</h2>
-											<span className="date-line"><i className="fa fa-calendar"></i>{node.date}</span>
-											<p>{node.excerpt}</p>
-										</header>
-										<Link to={`/${node.slug}`} key={i} className="link primary" onClick={(e) => {e.preventDefault();this.handleGotoPage(node.slug)}}></Link>
-									</article>
-								))}
-							</section>
+			<>
+			{!!page &&
+				<Layout location={this.props.location} meta_title={page.title}>
+					<div className={`body ${this.state.isPanelVisible ? 'blurred' : ''} ${this.state.blurred} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
+						<div id="wrapper">
+							<Header timeout={this.state.timeout} title={`${page.name ? page.name : 'Blog'}`} />
+							<div id="page" style={this.state.timeout ? {display: 'none'} : {}}>
+								<section id="blog" className="tiles" ref={(section) => { this.Blog = section; }}>
+									{postListJSON.edges.map(({ node }, i) => (
+										<article className="image-tile" key={i} style={{backgroundImage: `url(${node.image_1_local.childImageSharp.fluid.src})`}}>
+											<header className="major">
+												<h2 className="title">{node.title}</h2>
+												<span className="date-line"><i className="fa fa-calendar"></i>{node.date}</span>
+												<p>{node.excerpt}</p>
+											</header>
+											<Link to={`/${node.slug}`} key={i} className="link primary" onClick={(e) => {e.preventDefault();this.handleGotoPage(node.slug)}}></Link>
+										</article>
+									))}
+								</section>
+							</div>
+							<Footer timeout={this.state.timeout} />
 						</div>
-						<Footer timeout={this.state.timeout} />
+						<div id="bg"></div>
+						<Menu onToggleMenu={this.handleToggleMenu} location={this.props.location} />
 					</div>
-					<div id="bg"></div>
-					<Menu onToggleMenu={this.handleToggleMenu} location={this.props.location} />
-				</div>
-			</Layout>
+				</Layout>
+			}
+			</>
 		)
 	}
 }
