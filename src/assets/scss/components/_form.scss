@@ -25,8 +25,9 @@ form {
 		}
 	}
 
-	> .actions {
-		margin: ($gutter * 1.25) 0 0 0 !important;
+	.actions {
+		float: left;
+		width: 100%;
 	}
 	
 	.fadeOut {
@@ -45,10 +46,6 @@ form {
 	@include breakpoint(small) {
 		.field {
 			margin: 0 0 ($gutter * 0.75) 0;
-		}
-
-		> .actions {
-			margin: ($gutter * 1) 0 0 0 !important;
 		}
 	}
 
