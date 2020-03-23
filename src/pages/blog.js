@@ -60,9 +60,8 @@ class BlogPage extends React.Component {
 		const postListJSON = this.props.data.allThirdPartyPosts;
 		const page = this.props.data.thirdPartyPages;
 		
-		return (
-			<>
-			{!!page &&
+		if (!!page) {
+			return (
 				<Layout location={this.props.location} meta_title={page.title}>
 					<div className={`body ${this.state.isPanelVisible ? 'blurred' : ''} ${this.state.blurred} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
 						<div id="wrapper">
@@ -87,9 +86,12 @@ class BlogPage extends React.Component {
 						<Menu onToggleMenu={this.handleToggleMenu} location={this.props.location} />
 					</div>
 				</Layout>
-			}
-			</>
-		)
+			)
+		}
+		else {
+			navigate('/');
+			return null;
+		}
 	}
 }
 
