@@ -17,6 +17,7 @@
 		}
 
 		article {
+			position: relative;
 			@include vendor('align-items', 'center');
 			@include vendor('display', 'flex');
 			@include vendor('transition', (
@@ -30,10 +31,8 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 			cursor: default;
-			height: 60vh;
-			min-height: 500px;
-			position: relative;
-			width: 33.333%;
+			width: 33.333vw;
+			height: 40vw;
 
 			header {
 				position: relative;
@@ -296,15 +295,16 @@
 			}
 		}
 		
-		@include breakpoint(xlarge) {
+		@include breakpoint(large) {
 			article {
-				height: 40vh;
+				height: 50vw;
 			}
 		}
 
 		@include breakpoint(medium) {
 			article {
-				width: 50% !important;
+				width: 50vw;
+				height: 60vw;
 			}
 		}
 
@@ -313,6 +313,7 @@
 			
 			article {
 				@include padding(3rem, 1.5rem);
+				width: 100vw;
 				height: auto;
 				max-height: none;
 				min-height: none;
