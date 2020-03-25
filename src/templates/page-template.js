@@ -1,8 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet'
 import { Link, navigate, graphql } from 'gatsby'
-import Img from "gatsby-image"
-import striptags from "striptags"
+import Img from 'gatsby-image'
+import striptags from 'striptags'
+
+import '../assets/scss/main.scss'
 
 import Menu from '../components/Menu'
 import Sections from '../components/Sections'
