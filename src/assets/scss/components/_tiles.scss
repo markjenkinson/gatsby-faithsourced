@@ -31,7 +31,7 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 			cursor: default;
-			width: 33.333vw;
+			width: 33.333%;
 			height: 40vw;
 
 			header {
@@ -297,17 +297,17 @@
 		
 		@include breakpoint(large) {
 			article {
-				height: 50vw;
+				height: 50%;
 			}
 		}
 
 		@include breakpoint(medium) {
 			article {
-				width: 50vw;
+				width: 50%;
 				height: 60vw;
 				
 				&:nth-of-type(3n+1) {
-					width: 100vw;
+					width: 100%;
 					
 					.image.glyph {
 						width: 60vw;
@@ -322,7 +322,7 @@
 			
 			article {
 				@include padding(3rem, 1.5rem);
-				width: 100vw;
+				width: 100%;
 				height: auto;
 				max-height: none;
 				min-height: none;
