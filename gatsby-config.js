@@ -29,7 +29,7 @@ module.exports = {
 		},
 		{
 		resolve: 'gatsby-source-thirdparty', options: {
-				url: `${process.env.GATSBY_API_URL}/news/api/public/v1/posts/?news_group_id=1&start=0&limit=3`,
+				url: `${process.env.GATSBY_API_URL}/news/api/public/v1/posts/?news_group_id=1`,
 				name: 'Posts',
 				payloadKey: 'posts',
 			},
