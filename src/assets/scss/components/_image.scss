@@ -23,7 +23,6 @@
 		&.banner:after {
 			@include vendor('pointer-events', 'none');
 			background-color: _palette(bg-overlay);
-			border-radius: _size(border-radius-top);
 			content: '';
 			display: block;
 			height: 100%;
