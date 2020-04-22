@@ -41,41 +41,43 @@ class FormComponent extends React.Component {
 					<div className={this.state.isSubmitted ? 'fadeOut' : 'fadeIn'}>
 						<h2 className="major" dangerouslySetInnerHTML={{ __html: this.props.data.name}} />
 						<input type="hidden" name="form-name" value={this.props.data.name} />
+						<div className="form-fields">
 						{this.props.data.thirdParty_fields && this.props.data.thirdParty_fields.map(( field ) => (
-							<div className="form-fields">
+							<div className={`field ${field.type ? field.type : ''}`}>
 							{field.type === "text_block" &&
-								<div className="field" dangerouslySetInnerHTML={{ __html: field.title}} />
+								<div dangerouslySetInnerHTML={{ __html: field.title}} />
 							}
 					
 							{field.type === "text" &&
-								<div className="field half">
-									<label dangerouslySetInnerHTML={{ __html: field.title}} />
-									<input type="text" name={field.namespace} id={field.namespace} onChange={this.handleChange} />
-								</div>
+								<>
+								<label dangerouslySetInnerHTML={{ __html: field.title}} />
+								<input type="text" name={field.namespace} id={field.namespace} onChange={this.handleChange} />
+								</>
 							}
 					
 							{field.type === "select" &&
-								<div className="field">
-									<label dangerouslySetInnerHTML={{ __html: field.title}} />
-									<div class="select-wrapper">
-										<select name={field.namespace} id={field.namespace} onChange={this.handleChange}>
-											<option value="">Choose one&hellip;</option>
-											{field.options && field.options.map(( option ) => (
-												<option value={option.title} dangerouslySetInnerHTML={{ __html: option.title}} />
-											))}
-										</select>
-									</div>
+								<>
+								<label dangerouslySetInnerHTML={{ __html: field.title}} />
+								<div class="select-wrapper">
+									<select name={field.namespace} id={field.namespace} onChange={this.handleChange}>
+										<option value="">Choose one&hellip;</option>
+										{field.options && field.options.map(( option ) => (
+											<option value={option.title} dangerouslySetInnerHTML={{ __html: option.title}} />
+										))}
+									</select>
 								</div>
+								</>
 							}
 					
 							{field.type === "textarea" &&
-								<div className="field">
-									<label dangerouslySetInnerHTML={{ __html: field.title}} />
-									<textarea name={field.namespace} id={field.namespace} rows="4" onChange={this.handleChange} />
-								</div>
+								<>
+								<label dangerouslySetInnerHTML={{ __html: field.title}} />
+								<textarea name={field.namespace} id={field.namespace} rows="4" onChange={this.handleChange} />
+								</>
 							}
 							</div>
 						))}
+						</div>
 						<ul class="actions">
 							{this.props.onCloseArticle &&
 								<li><input type="reset" value="Cancel" onClick={() => {this.props.onCloseArticle()}} /></li>

@@ -20,7 +20,7 @@ form {
 		margin: 0 0 ($gutter * 1) 0;
 		padding: 0 ($gutter * 1 * 0.5) 0 ($gutter * 1 * 0.5);
 		
-		&.half {
+		&.text {
 			width: 50%;				
 		}
 	}
@@ -51,7 +51,7 @@ form {
 
 	@include breakpoint(xsmall) {
 		.field {
-			&.half {
+			&.text {
 				width: 100%;
 				float: none;
 			}
