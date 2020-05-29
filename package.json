@@ -17,7 +17,7 @@
     "gatsby-plugin-sharp": "2.2.27",
     "gatsby-plugin-stripe": "1.2.3",
     "gatsby-source-filesystem": "2.1.28",
-    "gatsby-source-thirdparty": "1.0.5",
+    "gatsby-source-thirdparty": "1.0.6",
     "gatsby-transformer-remark": "2.6.26",
     "gatsby-transformer-sharp": "2.2.19",
     "netlify-cli": "2.15.0",
