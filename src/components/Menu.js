@@ -47,7 +47,7 @@ class Menu extends React.Component {
 														)}
 														</>
 													):(
-														<Link to={node.link_url} target={node.link_target === 1 ? '_blank' : '_parent'} activeClassName="active">{node.name}</Link>
+														<a href={node.link_url} target={node.link_target === 1 ? '_blank' : '_parent'}>{node.name}</a>
 													)} 
 													</>
 												):(
