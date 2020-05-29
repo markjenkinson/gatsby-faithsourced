@@ -47,7 +47,7 @@ class Menu extends React.Component {
 														)}
 														</>
 													):(
-														<a href={node.link_url} target={node.link_target === 1 ? '_blank' : '_parent'}>{node.name}</a>
+														<a href={node.link_url} target={node.link_target == 1 ? '_blank' : '_parent'}>{node.name}</a>
 													)} 
 													</>
 												):(
