@@ -105,37 +105,37 @@
 
 			&:nth-child(6n - 5) {
 				&:before {
-					background-color: _palette(tile-bg-1);
+					background-color: transparentize(_palette(tile-bg-default), 0.7);
 				}
 			}
 
 			&:nth-child(6n - 4) {
 				&:before {
-					background-color: _palette(tile-bg-2);
+					background-color: transparentize(_palette(tile-bg-default), 0.5);
 				}
 			}
 
 			&:nth-child(6n - 3) {
 				&:before {
-					background-color: _palette(tile-bg-3);
+					background-color: transparentize(_palette(tile-bg-default), 0.3);
 				}
 			}
 
 			&:nth-child(6n - 2) {
 				&:before {
-					background-color: _palette(tile-bg-4);
+					background-color:  transparentize(_palette(tile-bg-alt), 0.7);
 				}
 			}
 
 			&:nth-child(6n - 1) {
 				&:before {
-					background-color: _palette(tile-bg-5);
+					background-color:  transparentize(_palette(tile-bg-alt), 0.5);
 				}
 			}
 
 			&:nth-child(6n) {
 				&:before {
-					background-color: _palette(tile-bg-6);
+					background-color:  transparentize(_palette(tile-bg-alt), 0.3);
 				}
 			}
 			
@@ -178,6 +178,7 @@
 						text-transform: uppercase;
 						vertical-align: middle;
 						font-size: 16px;
+						font-weight: 600;
 						
 						a {
 							border: none;

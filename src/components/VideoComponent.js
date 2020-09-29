@@ -18,7 +18,7 @@ class VideoComponent extends React.Component {
     
 		return (
 			<div className='col'>
-				<YouTube containerClassName='video-container' videoId={this.props.data.youtube_id} opts={opts} onReady={this._onReady}/>
+				<YouTube containerClassName='video-container' videoId={this.props.data.embedded_video_id} opts={opts} onReady={this._onReady}/>
 			</div>
 		)
 	}
