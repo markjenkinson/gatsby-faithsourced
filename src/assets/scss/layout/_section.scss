@@ -97,7 +97,7 @@ article {
 				padding-bottom: 0;
 			}
 			
-			> .col:last-of-type > .image:last-of-type {
+			> .col:last-of-type > .image:last-of-type, > .col:last-of-type > .video-container:last-of-type {
 				border-radius: _size(border-radius-bottom);
 				margin-bottom: -4rem;
 			}
