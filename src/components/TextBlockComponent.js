@@ -20,7 +20,9 @@ class TextBlockComponent extends React.Component {
 			{this.props.data.image_1_dummy === false &&
 				<span className={`image ${this.props.params.custom_class.value ? this.props.params.custom_class.value : 'right'}`}><Img fluid={this.props.data.image_1_local.childImageSharp.fluid} /></span>
 			}
-			<span dangerouslySetInnerHTML={{ __html: this.props.data.body}} />
+			{this.props.data.body && 
+				<span dangerouslySetInnerHTML={{ __html: this.props.data.body}} />
+			}
 			</div>
 		)
 	}
