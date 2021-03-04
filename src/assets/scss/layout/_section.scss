@@ -42,7 +42,7 @@ article {
 				text-align: center;
 			}
 		
-			p:last-child, blockquote p:last-child, ul:last-child, ol:last-child {
+			p:last-child, blockquote p:last-child, ul:last-child, ol:last-child, .major:last-child {
 				margin: 0;
 			}
 			
