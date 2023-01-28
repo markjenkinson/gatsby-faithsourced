@@ -83,7 +83,7 @@ git@github.com:markjenkinson/gatsby-faithsourced.git
 
 ## STEP 6 - Start the Docker Container in develop mode
 
-To correctly bridge the Docker container to your development host you must also ensure that the `-H 0.0.0.0` parameter (yes, with zeros) is included in the `gatsby develop` command. Otherwise, [localhost:8000](localhost:8000) will not work on your development host. The -H parameter simply binds Gastby to your Docker container correctly. Without it, Gatsby will only be bound to the local container and  the bridge to your development host will not be made, resulting in `server unexpectedly dropped the connection` errors in your browser when you try to access Gatsby via [localhost:8000](localhost:8000).
+To correctly bridge the Docker container to your development host you must also ensure that the `-H 0.0.0.0` parameter (yes, with zeros) is included in the `gatsby develop` command. Otherwise, [localhost:8000](http://localhost:8000) will not work on your development host. The -H parameter simply binds Gastby to your Docker container correctly. Without it, Gatsby will only be bound to the local container and  the bridge to your development host will not be made, resulting in `server unexpectedly dropped the connection` errors in your browser when you try to access Gatsby via [localhost:8000](http://localhost:8000).
 
 Additionally, if you wish to run Gatsby on a different port you will need to also specify the -p flag followed by the port number of your choosing. If you do this, you will also need to update the port mapping from Step 4 with the same port number.
 
@@ -94,4 +94,4 @@ cd /path/to/netlify/docker/scripts/build-image-focal
 
 ## DONE
 
-Gatsby should now be running in develop mode in the Docker container, and any changes to the `gatsby-faithsourced` repository on your development host should be immediately reflected on in your browser via [localhost:8000](localhost:8000).
+Gatsby should now be running in develop mode in the Docker container, and any changes to the `gatsby-faithsourced` repository on your development host should be immediately reflected on in your browser via [localhost:8000](http://localhost:8000).
