@@ -23,6 +23,7 @@ class JSONPage extends React.Component {
 		}
 		this.handleToggleMenu = this.handleToggleMenu.bind(this);
 		this.handleGotoPage = this.handleGotoPage.bind(this);
+		this.onCloseArticle = this.onCloseArticle.bind(this);
 	}
 	
 	componentDidMount () {
@@ -60,6 +61,21 @@ class JSONPage extends React.Component {
 		}, 125)
 	}
 	
+	onCloseArticle() {
+		this.setState({
+			isPanelVisible: false
+		})
+		setTimeout(() => {
+			navigate('/', {
+				state: {
+					loading: '',
+					isPanelVisible: true,
+					scrolly: this.state.scrolly
+				}
+			})
+		}, 125)
+	}
+	
 	render() {
 		const page = this.props.data.thirdPartyPages
 		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
@@ -88,7 +104,7 @@ class JSONPage extends React.Component {
 								{page.tile_icon_dummy === false && 
 									<div className="logo"><Img fluid={page.tile_icon_local.childImageSharp.fluid} /></div>
 								}
-								<Sections slug={page.slug} />
+								<Sections slug={page.slug} onCloseArticle={this.onCloseArticle} />
 								{close}
 							</article>
 						</div>
