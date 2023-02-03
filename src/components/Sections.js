@@ -89,6 +89,20 @@ class Sections extends React.Component {
 													title
 													namespace
 												}
+												photos {
+													title
+													description
+													image_1_url
+													image_1_dummy
+													image_1_local {
+														childImageSharp {
+															fluid(maxWidth: 1920) {
+																...GatsbyImageSharpFluid
+															}
+														}
+														publicURL
+													}
+												}
 											}
 										}
 									}

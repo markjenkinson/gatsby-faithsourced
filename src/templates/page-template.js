@@ -161,6 +161,11 @@ query PageQuery($slug: String!) {
 				}
 				object {
 					thirdParty_id
+					photos {
+						title
+						description
+						image_1_url
+					}
 				}
 			}
 		}

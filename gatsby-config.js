@@ -114,6 +114,13 @@ module.exports = {
 		{
 		resolve: 'gatsby-plugin-remote-images', options: {
 				nodeType: 'thirdParty__Pages',
+				imagePath: 'sections[].components[].object.photos[].image_1_url',
+				name: 'image_1_local',
+			},
+		},
+		{
+		resolve: 'gatsby-plugin-remote-images', options: {
+				nodeType: 'thirdParty__Pages',
 				imagePath: 'tile_icon_url',
 				name: 'tile_icon_local',
 			},

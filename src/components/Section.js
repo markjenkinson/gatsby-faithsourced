@@ -6,6 +6,7 @@ import TextBlockComponent from '../components/TextBlockComponent'
 import QuickImageComponent from '../components/QuickImageComponent'
 import FormComponent from '../components/FormComponent'
 import VideoComponent from '../components/VideoComponent'
+import SliderComponent from '../components/SliderComponent'
 
 class Section extends React.Component {
 	render() {
@@ -24,6 +25,9 @@ class Section extends React.Component {
 					}
 					{components.component.module === "multimedia" && 
 						<VideoComponent params={components.options} data={components.object} />
+					}
+					{components.component.module === "photos" && 
+						<SliderComponent params={components.options} data={components.object} />
 					}
 					</>
 				))}
