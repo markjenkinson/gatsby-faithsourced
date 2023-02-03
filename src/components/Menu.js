@@ -14,7 +14,7 @@ class Menu extends React.Component {
 							<StaticQuery
 								query={graphql`
 									query MenuQuery {
-										allThirdPartyPages(filter: {nav_level: {eq: 2}, parent_id: {eq: 0}}) {
+										allThirdPartyPages {
 											edges {
 												node {
 													nav_level
@@ -33,25 +33,29 @@ class Menu extends React.Component {
 								`}
 								render={data => (
 									data.allThirdPartyPages.edges.map(({ node }, i) => (
-										<li key={i}>
-											{node.type === 'link' ? (
-												<>
-												{node.link_mode === 'internal' ? (
+										<>
+										{node.nav_level === '2' && node.parent_id === '0' &&
+											<li key={i}>
+												{node.type === 'link' ? (
 													<>
-													{node.link_hash ? (
-														<a href="javascript:;" onClick={() => {/**props.onScrollTo(node.link_hash)**/}}>{node.name}</a>
+													{node.link_mode === 'internal' ? (
+														<>
+														{node.link_hash ? (
+															<a href="javascript:;" onClick={() => {/**props.onScrollTo(node.link_hash)**/}}>{node.name}</a>
+														):(
+															<Link to={node.link_url} onClick={location_path === node.link_url.replace(/^\/+/, '') ? this.props.onToggleMenu : ''} target={node.link_target === 1 ? '_blank' : '_parent'} activeClassName="active">{node.name}</Link>
+														)}
+														</>
 													):(
-														<Link to={node.link_url} onClick={location_path === node.link_url.replace(/^\/+/, '') ? this.props.onToggleMenu : ''} target={node.link_target === 1 ? '_blank' : '_parent'} activeClassName="active">{node.name}</Link>
-													)}
+														<a href={node.link_url} target={node.link_target == 1 ? '_blank' : '_parent'}>{node.name}</a>
+													)} 
 													</>
 												):(
-													<a href={node.link_url} target={node.link_target === 1 ? '_blank' : '_parent'}>{node.name}</a>
-												)} 
-												</>
-											):(
-												<Link to={`/${node.slug}`} onClick={location_path === node.slug.replace(/^\/+/, '') ? this.props.onToggleMenu : ''} activeClassName="active">{node.name}</Link>
-											)}
-										</li>
+													<Link to={`/${node.slug}`} onClick={location_path === node.slug.replace(/^\/+/, '') ? this.props.onToggleMenu : ''} activeClassName="active">{node.name}</Link>
+												)}
+											</li>
+										}
+										</>
 									))
 								)}
 							/>
