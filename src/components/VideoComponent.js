@@ -14,7 +14,7 @@ class VideoComponent extends React.Component {
 				wmode: 'opaque',
 				rel: 0
 			}
-		};
+		}
     
 		return (
 			<div className='col'>
