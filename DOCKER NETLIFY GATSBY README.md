@@ -30,25 +30,25 @@ The following changes are required to successfully run the Gatsby development en
 
 ```zh
 docker run --rm --name NetlifyBuild \
-		-e=NODE_VERSION="10.24.1" \
-		-e=RUBY_VERSION="2.6.2" \
-		-e=YARN_VERSION="1.13.0" \
-		-e=PNPM_VERSION="7.13.4" \
-		-e=NPM_VERSION="6.14.12" \
-		-e=HUGO_VERSION \
-		-e=PHP_VERSION="8.0" \
-		-e=NETLIFY_VERBOSE \
-		-e=GO_VERSION="1.12" \
-		-e=GO_IMPORT_PATH \
-		-e=SWIFT_VERSION \
-		-e=PYTHON_VERSION="2.7" \
-		-e=NETLIFY_PACKAGE_DIR="$NETLIFY_PACKAGE_DIR" \
-		-e=GATSBY_API_URL="https://api.yourwebsite.com/api/root/" \
-		-e=GATSBY_PLUGIN_MANIFEST_NAME="Page Title and Website Manifest Name" \
-		-e=GATSBY_PLUGIN_MANIFEST_SHORTNAME="Mobile App Short Name" \
-		-e=GATSBY_PLUGIN_MANIFEST_BGCOLOR="#2c393f" \
-		-e=GATSBY_PLUGIN_MANIFEST_THEMECOLOR="#2c393f" \
-		-e=SHARP_IGNORE_GLOBAL_LIBVIPS=true \
+		-e NODE_VERSION="10.24.1" \
+		-e RUBY_VERSION="2.6.2" \
+		-e YARN_VERSION="1.13.0" \
+		-e PNPM_VERSION="7.13.4" \
+		-e NPM_VERSION="6.14.12" \
+		-e HUGO_VERSION \
+		-e PHP_VERSION="8.0" \
+		-e NETLIFY_VERBOSE \
+		-e GO_VERSION="1.12" \
+		-e GO_IMPORT_PATH \
+		-e SWIFT_VERSION \
+		-e PYTHON_VERSION="2.7" \
+		-e NETLIFY_PACKAGE_DIR="$NETLIFY_PACKAGE_DIR" \
+		-e GATSBY_API_URL="https://api.yourwebsite.com/api/root/" \
+		-e GATSBY_PLUGIN_MANIFEST_NAME="Page Title and Website Manifest Name" \
+		-e GATSBY_PLUGIN_MANIFEST_SHORTNAME="Mobile App Short Name" \
+		-e GATSBY_PLUGIN_MANIFEST_BGCOLOR="#2c393f" \
+		-e GATSBY_PLUGIN_MANIFEST_THEMECOLOR="#2c393f" \
+		-e SHARP_IGNORE_GLOBAL_LIBVIPS=true \
 		-v "${REPO_PATH}:/opt/buildhome/repo" \
 		-v "${BASE_PATH}/run-build.sh:/opt/build-bin/build" \
 		-v "${BASE_PATH}/tests/get-build-info.mjs:/opt/buildhome/get-build-info.mjs" \
@@ -81,7 +81,7 @@ git@github.com:markjenkinson/gatsby-faithsourced.git
 
 
 
-## STEP 6 - Start the Docker Container in develop mode
+## STEP 6 - Create the Docker Container and Start Gatsby
 
 To correctly bridge the Docker container to your development host you must also ensure that the `-H 0.0.0.0` parameter (yes, with zeros) is included in the `gatsby develop` command. Otherwise, [localhost:8000](http://localhost:8000) will not work on your development host. The -H parameter simply binds Gastby to your Docker container correctly. Without it, Gatsby will only be bound to the local container and  the bridge to your development host will not be made, resulting in `server unexpectedly dropped the connection` errors in your browser when you try to access Gatsby via [localhost:8000](http://localhost:8000).
 
