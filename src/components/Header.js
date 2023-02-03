@@ -26,7 +26,7 @@ const Header = (props) => (
 					<StaticQuery
 						query={graphql`
 							query PrimaryMenuQuery {
-								allThirdPartyPages {
+								allThirdPartyPages(filter: {nav_level: {eq: 1}, parent_id: {eq: 0}}) {
 									edges {
 										node {
 											nav_level
@@ -45,27 +45,25 @@ const Header = (props) => (
 						`}
 						render={data => (
 							data.allThirdPartyPages.edges.map(({ node }, i) => {
-								if(node.nav_level === '1' && node.parent_id === '0') {
-									if(node.type === 'link') {
-										var target = '_parent';
-										if(node.link_target === 1) {
-											target = '_blank';
-										}
-										if(node.link_mode === 'internal') {
-											if(node.link_hash) {
-												return <li key={i}><a href="javascript:;" onClick={() => {props.onScrollTo(node.link_hash)}}>{node.name}</a></li>
-											}
-											else {
-												return <li key={i}><a href={node.link_url} target={target}>{node.name}</a></li>
-											}
+								if(node.type === 'link') {
+									var target = '_parent';
+									if(node.link_target === 1) {
+										target = '_blank';
+									}
+									if(node.link_mode === 'internal') {
+										if(node.link_hash) {
+											return <li key={i}><a href="javascript:;" onClick={() => {props.onScrollTo(node.link_hash)}}>{node.name}</a></li>
 										}
 										else {
 											return <li key={i}><a href={node.link_url} target={target}>{node.name}</a></li>
 										}
 									}
 									else {
-										return <li key={i}><Link to={`/${node.slug}`} onClick={(e) => {e.preventDefault();props.onGotoPage(node.slug)}}>{node.name}</Link></li>
+										return <li key={i}><a href={node.link_url} target={target}>{node.name}</a></li>
 									}
+								}
+								else {
+									return <li key={i}><Link to={`/${node.slug}`} onClick={(e) => {e.preventDefault();props.onGotoPage(node.slug)}}>{node.name}</Link></li>
 								}
 							})
 						)}
