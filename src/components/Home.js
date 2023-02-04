@@ -8,7 +8,7 @@ const Home = (props) => (
 		<StaticQuery
 			query={graphql`
 				query HomeTilesQuery {
-					allThirdPartyPages(filter: {nav_level: {eq: 3}, parent_id: {eq: 0}, type: {eq: "templated_page"}}) {
+					allThirdPartyPages {
 						edges {
 							node {
 								nav_level
@@ -46,21 +46,25 @@ const Home = (props) => (
 			`}
 			render={data => (
 				data.allThirdPartyPages.edges.map(({ node }, i) => (
-					<article key={i} className={node.tile_thumbnail_dummy === false && "image-tile"} style={(node.tile_thumbnail_dummy === false) ? {backgroundImage: `url(${node.tile_thumbnail_local.childImageSharp.fluid.src})`} : {} }>
-						{node.tile_ribbon_text && 
-							<div className="ribbon ribbon-top-right"><div><span dangerouslySetInnerHTML={{ __html: node.tile_ribbon_text}} /></div></div>
-						}
-						<header className="major">
-							{node.tile_icon_dummy === false && 
-								<span className="image glyph"><Img fluid={node.tile_icon_local.childImageSharp.fluid} /></span>
+					<>
+					{node.type === 'templated_page' && node.nav_level === '3' && node.parent_id === '0' && 
+						<article key={i} className={node.tile_thumbnail_dummy === false && "image-tile"} style={(node.tile_thumbnail_dummy === false) ? {backgroundImage: `url(${node.tile_thumbnail_local.childImageSharp.fluid.src})`} : {} }>
+							{node.tile_ribbon_text && 
+								<div className="ribbon ribbon-top-right"><div><span dangerouslySetInnerHTML={{ __html: node.tile_ribbon_text}} /></div></div>
 							}
-							<h2 className="title" dangerouslySetInnerHTML={{ __html: node.name}} />
-							{node.tile_text && 
-								<p dangerouslySetInnerHTML={{ __html: node.tile_text}} />
-							}
-						</header>
-						<Link to={`/${node.slug}`} className="link primary" onClick={(e) => {e.preventDefault();props.onGotoPage(node.slug)}}></Link>
-					</article>
+							<header className="major">
+								{node.tile_icon_dummy === false && 
+									<span className="image glyph"><Img fluid={node.tile_icon_local.childImageSharp.fluid} /></span>
+								}
+								<h2 className="title" dangerouslySetInnerHTML={{ __html: node.name}} />
+								{node.tile_text && 
+									<p dangerouslySetInnerHTML={{ __html: node.tile_text}} />
+								}
+							</header>
+							<Link to={`/${node.slug}`} className="link primary" onClick={(e) => {e.preventDefault();props.onGotoPage(node.slug)}}></Link>
+						</article>
+					}
+					</>
 				))
 			)}
 		/>
