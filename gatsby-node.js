@@ -67,7 +67,7 @@ exports.createPages = async ({ actions, graphql }) => {
 		const blogPostTemplate = path.resolve('./src/templates/blog-post-template.js')
 		const posts = result.data.blogPosts.edges
 	
-		posts.forEach(({ node }, index) => {
+		posts.forEach(({ node }, i) => {
 			if(node.slug) {
 				const prev = i === posts.length - 1 ? null : posts[i + 1].node
 				const next = i === 0 ? null : posts[i - 1].node
