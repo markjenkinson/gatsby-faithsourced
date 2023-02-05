@@ -9,7 +9,8 @@ const { createFilePath, createFileNode, createRemoteFileNode} = require(`gatsby-
 const axios = require('axios');
 const fs = require('fs');
 
-exports.createPages = async function ({ actions, graphql }) {
+exports.createPages = async ({ actions, graphql }) => {
+	const { createPage } = actions
 	const result = await graphql(`{
 		blogPosts: allThirdPartyPosts(
 			sort: { order: DESC, fields: [date] }
@@ -17,7 +18,6 @@ exports.createPages = async function ({ actions, graphql }) {
 		) {
 			edges {
 				node {
-					thirdParty_id
 					title
 					slug
 				}
@@ -26,9 +26,6 @@ exports.createPages = async function ({ actions, graphql }) {
 		templatedPages: allThirdPartyPages {
 			edges {
 				node {
-					name
-					nav_level
-					parent_id
 					type
 					slug
 				}
@@ -62,21 +59,22 @@ exports.createPages = async function ({ actions, graphql }) {
 			}
 		}
 	}
-	`).then(result => {
+	`).then(result => {	
 		if (result.errors) {
-			console.log(result.errors)
-			return reject(result.errors)
+			return console.log(result.errors);
 		}
-		
+	
 		const blogPostTemplate = path.resolve('./src/templates/blog-post-template.js')
 		const posts = result.data.blogPosts.edges
-		
+	
 		posts.forEach(({ node }, index) => {
-			if(node.thirdParty_id > 0) {
-				const prev = index === posts.length - 1 ? null : posts[index + 1].node
-				const next = index === 0 ? null : posts[index - 1].node
+			if(node.slug) {
+				const prev = i === posts.length - 1 ? null : posts[i + 1].node
+				const next = i === 0 ? null : posts[i - 1].node
+				console.log('---------------------Post---------------------');
+				console.log(node.slug);
 			
-				actions.createPage({
+				createPage({
 					path: `${node.slug}`,
 					component: blogPostTemplate,
 					context: {
@@ -87,15 +85,18 @@ exports.createPages = async function ({ actions, graphql }) {
 				})
 			}
 		})
-		
+	
+	
 		const pageTemplate = path.resolve('./src/templates/page-template.js')
 		const pages = result.data.templatedPages.edges
-		
+	
 		pages.forEach(({ node }, index) => {
-			if(node.type === 'templated_page') {
+			if(node.slug != "/" && node.slug && node.type === 'templated_page') {
 				fs.readFile(__dirname +'/src/pages/'+node.slug+'.js', (err) => {
-					if (err) { // ignore pages that have the same name as a hardcoded page
-						actions.createPage({
+					if (err) { // if page does not already exist as a hardcoded page
+						console.log('---------------------Page---------------------');
+						console.log(node.slug);
+						createPage({
 							path: `${node.slug}`,
 							component: pageTemplate,
 							context: {
@@ -103,12 +104,11 @@ exports.createPages = async function ({ actions, graphql }) {
 							},
 						})
 					}
-				})
+				})						
 			}
 		})
-		
+	
 		// copy favicon to the location expected in gatsby-config->gatsby-plugin-manifest
-		
 		fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_favicon_img_local.publicURL, function read(err, data) {
 			if (err) {
 				throw err;
@@ -117,9 +117,9 @@ exports.createPages = async function ({ actions, graphql }) {
 				if(err) {
 					return console.log(err);
 				}
-			});
-		});
-		
+			})
+		})
+	
 		fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.site_bg_img_local.publicURL, function read(err, data) {
 			if (err) {
 				throw err;
@@ -128,9 +128,9 @@ exports.createPages = async function ({ actions, graphql }) {
 				if(err) {
 					return console.log(err);
 				}
-			});
-		});
-		
+			})
+		})
+	
 		fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_wordmark_img_local.publicURL, function read(err, data) {
 			if (err) {
 				throw err;
@@ -139,9 +139,9 @@ exports.createPages = async function ({ actions, graphql }) {
 				if(err) {
 					return console.log(err);
 				}
-			});
-		});
-				
+			})
+		})
+	
 		fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_glyph_img_local.publicURL, function read(err, data) {
 			if (err) {
 				throw err;
@@ -150,17 +150,16 @@ exports.createPages = async function ({ actions, graphql }) {
 				if(err) {
 					return console.log(err);
 				}
-			});
-		});
+			})
+		})
 	})
 }
 
 exports.sourceNodes = async ({actions, store, cache, graphql }) => {
 	const {data} = await axios.get(process.env.GATSBY_API_URL+'/preferences/api/public/v1/styles/');
-
 	fs.writeFile(__dirname +'/src/assets/scss/dynamic/_theme.scss', data, function(err) {
 		if(err) {
         	return console.log(err);
 		}
-	});
+	})
 }
