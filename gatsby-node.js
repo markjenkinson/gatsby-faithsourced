@@ -71,9 +71,7 @@ exports.createPages = async ({ actions, graphql }) => {
 			if(node.slug) {
 				const prev = i === posts.length - 1 ? null : posts[i + 1].node
 				const next = i === 0 ? null : posts[i - 1].node
-				console.log('---------------------Post---------------------');
-				console.log(node.slug);
-			
+				
 				createPage({
 					path: `${node.slug}`,
 					component: blogPostTemplate,
@@ -94,8 +92,6 @@ exports.createPages = async ({ actions, graphql }) => {
 			if(node.slug != "/" && node.slug && node.type === 'templated_page') {
 				fs.readFile(__dirname +'/src/pages/'+node.slug+'.js', (err) => {
 					if (err) { // if page does not already exist as a hardcoded page
-						console.log('---------------------Page---------------------');
-						console.log(node.slug);
 						createPage({
 							path: `${node.slug}`,
 							component: pageTemplate,
