@@ -76,7 +76,7 @@ class BlogPage extends React.Component {
 												<span className="date-line"><i className="fa fa-calendar"></i>{node.date}</span>
 												<p>{node.excerpt}</p>
 											</header>
-											<Link to={`/${node.slug}`} key={i} className="link primary" onClick={(e) => {e.preventDefault();this.handleGotoPage(node.slug)}}></Link>
+											<Link to={`/${node.slug}`} key={i} className="link primary" onClick={(e) => {e.preventDefault();this.handleGotoPage('/'+node.slug)}}></Link>
 										</article>
 									))}
 								</section>
