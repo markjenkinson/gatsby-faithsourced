@@ -42,7 +42,7 @@ class FormComponent extends React.Component {
 						<h2 className="major" dangerouslySetInnerHTML={{ __html: this.props.data.name}} />
 						<input type="hidden" name="form-name" value={this.props.data.name} />
 						<div className="form-fields">
-						{this.props.data.thirdParty_fields && this.props.data.thirdParty_fields.map(( field ) => (
+						{this.props.data.alternative_fields && this.props.data.alternative_fields.map(( field ) => (
 							<div className={`field ${field.type ? field.type : ''}`}>
 							{field.type === "text_block" &&
 								<div dangerouslySetInnerHTML={{ __html: field.title}} />

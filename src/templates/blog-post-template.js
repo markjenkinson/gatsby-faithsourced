@@ -94,17 +94,17 @@ class BlogPost extends React.Component {
 								</section>
 								<section>
 									<div className="pagination-bar top">
-										{prev && (<Link to={'/'+prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
+										{prev?.slug && (<Link to={'/'+prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
 										<Link to="/blog" className="home" onClick={(e) => {e.preventDefault();this.handleGotoPage('/blog')}} alt="Blog" title="Blog"></Link>
-										{next && (<Link to={'/'+next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
+										{next?.slug && (<Link to={'/'+next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
 									</div>
 									<h1 className="align-center">{post.title}</h1>
 									<span className="date-line"><i className="fa fa-calendar"></i>{post.date}</span>
 									<div dangerouslySetInnerHTML={{ __html: post.html }} />
 									<div className="pagination-bar bottom">
-										{prev && (<Link to={'/'+prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
+										{prev?.slug && (<Link to={'/'+prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
 										<Link to="/blog" className="home" onClick={(e) => {e.preventDefault();this.handleGotoPage('/blog')}} alt="Blog" title="Blog"></Link>
-										{next && (<Link to={'/'+next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
+										{next?.slug && (<Link to={'/'+next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
 									</div>
 								</section>
 							</article>

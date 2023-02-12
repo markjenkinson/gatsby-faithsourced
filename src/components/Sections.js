@@ -20,7 +20,7 @@ class Sections extends React.Component {
 									slug
 									sections {
 										section {
-											thirdParty_id
+											alternative_id
 											placement
 											position
 											name
@@ -41,7 +41,7 @@ class Sections extends React.Component {
 										}
 										components {
 											component {
-												thirdParty_id
+												alternative_id
 												module
 												type
 												component_type
@@ -58,7 +58,7 @@ class Sections extends React.Component {
 												}
 											}
 											object {
-												thirdParty_id
+												alternative_id
 												body
 												name
 												header_level
@@ -77,7 +77,7 @@ class Sections extends React.Component {
 												custom_submit_button_text
 												thank_you_title
 												thank_you_text
-												thirdParty_fields {
+												alternative_fields {
 													type
 													options {
 														title

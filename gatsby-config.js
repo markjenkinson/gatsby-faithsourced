@@ -28,28 +28,40 @@ module.exports = {
 			},
 		},
 		{
-		resolve: 'gatsby-source-thirdparty', options: {
+		resolve: 'gatsby-source-apiserver', options: {
+				typePrefix: "thirdParty__",
+				data: {},
+				method: "get",
 				url: `${process.env.GATSBY_API_URL}/news/api/public/v1/posts/?news_group_id=1`,
 				name: 'Posts',
 				payloadKey: 'posts',
 			},
 		},
 		{
-		resolve: 'gatsby-source-thirdparty', options: {
+		resolve: 'gatsby-source-apiserver', options: {
+				typePrefix: "thirdParty__",
+				data: {},
+				method: "get",
 				url: `${process.env.GATSBY_API_URL}/core/api/public/v1/pages/`,
 				name: 'Pages', 
 				payloadKey: 'pages'
 			},
 		},
 		{
-		resolve: 'gatsby-source-thirdparty', options: {
+		resolve: 'gatsby-source-apiserver', options: {
+				typePrefix: "thirdParty__",
+				data: {},
+				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v1/`,
 				name: 'Preferences', 
 				payloadKey: 'preferences',
 			},
 		},
 		{
-		resolve: 'gatsby-source-thirdparty', options: {
+		resolve: 'gatsby-source-apiserver', options: {
+				typePrefix: "thirdParty__",
+				data: {},
+				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v1/`,
 				name: 'SocialChannels', 
 				payloadKey: 'social',

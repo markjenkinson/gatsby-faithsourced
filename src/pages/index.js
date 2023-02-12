@@ -122,18 +122,18 @@ class IndexPage extends React.Component {
 	}
 	
 	render() {
-		const blogRoll = this.props.data.allThirdPartyPosts;
-		const sitePrefs = this.props.data.allThirdPartyPreferences;
+		const blogRolledges = this.props.data.allThirdPartyPosts.edges.filter(({ node }) => node.title !== null);
+		const sitePrefsedges = this.props.data.allThirdPartyPreferences.edges.filter(({ node }) => node.site_title !== null);
 		
 		return (
 			<Layout location={this.props.location}>
 				<div className={`body ${this.state.loading} ${this.state.isPanelVisible ? 'blurred' : ''} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
 					<div id="wrapper">
-						<Header glyph={sitePrefs.edges[0].node.logo_glyph_img} wordmark={sitePrefs.edges[0].node.logo_wordmark_img} title={sitePrefs.edges[0].node.site_name} slogan={sitePrefs.edges[0].node.logo_slogan} onScrollTo={this.handleScrollTo} timeout={this.state.timeout} onGotoPage={this.handleGotoPage} />
+						<Header glyph={sitePrefsedges[0].node.logo_glyph_img} wordmark={sitePrefsedges[0].node.logo_wordmark_img} title={sitePrefsedges[0].node.site_name} slogan={sitePrefsedges[0].node.logo_slogan} onScrollTo={this.handleScrollTo} timeout={this.state.timeout} onGotoPage={this.handleGotoPage} />
 						<div id="home" style={this.state.timeout ? {display: 'none'} : {}}>
 							<Home onGotoPage={this.handleGotoPage} />
 							<section id="blog" className="tiles" ref={(section) => { this.Blog = section; }}>
-								{blogRoll.edges.map(({ node }, i) => (
+								{blogRolledges.map(({ node }, i) => (
 									<article className="image-tile" key={i} style={{backgroundImage: `url(${node.image_1_local.childImageSharp.fluid.src})`}}>
 										<div className="ribbon ribbon-top-right"><div><span><strong>{node.news_group_name}</strong></span></div></div>
 										<header className="major">
@@ -161,10 +161,10 @@ export default IndexPage
 
 export const listQuery = graphql`
 	query ListQuery {
-		allThirdPartyPosts(filter: {thirdParty_id: {gt: 0}}, sort: { order: DESC, fields: [date] }, limit: 3) {
+		allThirdPartyPosts(filter: {alternative_id: {gt: 0}}, sort: { order: DESC, fields: [date] }, limit: 3) {
 			edges {
 				node {
-					thirdParty_id
+					alternative_id
 					title
 					news_group_name
 					image_1_url

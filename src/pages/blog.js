@@ -57,7 +57,7 @@ class BlogPage extends React.Component {
 	}
 	
 	render() {
-		const postListJSON = this.props.data.allThirdPartyPosts;
+		const postListedges= this.props.data.allThirdPartyPosts.edges.filter(({ node }) => node.title !== null);;
 		const page = this.props.data.thirdPartyPages;
 		
 		return (
@@ -69,7 +69,7 @@ class BlogPage extends React.Component {
 							<Header timeout={this.state.timeout} title={`${page.name ? page.name : 'Blog'}`} />
 							<div id="page" style={this.state.timeout ? {display: 'none'} : {}}>
 								<section id="blog" className="tiles" ref={(section) => { this.Blog = section; }}>
-									{postListJSON.edges.map(({ node }, i) => (
+									{postListedges.map(({ node }, i) => (
 										<article className="image-tile" key={i} style={{backgroundImage: `url(${node.image_1_local.childImageSharp.fluid.src})`}}>
 											<header className="major">
 												<h2 className="title">{node.title}</h2>
@@ -97,10 +97,10 @@ export default BlogPage
 
 export const blogRollQuery = graphql`
 	query BlogRollQuery {
-		allThirdPartyPosts(filter: {thirdParty_id: {gt: 0}}, sort: { order: DESC, fields: [date] }) {
+		allThirdPartyPosts(filter: {alternative_id: {gt: 0}}, sort: { order: DESC, fields: [date] }) {
 			edges {
 				node {
-					thirdParty_id
+					alternative_id
 					title
 					news_group_name
 					image_1_url
