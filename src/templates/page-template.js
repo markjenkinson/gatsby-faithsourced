@@ -176,7 +176,13 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 		  image_1_dummy
 		  image_1_local {
 			childImageSharp {
-			  gatsbyImageData(layout: FULL_WIDTH)
+				gatsbyImageData(
+				  placeholder: BLURRED
+				  quality: 70 # 50 by default
+				)
+				fluid {
+				  ...GatsbyImageSharpFluid_withWebp
+				}
 			}
 			publicURL
 		  }

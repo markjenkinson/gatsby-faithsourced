@@ -129,12 +129,18 @@ export const query = graphql`query postQuery($slug: String!) {
     excerpt
     slug
     image_1_url
-    image_1_local {
-      childImageSharp {
-        gatsbyImageData(layout: FULL_WIDTH)
-      }
-      publicURL
-    }
+	image_1_local {
+		childImageSharp {
+			gatsbyImageData(
+			  placeholder: BLURRED
+			  quality: 70 # 50 by default
+			)
+			fluid {
+			  ...GatsbyImageSharpFluid_withWebp
+			}
+		}
+		publicURL
+	  }
   }
   allThirdPartyPreferences {
     edges {
