@@ -1,64 +1,53 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
 const path = require("path")
 const axios = require('axios');
-const fs = require('fs');
+const fse = require('fs-extra');
+let dynamic_images_saved = false;
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
   const result = await graphql(`{
-		blogPosts: allThirdPartyPosts(
-			sort: { order: DESC, fields: [date] }
-			limit: 1000
-		) {
-			edges {
-				node {
-					title
-					slug
-				}
-			}
-		}
-		templatedPages: allThirdPartyPages {
-			edges {
-				node {
-					type
-					slug
-				}
-			}
-		}
-		sitePreferences: allThirdPartyPreferences {
-			edges {
-				node {
-					logo_favicon_img_type
-					logo_favicon_img_local {
-						childImageSharp {
-							fixed(width: 512, height: 512) {
-								src
-							}
-						}
-						publicURL
-					}
-					site_bg_img_type
-					site_bg_img_local {
-						publicURL
-					}
-					logo_wordmark_img_type
-					logo_wordmark_img_local {
-						publicURL
-					}
-					logo_glyph_img_type
-					logo_glyph_img_local {
-						publicURL
-					}
-				}
-			}
-		}
-	}
-	`);
+  blogPosts: allThirdPartyPosts(sort: {order: DESC, fields: [date]}, limit: 1000) {
+    edges {
+      node {
+        title
+        slug
+      }
+    }
+  }
+  templatedPages: allThirdPartyPages {
+    edges {
+      node {
+        type
+        slug
+      }
+    }
+  }
+  sitePreferences: allThirdPartyPreferences {
+    edges {
+      node {
+        logo_favicon_img_type
+        logo_favicon_img_local {
+          childImageSharp {
+            gatsbyImageData(width: 512, height: 512, placeholder: BLURRED, layout: FIXED)
+          }
+          publicURL
+        }
+        site_bg_img_type
+        site_bg_img_local {
+          publicURL
+        }
+        logo_wordmark_img_type
+        logo_wordmark_img_local {
+          publicURL
+        }
+        logo_glyph_img_type
+        logo_glyph_img_local {
+          publicURL
+        }
+      }
+    }
+  }
+}`);
 
   if (result.errors) {
     return console.log(result.errors);
@@ -66,43 +55,41 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const blogPostTemplate = path.resolve('./src/templates/blog-post-template.js')
   const posts = result.data.blogPosts.edges
-  
+
   await Promise.all(
-    posts.map( async({ node }, index) => {
-		 if (node.slug) {
-          const prev = index === posts.length - 1 ? null : posts[index + 1].node
-          const next = index === 0 ? null : posts[index - 1].node
-      
-          return new Promise((resolve, reject) => {
-            createPage({
-              path: `${node.slug}`,
-              component: blogPostTemplate,
-              context: {
-                slug: node.slug,
-                prev,
-                next,
-              },
-            });
-            resolve();
+    posts.map(async ({ node }, index) => {
+      if (node.slug) {
+        const prev = index === posts.length - 1 ? null : posts[index + 1].node
+        const next = index === 0 ? null : posts[index - 1].node
+
+        return new Promise((resolve, reject) => {
+          createPage({
+            path: `${node.slug}`,
+            component: blogPostTemplate,
+            context: {
+              slug: node.slug,
+              prev,
+              next,
+            },
           });
+          resolve();
+        });
       }
     })
   )
-  
-
 
   const pageTemplate = path.resolve('./src/templates/page-template.js')
   const pages = result.data.templatedPages.edges
-  
+
   await Promise.all(
-    pages.map( async({ node }, index) => {
+    pages.map(async ({ node }, index) => {
       if (node.slug != "/" && node.slug && node.type === 'templated_page') {
         try {
-          await fs.promises.readFile(__dirname + '/src/pages/' + node.slug + '.js', (err) => {
-             // if page already exist as a hardcoded page            
+          await fse.promises.readFile(__dirname + '/src/pages/' + node.slug + '.js', (err) => {
+
           })
         } catch (err) {
-          // if page does not already exist as a hardcoded page
+
           return new Promise((resolve, reject) => {
             createPage({
               path: `${node.slug}`,
@@ -117,68 +104,142 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     })
   )
+  if (dynamic_images_saved === false) {
 
-  // copy favicon to the location expected in gatsby-config->gatsby-plugin-manifest
-  fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_favicon_img_local.publicURL, function read(err, data) {
-    if (err) {
-      throw err;
-    }
-    fs.writeFile(__dirname + '/src/images/dynamic/favicon.' + result.data.sitePreferences.edges[0].node.logo_favicon_img_type, data, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-    })
-  })
+    try {
+      const faviconData = await fse.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_favicon_img_local?.publicURL);
+      await fse.writeFile(__dirname + '/src/images/dynamic/favicon.' + result.data.sitePreferences.edges[0].node.logo_favicon_img_type, faviconData);
+    } catch (err) {
 
-  fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.site_bg_img_local.publicURL, function read(err, data) {
-    if (err) {
-      throw err;
     }
-    fs.writeFile(__dirname + '/src/images/dynamic/background.' + result.data.sitePreferences.edges[0].node.site_bg_img_type, data, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-    })
-  })
 
-  fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_wordmark_img_local.publicURL, function read(err, data) {
-    if (err) {
-      throw err;
-    }
-    fs.writeFile(__dirname + '/src/images/dynamic/logo_wordmark.' + result.data.sitePreferences.edges[0].node.logo_wordmark_img_type, data, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-    })
-  })
+    try {
+      const bgData = await fse.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.site_bg_img_local.publicURL);
+      await fse.writeFile(__dirname + '/src/images/dynamic/background.' + result.data.sitePreferences.edges[0].node.site_bg_img_type, bgData);
+    } catch (err) {
 
-  fs.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_glyph_img_local.publicURL, function read(err, data) {
-    if (err) {
-      throw err;
     }
-    fs.writeFile(__dirname + '/src/images/dynamic/logo_glyph.' + result.data.sitePreferences.edges[0].node.logo_glyph_img_type, data, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-    })
-  })
+
+    try {
+      const wordmarkData = await fse.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_wordmark_img_local.publicURL);
+      await fse.writeFile(__dirname + '/src/images/dynamic/logo_wordmark.' + result.data.sitePreferences.edges[0].node.logo_wordmark_img_type, wordmarkData);
+    } catch (err) {
+
+    }
+
+    try {
+      const glyphData = await fse.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_glyph_img_local.publicURL);
+      await fse.writeFile(__dirname + '/src/images/dynamic/logo_glyph.' + result.data.sitePreferences.edges[0].node.logo_glyph_img_type, glyphData);
+    } catch (err) {
+
+    }
+    dynamic_images_saved = true
+  }
 }
 
 exports.sourceNodes = async ({ actions, store, cache, graphql }) => {
-  const { data } = await axios.get(process.env.GATSBY_API_URL + '/preferences/api/public/v1/styles/');
-  fs.writeFile(__dirname + '/src/assets/scss/dynamic/_theme.scss', data, function (err) {
-    if (err) {
-      return console.log(err);
-    }
-  })
+  try {
+    const { data } = await axios.get(process.env.GATSBY_API_URL + '/preferences/api/public/v1/styles/');
+    await fse.writeFile(__dirname + '/src/assets/scss/dynamic/_theme.scss', data);
+  } catch (err) {
+
+  }
 }
 
-exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
-  // override config only during production JS & CSS build
-  if (stage === 'build-javascript') {
-    // get current webpack config
-    const config = getConfig();
+exports.onCreateNode = async ({ node, actions, createNodeId }) => {
+  const { createNodeField } = actions;
 
+  if (node.internal.type === 'thirdParty__Preferences' && node.logo_favicon_img) {
+    try {
+
+      const response = await axios.get(node.logo_favicon_img, { responseType: 'arraybuffer' });
+      const buffer = Buffer.from(response.data, 'binary');
+      const fileName = `${node.id}-${path.basename(node.logo_favicon_img)}`;
+
+      const filePath = path.join(__dirname, 'public', 'images', fileName);
+      await fse.outputFile(filePath, buffer);
+
+      createNodeField({
+        node,
+        name: 'image_1_local',
+        value: `images/${fileName}`,
+      });
+    } catch (error) {
+      console.error(`Error downloading image for node ${node.id}:`, error);
+    }
+  }
+
+  if (node.internal.type === 'thirdParty__Pages' && node.sections) {
+    const imageUrls = [];
+
+
+    node.sections.forEach(section => {
+      if (section.components) {
+        section.components.forEach(component => {
+          if (component.object && component.object.photos) {
+            component.object.photos.forEach(photo => {
+              if (photo.image_1_url) {
+                imageUrls.push(photo.image_1_url);
+              }
+            });
+          }
+        });
+      }
+    });
+
+
+    await Promise.all(
+      imageUrls.map(async imageUrl => {
+        try {
+          const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+          const buffer = Buffer.from(response.data, 'binary');
+          const fileName = `${createNodeId(node.id)}-${createNodeId(imageUrl)}.jpg`;
+          const filePath = path.join(__dirname, 'public', 'images', fileName);
+          await fse.outputFile(filePath, buffer);
+          createNodeField({
+            node,
+            name: 'image_1_local',
+            value: `images/${fileName}`,
+          });
+        } catch (error) {
+          console.error(`Error downloading image for node ${node.id}:`, error);
+        }
+      })
+    );
+  }
+
+
+
+  if (node.internal.type === 'thirdParty__Posts' && node.image_1_url) {
+    try {
+
+      const response = await axios.get(node.image_1_url, { responseType: 'arraybuffer' });
+      const buffer = Buffer.from(response.data, 'binary');
+
+
+      const fileName = `${node.id}-${path.basename(node.image_1_url)}`;
+
+
+      const filePath = path.join(__dirname, 'public', 'images', fileName);
+      await fse.outputFile(filePath, buffer);
+
+
+
+      createNodeField({
+        node,
+        name: 'image_1_local',
+        value: `images/${fileName}`,
+      });
+    } catch (error) {
+      console.error(`Error downloading image for node ${node.id}:`, error);
+    }
+  }
+};
+
+exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
+
+  if (stage === 'build-javascript') {
+    const config = getConfig();
     const options = {
       minimizerOptions: {
         preset: [
@@ -187,8 +248,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
             svgo: {
               full: true,
               plugins: [
-                // potentially destructive plugins removed - see https://github.com/gatsbyjs/gatsby/issues/15629
-                // use correct config format and remove plugins requiring specific params - see https://github.com/gatsbyjs/gatsby/issues/31619
                 `removeUselessDefs`,
                 `cleanupAttrs`,
                 `cleanupEnableBackground`,
@@ -209,7 +268,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
                 `removeAttrs`,
                 `removeComments`,
                 `removeDesc`,
-                // `removeDimensions`,
                 `removeDoctype`,
                 `removeEditorsNSData`,
                 `removeEmptyAttrs`,
@@ -221,13 +279,10 @@ exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
                 `removeOffCanvasPaths`,
                 `removeRasterImages`,
                 `removeScriptElement`,
-                // this breaks some svg color styling so disable it
-                //`removeStyleElement`,
                 `removeTitle`,
                 `removeUnknownsAndDefaults`,
                 `removeUnusedNS`,
                 `removeUselessStrokeAndFill`,
-                // 'removeXMLNS',
                 `removeXMLProcInst`,
                 `reusePaths`,
                 `sortAttrs`,
@@ -237,17 +292,17 @@ exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
         ],
       }
     }
-    // find CSS minimizer
+
     const minifyCssIndex = config.optimization.minimizer.findIndex(
       minimizer => minimizer.constructor.name ===
         'CssMinimizerPlugin'
     );
-    // if found, overwrite existing CSS minimizer with the new one
+
     if (minifyCssIndex > -1) {
       config.optimization.minimizer[minifyCssIndex] =
         plugins.minifyCss(options);
     }
-    // replace webpack config with the modified object
+
     actions.replaceWebpackConfig(config);
   }
 };

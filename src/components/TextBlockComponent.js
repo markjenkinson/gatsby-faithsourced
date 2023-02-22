@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image";
 
 class TextBlockComponent extends React.Component {
 	render() {
 		const CustomTag = `${this.props.data.header_level}`
 		return (
-			<div className='col'>
+            <div className='col'>
 			{this.props.data.name &&
 				<>
 				{this.props.data.header_level && 
@@ -18,13 +18,13 @@ class TextBlockComponent extends React.Component {
 				</>
 			}
 			{this.props.data.image_1_dummy === false &&
-				<span className={`image ${this.props.params.custom_class.value ? this.props.params.custom_class.value : 'right'}`}><Img fluid={this.props.data.image_1_local.childImageSharp.fluid} /></span>
+				<span className={`image ${this.props.params.custom_class.value ? this.props.params.custom_class.value : 'right'}`}><GatsbyImage image={this.props.data.image_1_local?.childImageSharp?.gatsbyImageData} /></span>
 			}
 			{this.props.data.body && 
 				<span dangerouslySetInnerHTML={{ __html: this.props.data.body}} />
 			}
 			</div>
-		)
+        );
 	}
 }
 

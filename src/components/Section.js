@@ -11,7 +11,7 @@ import SliderComponent from '../components/SliderComponent'
 class Section extends React.Component {
 	render() {
 		return (
-			<section id={`section-${this.props.params.anchor_id}`} className={`${this.props.params.image_1_dummy === false ? 'backgrounded' : ''}`} style={{backgroundImage: this.props.params.image_1_dummy === false ? 'url('+this.props.params.image_1_local.childImageSharp.fluid.src+')' : 'none', backgroundSize: 'cover'}}>
+            <section id={`section-${this.props.params.anchor_id}`} className={`${this.props.params.image_1_dummy === false ? 'backgrounded' : ''}`} style={{backgroundImage: this.props.params.image_1_dummy === false ? 'url('+this.props.params.image_1_local?.childImageSharp?.gatsbyImageData.src+')' : 'none', backgroundSize: 'cover'}}>
 				{this.props.components && this.props.components.map(( components) => (
 					<>
 					{components.component.module === "text_blocks" && 
@@ -32,7 +32,7 @@ class Section extends React.Component {
 					</>
 				))}
 			</section>
-		)
+        );
 	}
 }
 

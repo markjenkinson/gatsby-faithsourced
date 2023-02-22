@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image";
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 
@@ -15,14 +15,14 @@ class SliderComponent extends React.Component {
 		};
     
 		return (
-			<div className='col'>
+            <div className='col'>
 				<Slider className='slider-container' {...settings}>
 					{this.props.data.photos && this.props.data.photos.map(( photo ) => (
-						<div><Img fluid={photo.image_1_local.childImageSharp.fluid} /></div>
+						<div><GatsbyImage image={photo.image_1_local?.childImageSharp?.gatsbyImageData} /></div>
 					))}
 				</Slider>
 			</div>
-		);
+        );
 	}
 }
 

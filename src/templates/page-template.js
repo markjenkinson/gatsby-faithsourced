@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet'
 import { Link, navigate, graphql } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from "gatsby-plugin-image";
 import striptags from 'striptags'
 
 import '../assets/scss/main.scss'
@@ -82,47 +82,44 @@ class JSONPage extends React.Component {
 		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
 		let close = <Link to="/" className="close" onClick={(e) => { e.preventDefault(); this.handleGotoPage('/') }} alt="Close" title="Close"></Link>
 
-		return (
-			<>
-				<Helmet
-					title={meta_title}
-					meta={[
-						{ name: 'description', content: page.excerpt },
-						{ name: 'keywords', content: page.keywords },
-						{ property: 'og:type', content: 'website' },
-						{ property: 'og:site_name', content: prefs.node.site_name },
-						{ property: 'og:title', content: meta_title },
-						{ property: 'og:url', content: this.props.location.href },
-						{ property: 'og:description', content: page.excerpt },
-					]}>
-					<html lang="en" />
-				</Helmet>
-				<div id="page" className={`body blurred ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
-					<div id="wrapper">
-						<div id="main" style={{ display: 'flex' }}>
-							<article className={`active ${this.state.isPanelVisible ? 'timeout' : ''}`} style={{ display: 'none' }}>
-								{page.tile_icon_dummy === false &&
-									<div className="logo"><Img fluid={page.tile_icon_local.childImageSharp.fluid} /></div>
-								}
-								<Sections slug={page.slug} onCloseArticle={this.onCloseArticle} />
-								{close}
-							</article>
-						</div>
-						<Footer />
-					</div>
-					<div id="bg"></div>
-					<Menu onToggleMenu={this.handleToggleMenu} location={this.props.location} />
-				</div>
-			</>
-		)
+		return <>
+            <Helmet
+                title={meta_title}
+                meta={[
+                    { name: 'description', content: page.excerpt },
+                    { name: 'keywords', content: page.keywords },
+                    { property: 'og:type', content: 'website' },
+                    { property: 'og:site_name', content: prefs.node.site_name },
+                    { property: 'og:title', content: meta_title },
+                    { property: 'og:url', content: this.props.location.href },
+                    { property: 'og:description', content: page.excerpt },
+                ]}>
+                <html lang="en" />
+            </Helmet>
+            <div id="page" className={`body blurred ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
+                <div id="wrapper">
+                    <div id="main" style={{ display: 'flex' }}>
+                        <article className={`active ${this.state.isPanelVisible ? 'timeout' : ''}`} style={{ display: 'none' }}>
+                            {page.tile_icon_dummy === false &&
+                                <div className="logo"><GatsbyImage image={page.tile_icon_local?.childImageSharp?.gatsbyImageData} /></div>
+                            }
+                            <Sections slug={page.slug} page={page} onCloseArticle={this.onCloseArticle} />
+                            {close}
+                        </article>
+                    </div>
+                    <Footer />
+                </div>
+                <div id="bg"></div>
+                <Menu onToggleMenu={this.handleToggleMenu} location={this.props.location} />
+            </div>
+        </>;
 	}
 }
 
 export default JSONPage;
 
-export const PageQuery = graphql`
-query PageQuery($slug: String!) {
-		thirdPartyPages(slug: {eq: $slug}) {
+export const PageQuery = graphql`query PageQuery($slug: String!) {
+  thirdPartyPages(slug: {eq: $slug}) {
     name
     title
     slug
@@ -130,45 +127,91 @@ query PageQuery($slug: String!) {
     keywords
     tile_icon_local {
       childImageSharp {
-        fluid(maxWidth: 128) {
-          ...GatsbyImageSharpFluid
-        }
+        gatsbyImageData(width: 128, layout: CONSTRAINED)
       }
     }
     sections {
-      section {
-        alternative_id
-        placement
-        position
-        name
-        anchor_id
-        custom_class
-        contained
-        padded
-      }
-      components {
-        component {
-          alternative_id
-          module
-          type
-          component_type
-          container_type
-          style
-          custom_class
-          reference
-          placement
-          position
-        }
-        object {
-          alternative_id
-          photos {
-            title
-            description
-            image_1_url
-          }
-        }
-      }
-    }
+	  section {
+		alternative_id
+		placement
+		position
+		name
+		anchor_id
+		custom_class
+		contained
+		padded
+		parallax_bg
+		image_1_dummy
+		image_1_local {
+		  childImageSharp {
+			gatsbyImageData(layout: FULL_WIDTH)
+		  }
+		  publicURL
+		}
+	  }
+	  components {
+		component {
+		  alternative_id
+		  module
+		  type
+		  component_type
+		  container_type
+		  style
+		  custom_class
+		  reference
+		  placement
+		  position
+		}
+		options {
+		  custom_class {
+			value
+		  }
+		}
+		object {
+		  alternative_id
+		  body
+		  name
+		  header_level
+		  image_1_url
+		  image_1_dummy
+		  image_1_local {
+			childImageSharp {
+			  gatsbyImageData(layout: FULL_WIDTH)
+			}
+			publicURL
+		  }
+		  file_name
+		  embedded_video_id
+		  custom_submit_button_text
+		  thank_you_title
+		  thank_you_text
+		  alternative_fields {
+			type
+			options {
+			  title
+			  default_selection
+			}
+			default_value
+			description
+			required
+			title
+			namespace
+		  }
+		  photos {
+			title
+			description
+			image_1_url
+			image_1_dummy
+			image_1_local {
+			  childImageSharp {
+				gatsbyImageData(layout: FULL_WIDTH)
+			  }
+			  publicURL
+			}
+		  }
+		}
+	  }
+	}
   }
   allThirdPartyPreferences {
     edges {
