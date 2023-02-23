@@ -105,7 +105,6 @@ exports.createPages = async ({ actions, graphql }) => {
     })
   )
   if (dynamic_images_saved === false) {
-
     try {
       const faviconData = await fse.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_favicon_img_local?.publicURL);
       await fse.writeFile(__dirname + '/src/images/dynamic/favicon.' + result.data.sitePreferences.edges[0].node.logo_favicon_img_type, faviconData);
@@ -148,38 +147,26 @@ exports.sourceNodes = async ({ actions, store, cache, graphql }) => {
 
 exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   const { createNodeField } = actions;
-
-  if (node.internal.type === 'thirdParty__Preferences' && node.logo_favicon_img) {
-    try {
-
-      const response = await axios.get(node.logo_favicon_img, { responseType: 'arraybuffer' });
-      const buffer = Buffer.from(response.data, 'binary');
-      const fileName = `${node.id}-${path.basename(node.logo_favicon_img)}`;
-
-      const filePath = path.join(__dirname, 'public', 'images', fileName);
-      await fse.outputFile(filePath, buffer);
-
-      createNodeField({
-        node,
-        name: 'image_1_local',
-        value: `images/${fileName}`,
-      });
-    } catch (error) {
-      console.error(`Error downloading image for node ${node.id}:`, error);
-    }
-  }
-
+  
   if (node.internal.type === 'thirdParty__Pages' && node.sections) {
-    const imageUrls = [];
-
+    const sectionImageURLs = [];
+    const componentImageURLs = [];
+    const photoURLs = [];
 
     node.sections.forEach(section => {
+      if (section.section.image_1_url) {
+		sectionImageURLs.push(section.section.image_1_url);
+	  }
+      
       if (section.components) {
         section.components.forEach(component => {
+          if (component.object && component.object.image_1_url) {
+			componentImageURLs.push(component.object.image_1_url);
+		  }
           if (component.object && component.object.photos) {
             component.object.photos.forEach(photo => {
               if (photo.image_1_url) {
-                imageUrls.push(photo.image_1_url);
+                photoURLs.push(photo.image_1_url);
               }
             });
           }
@@ -187,19 +174,59 @@ exports.onCreateNode = async ({ node, actions, createNodeId }) => {
       }
     });
 
-
     await Promise.all(
-      imageUrls.map(async imageUrl => {
+      photoURLs.map(async imageUrl => {
         try {
           const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
           const buffer = Buffer.from(response.data, 'binary');
-          const fileName = `${createNodeId(node.id)}-${createNodeId(imageUrl)}.jpg`;
-          const filePath = path.join(__dirname, 'public', 'images', fileName);
+          const imageType = imageUrl.split('.').pop();
+          const fileName = `photos-image_1-${createNodeId(node.id)}-${createNodeId(imageUrl)}.${imageType}`;
+          const filePath = path.join(__dirname, 'public', 'images/original/photos', fileName);
           await fse.outputFile(filePath, buffer);
           createNodeField({
             node,
-            name: 'image_1_local',
-            value: `images/${fileName}`,
+            name: 'photo_image_1_local',
+            value: `images/original/photos/${fileName}`,
+          });
+        } catch (error) {
+          console.error(`Error downloading image for node ${node.id}:`, error);
+        }
+      })
+    );
+    
+    await Promise.all(
+      sectionImageURLs.map(async imageUrl => {
+        try {
+          const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+          const buffer = Buffer.from(response.data, 'binary');
+          const imageType = imageUrl.split('.').pop();
+          const fileName = `section-image_1-${createNodeId(node.id)}-${createNodeId(imageUrl)}.${imageType}`;
+          const filePath = path.join(__dirname, 'public', 'images/original/sections', fileName);
+          await fse.outputFile(filePath, buffer);
+          createNodeField({
+            node,
+            name: 'section_image_1_local',
+            value: `images/original/sections/${fileName}`,
+          });
+        } catch (error) {
+          console.error(`Error downloading image for node ${node.id}:`, error);
+        }
+      })
+    );
+    
+     await Promise.all(
+      componentImageURLs.map(async imageUrl => {
+        try {
+          const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+          const buffer = Buffer.from(response.data, 'binary');
+          const imageType = imageUrl.split('.').pop();
+          const fileName = `component-image_1-${createNodeId(node.id)}-${createNodeId(imageUrl)}.${imageType}`;
+          const filePath = path.join(__dirname, 'public', 'images/original/sections/components', fileName);
+          await fse.outputFile(filePath, buffer);
+          createNodeField({
+            node,
+            name: 'component_image_1_local',
+            value: `images/original/sections/components/${fileName}`,
           });
         } catch (error) {
           console.error(`Error downloading image for node ${node.id}:`, error);
@@ -207,28 +234,35 @@ exports.onCreateNode = async ({ node, actions, createNodeId }) => {
       })
     );
   }
-
-
-
+  
   if (node.internal.type === 'thirdParty__Posts' && node.image_1_url) {
     try {
-
       const response = await axios.get(node.image_1_url, { responseType: 'arraybuffer' });
       const buffer = Buffer.from(response.data, 'binary');
-
-
-      const fileName = `${node.id}-${path.basename(node.image_1_url)}`;
-
-
-      const filePath = path.join(__dirname, 'public', 'images', fileName);
+      const fileName = `post-image_1-${node.id}-${path.basename(node.image_1_url)}`;
+      const filePath = path.join(__dirname, 'public', 'images/original/posts', fileName);
       await fse.outputFile(filePath, buffer);
-
-
-
       createNodeField({
         node,
-        name: 'image_1_local',
-        value: `images/${fileName}`,
+        name: 'post_image_1_local',
+        value: `images/original/posts/${fileName}`,
+      });
+    } catch (error) {
+      console.error(`Error downloading image for node ${node.id}:`, error);
+    }
+  }
+  
+  if (node.internal.type === 'thirdParty__Preferences' && node.logo_favicon_img) {
+    try {
+      const response = await axios.get(node.logo_favicon_img, { responseType: 'arraybuffer' });
+      const buffer = Buffer.from(response.data, 'binary');
+      const fileName = `${node.id}-${path.basename(node.logo_favicon_img)}`;
+      const filePath = path.join(__dirname, 'public', 'images/original/preferences', fileName);
+      await fse.outputFile(filePath, buffer);
+      createNodeField({
+        node,
+        name: 'logo_favicon_img_local',
+        value: `images/original/preferences/${fileName}`,
       });
     } catch (error) {
       console.error(`Error downloading image for node ${node.id}:`, error);
