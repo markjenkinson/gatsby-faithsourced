@@ -143,46 +143,240 @@ exports.sourceNodes = async ({ actions, store, cache, graphql }) => {
   } catch (err) {}
 }
 
-// this is a hack that ensures gatsby-plugin-remote-images registers the localImage (ie. image_1_local) to the node, don't ask me why it works
-exports.onCreateNode = async ({ node, actions, createNodeId }) => {
-  const { createNodeField } = actions;
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+
+exports.createResolvers = async (
+  {
+    actions,
+    cache,
+    createNodeId,
+    createResolvers,
+    store,
+    reporter,
+  },
+) => {
+  const { createNode } = actions
+
+  await createResolvers({
+    thirdParty__Pages: {
+      tile_icon_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.tile_icon_url
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
   
-  if (node.internal.type === 'thirdParty__Pages') {
-	try {
-	  createNodeField({
-		node,
-		name: 'page_images_loaded',
-		value: true,
-	  });
-	} catch (error) {
-	  console.error(`Error on loading thirdParty__Pages images for node ${node.id}:`, error);
-	}
-  }
+  await createResolvers({
+    thirdParty__Pages: {
+      tile_thumbnail_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.tile_thumbnail_url
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
   
-  if (node.internal.type === 'thirdParty__Posts') {
-    try {
-      createNodeField({
-		node,
-		name: 'post_images_loaded',
-		value: true,
-	  });
-    } catch (error) {
-      console.error(`Error on loading thirdParty__Posts images for node ${node.id}:`, error);
-    }
-  }
+  await createResolvers({
+    thirdParty__PagesSectionsSection: {
+      image_1_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.image_1_url
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
   
-  if (node.internal.type === 'thirdParty__Preferences') {
-    try {
-      createNodeField({
-		node,
-		name: 'preferences_images_loaded',
-		value: true,
-	  });
-    } catch (error) {
-      console.error(`Error on loading thirdParty__Preferences images for node ${node.id}:`, error);
-    }
-  }
-};
+  await createResolvers({
+    thirdParty__PagesSectionsComponentsObject: {
+      image_1_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.image_1_url
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
+    thirdParty__PagesSectionsComponentsObjectPhotos: {
+      image_1_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.image_1_url
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
+    thirdParty__Posts: {
+      image_1_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.image_1_url
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
+    thirdParty__Preferences: {
+      logo_bitmap_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.logo_bitmap
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
+    thirdParty__Preferences: {
+      logo_wordmark_img_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.logo_wordmark_img
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
+    thirdParty__Preferences: {
+      logo_glyph_img_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.logo_glyph_img
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
+    thirdParty__Preferences: {
+      logo_favicon_img_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.logo_favicon_img
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
+    thirdParty__Preferences: {
+      site_bg_img_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.site_bg_img
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+}
 
 exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
 
