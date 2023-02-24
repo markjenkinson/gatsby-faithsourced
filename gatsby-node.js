@@ -140,132 +140,46 @@ exports.sourceNodes = async ({ actions, store, cache, graphql }) => {
   try {
     const { data } = await axios.get(process.env.GATSBY_API_URL + '/preferences/api/public/v1/styles/');
     await fse.writeFile(__dirname + '/src/assets/scss/dynamic/_theme.scss', data);
-  } catch (err) {
-
-  }
+  } catch (err) {}
 }
 
+// this is a hack that ensures gatsby-plugin-remote-images registers the localImage (ie. image_1_local) to the node, don't ask me why it works
 exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   const { createNodeField } = actions;
   
-  if (node.internal.type === 'thirdParty__Pages' && node.sections) {
-    const sectionImageURLs = [];
-    const componentImageURLs = [];
-    const photoURLs = [];
-
-    node.sections.forEach(section => {
-      if (section.section.image_1_url) {
-		sectionImageURLs.push(section.section.image_1_url);
-	  }
-      
-      if (section.components) {
-        section.components.forEach(component => {
-          if (component.object && component.object.image_1_url) {
-			componentImageURLs.push(component.object.image_1_url);
-		  }
-          if (component.object && component.object.photos) {
-            component.object.photos.forEach(photo => {
-              if (photo.image_1_url) {
-                photoURLs.push(photo.image_1_url);
-              }
-            });
-          }
-        });
-      }
-    });
-
-    await Promise.all(
-      photoURLs.map(async imageUrl => {
-        try {
-          const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-          const buffer = Buffer.from(response.data, 'binary');
-          const imageType = imageUrl.split('.').pop();
-          const fileName = `photos-image_1-${createNodeId(node.id)}-${createNodeId(imageUrl)}.${imageType}`;
-          const filePath = path.join(__dirname, 'public', 'images/original/photos', fileName);
-          await fse.outputFile(filePath, buffer);
-          createNodeField({
-            node,
-            name: 'photo_image_1_local',
-            value: `images/original/photos/${fileName}`,
-          });
-        } catch (error) {
-          console.error(`Error downloading image for node ${node.id}:`, error);
-        }
-      })
-    );
-    
-    await Promise.all(
-      sectionImageURLs.map(async imageUrl => {
-        try {
-          const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-          const buffer = Buffer.from(response.data, 'binary');
-          const imageType = imageUrl.split('.').pop();
-          const fileName = `section-image_1-${createNodeId(node.id)}-${createNodeId(imageUrl)}.${imageType}`;
-          const filePath = path.join(__dirname, 'public', 'images/original/sections', fileName);
-          await fse.outputFile(filePath, buffer);
-          createNodeField({
-            node,
-            name: 'section_image_1_local',
-            value: `images/original/sections/${fileName}`,
-          });
-        } catch (error) {
-          console.error(`Error downloading image for node ${node.id}:`, error);
-        }
-      })
-    );
-    
-     await Promise.all(
-      componentImageURLs.map(async imageUrl => {
-        try {
-          const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-          const buffer = Buffer.from(response.data, 'binary');
-          const imageType = imageUrl.split('.').pop();
-          const fileName = `component-image_1-${createNodeId(node.id)}-${createNodeId(imageUrl)}.${imageType}`;
-          const filePath = path.join(__dirname, 'public', 'images/original/sections/components', fileName);
-          await fse.outputFile(filePath, buffer);
-          createNodeField({
-            node,
-            name: 'component_image_1_local',
-            value: `images/original/sections/components/${fileName}`,
-          });
-        } catch (error) {
-          console.error(`Error downloading image for node ${node.id}:`, error);
-        }
-      })
-    );
+  if (node.internal.type === 'thirdParty__Pages') {
+	try {
+	  createNodeField({
+		node,
+		name: 'page_images_loaded',
+		value: true,
+	  });
+	} catch (error) {
+	  console.error(`Error on loading thirdParty__Pages images for node ${node.id}:`, error);
+	}
   }
   
-  if (node.internal.type === 'thirdParty__Posts' && node.image_1_url) {
+  if (node.internal.type === 'thirdParty__Posts') {
     try {
-      const response = await axios.get(node.image_1_url, { responseType: 'arraybuffer' });
-      const buffer = Buffer.from(response.data, 'binary');
-      const fileName = `post-image_1-${node.id}-${path.basename(node.image_1_url)}`;
-      const filePath = path.join(__dirname, 'public', 'images/original/posts', fileName);
-      await fse.outputFile(filePath, buffer);
       createNodeField({
-        node,
-        name: 'post_image_1_local',
-        value: `images/original/posts/${fileName}`,
-      });
+		node,
+		name: 'post_images_loaded',
+		value: true,
+	  });
     } catch (error) {
-      console.error(`Error downloading image for node ${node.id}:`, error);
+      console.error(`Error on loading thirdParty__Posts images for node ${node.id}:`, error);
     }
   }
   
-  if (node.internal.type === 'thirdParty__Preferences' && node.logo_favicon_img) {
+  if (node.internal.type === 'thirdParty__Preferences') {
     try {
-      const response = await axios.get(node.logo_favicon_img, { responseType: 'arraybuffer' });
-      const buffer = Buffer.from(response.data, 'binary');
-      const fileName = `${node.id}-${path.basename(node.logo_favicon_img)}`;
-      const filePath = path.join(__dirname, 'public', 'images/original/preferences', fileName);
-      await fse.outputFile(filePath, buffer);
       createNodeField({
-        node,
-        name: 'logo_favicon_img_local',
-        value: `images/original/preferences/${fileName}`,
-      });
+		node,
+		name: 'preferences_images_loaded',
+		value: true,
+	  });
     } catch (error) {
-      console.error(`Error downloading image for node ${node.id}:`, error);
+      console.error(`Error on loading thirdParty__Preferences images for node ${node.id}:`, error);
     }
   }
 };
