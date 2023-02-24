@@ -6,7 +6,7 @@ To run a local copy of our site, for your own hacking pleasure, you’ll need so
 
 ## Requirements
 
-* [Node](https://nodejs.org/en/download/) Recommended version: 14.21.2
+* [Node](https://nodejs.org/en/download/) Minimum version: 18.14.2 (LTS)
   * It installs `npm` with it
   * If you want to use different versions of Node you can use [nvm](https://github.com/nvm-sh/nvm) to switch between them
   * If you are running on macOS, you may want to manage Node using homebrew, which can be installed with the following command : 
@@ -29,13 +29,13 @@ To run a local copy of our site, for your own hacking pleasure, you’ll need so
         ```zh
         brew uninstall node@10
         ```
-    * To install any version of node (ie. version 14) :
+    * To install any version of node (ie. version 18) :
         ```zh
-        brew install node@14
+        brew install node@18
         ```
-    * To link newly installed node version (ie. version 14) :
+    * To link newly installed node version (ie. version 18) :
         ```zh
-       brew link node@14
+       brew link node@18
         ```
 * [Git](https://git-scm.com/)
 
@@ -88,7 +88,7 @@ Which can be previewed in your browser at [http://localhost:9000](http://localho
     * GATSBY_PLUGIN_MANIFEST_SHORTNAME `Faith Sourced`
     * GATSBY_PLUGIN_MANIFEST_BGCOLOR `#2c393f`
     * GATSBY_PLUGIN_MANIFEST_THEMECOLOR `#2c393f`
-    * NODE_VERSION `14.21.2`
+    * NODE_VERSION `18.14.2`
         * This ensures development and deployment environments are in sync
     * SHARP_IGNORE_GLOBAL_LIBVIPS `true`
         * This forces the correct version of LIBVIPS to be used on the Netlify container
