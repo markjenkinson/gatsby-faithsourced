@@ -119,9 +119,7 @@ module.exports = {
 						},
 						query: `
 							{
-								allThirdPartyPosts(
-									sort: { order: DESC, fields: [date] }
-								) {
+								allThirdPartyPosts(sort: {date: DESC}) {
 									edges {
 										node {
 											id

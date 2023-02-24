@@ -162,7 +162,7 @@ export default IndexPage
 export const listQuery = graphql`query ListQuery {
   allThirdPartyPosts(
     filter: {alternative_id: {gt: 0}}
-    sort: {order: DESC, fields: [date]}
+    sort: {date: DESC}
     limit: 3
   ) {
     edges {

@@ -6,7 +6,7 @@ let dynamic_images_saved = false;
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
   const result = await graphql(`{
-  blogPosts: allThirdPartyPosts(sort: {order: DESC, fields: [date]}, limit: 1000) {
+  blogPosts: allThirdPartyPosts(sort: {date: DESC}, limit: 1000) {
     edges {
       node {
         title
@@ -407,7 +407,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
                 `moveElemsAttrsToGroup`,
                 `moveGroupAttrsToElems`,
                 `prefixIds`,
-                `removeAttrs`,
                 `removeComments`,
                 `removeDesc`,
                 `removeDoctype`,

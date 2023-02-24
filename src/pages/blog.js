@@ -94,10 +94,7 @@ class BlogPage extends React.Component {
 export default BlogPage
 
 export const blogRollQuery = graphql`query BlogRollQuery {
-  allThirdPartyPosts(
-    filter: {alternative_id: {gt: 0}}
-    sort: {order: DESC, fields: [date]}
-  ) {
+  allThirdPartyPosts(filter: {alternative_id: {gt: 0}}, sort: {date: DESC}) {
     edges {
       node {
         alternative_id
