@@ -152,8 +152,14 @@
 	blockquote {
 		border-left: solid (_size(border-width) * 4) _palette(border);
 		font-style: italic;
-		margin: 0 0 _size(element-margin) 0;
-		padding: (_size(element-margin) / 4) 0 (_size(element-margin) / 4) _size(element-margin);
+		margin-top: 0;
+		margin-right: 0;
+		margin-bottom: _size(element-margin);
+		margin-left:  _size(element-margin);
+		padding-top: calc(_size(element-margin) / 4);
+		padding-right: _size(element-margin);
+		padding-bottom: calc(_size(element-margin) / 4);
+		padding-left: _size(element-margin);
 		
 		p:last-child {
 			margin: 0;
