@@ -33,9 +33,6 @@ const Home = (props) => (
               width: 512
               quality: 70 # 50 by default
             )
-            fluid {
-              ...GatsbyImageSharpFluid_withWebp
-            }
           }
           publicURL
         }

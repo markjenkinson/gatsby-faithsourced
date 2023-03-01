@@ -135,9 +135,6 @@ export const query = graphql`query postQuery($slug: String!) {
 			  placeholder: BLURRED
 			  quality: 70 # 50 by default
 			)
-			fluid {
-			  ...GatsbyImageSharpFluid_withWebp
-			}
 		}
 		publicURL
 	  }
