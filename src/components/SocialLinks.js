@@ -21,7 +21,7 @@ const SocialLinks = (props) => (
 			`}
 			render={data => (
 				data.allThirdPartySocialChannels.edges.map(({ node }, i) => (
-					<li><a href={node.url} target="_blank" className={`icon fa-${node.style}`} title={`on ${node.name}`} alt={`on ${node.name}`}><span className="label">on {node.name}</span></a></li>
+					<li><a href={node.url} target="_blank" rel="noreferrer" className={`icon fa-${node.style}`} title={`on ${node.name}`} alt={`on ${node.name}`}><span className="label">on {node.name}</span></a></li>
 				))
 			)}
 		/>
