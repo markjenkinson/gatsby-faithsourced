@@ -39,13 +39,13 @@ class Menu extends React.Component {
 												{node.link_mode === 'internal' ? (
 													<>
 													{node.link_hash ? (
-														<a href="#" onClick={() => {/**props.onScrollTo(node.link_hash)**/}}>{node.name}</a>
+														<a href={`#${node.link_hash}`} onClick={() => {/**props.onScrollTo(node.link_hash)**/}}>{node.name}</a>
 													):(
 														<Link to={`/${node.link_url.replace(/^\/+/, '')}`} onClick={location_path === node.link_url.replace(/^\/+/, '') ? this.props.onToggleMenu : ''} target={node.link_target === 1 ? '_blank' : '_parent'} activeClassName="active">{node.name}</Link>
 													)}
 													</>
 												):(
-													<a href={node.link_url} target={node.link_target === 1 ? '_blank' : '_parent'}>{node.name}</a>
+													<a href={node.link_url} target={node.link_target === 1 ? '_blank' : '_parent'} rel="noreferrer">{node.name}</a>
 												)} 
 												</>
 											):(

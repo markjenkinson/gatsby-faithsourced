@@ -52,7 +52,7 @@ const Header = (props) => (
 									}
 									if(node.link_mode === 'internal') {
 										if(node.link_hash) {
-											return <li key={i}><a href="javascript:;" onClick={() => {props.onScrollTo(node.link_hash)}}>{node.name}</a></li>
+											return <li key={i}><a href={`#${node.link_hash}`} onClick={() => {props.onScrollTo(node.link_hash)}}>{node.name}</a></li>
 										}
 										else {
 											return <li key={i}><a href={node.link_url} target={target}>{node.name}</a></li>
