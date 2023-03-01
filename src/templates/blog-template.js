@@ -1,12 +1,16 @@
-import React from 'react'
+import React from 'react';
+import Helmet from 'react-helmet'
 import { Link, navigate, graphql } from 'gatsby'
-import Layout from '../components/layout'
+import { GatsbyImage } from "gatsby-plugin-image";
+import striptags from 'striptags'
+
+import '../assets/scss/main.scss'
 
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Menu from '../components/Menu'
+import Footer from '../components/Footer'
 
-class BlogPage extends React.Component {
+class blogPageTemplate extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -24,7 +28,7 @@ class BlogPage extends React.Component {
 			this.setState({blurred: window.history.state.blurred});
 		}
 		this.timeoutId = setTimeout(() => {
-				this.setState({blurred: ''});
+			this.setState({blurred: ''});
 		}, 100);
 	}
 
@@ -55,17 +59,31 @@ class BlogPage extends React.Component {
 			})
 		}, 325)
 	}
-	
+
 	render() {
-		const postListedges= this.props.data.allThirdPartyPosts.edges.filter(({ node }) => node.title !== null);;
-		const page = this.props.data.thirdPartyPages;
-		
+		const postListedges = this.props.data.allThirdPartyPosts.edges.filter(({ node }) => node.title !== null);
+		const page = this.props.data.thirdPartyPages
+		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
+		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
+		let close = <Link to="/" className="close" onClick={(e) => { e.preventDefault(); this.handleGotoPage('/') }} alt="Close" title="Close"></Link>
+
 		return <>
-        {page &&
-            <Layout location={this.props.location} meta_title={page.title}>
-                <div className={`body ${this.state.isPanelVisible ? 'blurred' : ''} ${this.state.blurred} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
+            <Helmet
+                title={meta_title}
+                meta={[
+                    { name: 'description', content: page.excerpt },
+                    { name: 'keywords', content: page.keywords },
+                    { property: 'og:type', content: 'website' },
+                    { property: 'og:site_name', content: prefs.node.site_name },
+                    { property: 'og:title', content: meta_title },
+                    { property: 'og:url', content: this.props.location.href },
+                    { property: 'og:description', content: page.excerpt },
+                ]}>
+                <html lang="en" />
+            </Helmet>
+            <div className={`body ${this.state.isPanelVisible ? 'blurred' : ''} ${this.state.blurred} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
                     <div id="wrapper">
-                        <Header timeout={this.state.timeout} title={`${page.name ? page.name : 'Blog'}`} />
+                        <Header timeout={this.state.timeout} title={`${postListedges[0].node.news_group_name ? postListedges[0].node.news_group_name : 'Blog'}`} />
                         <div id="page" style={this.state.timeout ? {display: 'none'} : {}}>
                             <section id="blog" className="tiles" ref={(section) => { this.Blog = section; }}>
                                 {postListedges.map(({ node }, i) => (
@@ -85,15 +103,13 @@ class BlogPage extends React.Component {
                     <div id="bg"></div>
                     <Menu onToggleMenu={this.handleToggleMenu} location={this.props.location} />
                 </div>
-            </Layout>
-        }
         </>;
 	}
 }
 
-export default BlogPage
+export default blogPageTemplate;
 
-export const blogRollQuery = graphql`query BlogRollQuery {
+export const blogRollQuery = graphql`query BlogRollQuery($slug: String!) {
   allThirdPartyPosts(filter: {alternative_id: {gt: 0}}, sort: {date: DESC}) {
     edges {
       node {
@@ -118,10 +134,26 @@ export const blogRollQuery = graphql`query BlogRollQuery {
       }
     }
   }
-  thirdPartyPages(slug: {eq: "blog"}) {
+  thirdPartyPages(slug: {eq: $slug}) {
     name
     title
     slug
     excerpt
+    keywords
+  }
+  allThirdPartyPreferences {
+    edges {
+      node {
+        site_name
+        site_title
+        email_address
+        meta_keywords
+        meta_description
+        logo_wordmark_img
+        logo_glyph_img
+        logo_slogan
+        site_bg_img
+      }
+    }
   }
 }`

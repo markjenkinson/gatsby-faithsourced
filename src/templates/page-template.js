@@ -10,7 +10,7 @@ import Menu from '../components/Menu'
 import Sections from '../components/Sections'
 import Footer from '../components/Footer'
 
-class JSONPage extends React.Component {
+class pageTemplate extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -116,7 +116,7 @@ class JSONPage extends React.Component {
 	}
 }
 
-export default JSONPage;
+export default pageTemplate;
 
 export const PageQuery = graphql`query PageQuery($slug: String!) {
   thirdPartyPages(slug: {eq: $slug}) {

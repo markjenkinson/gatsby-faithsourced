@@ -79,6 +79,7 @@ exports.createPages = async ({ actions, graphql }) => {
   )
 
   const pageTemplate = path.resolve('./src/templates/page-template.js')
+  const blogTemplate = path.resolve('./src/templates/blog-template.js')
   const pages = result.data.templatedPages.edges
 
   await Promise.all(
@@ -89,17 +90,16 @@ exports.createPages = async ({ actions, graphql }) => {
 
           })
         } catch (err) {
-
-          return new Promise((resolve, reject) => {
-            createPage({
-              path: `${node.slug}`,
-              component: pageTemplate,
-              context: {
-                slug: node.slug,
-              },
-            });
-            resolve();
-          });
+			return new Promise((resolve, reject) => {
+				createPage({
+				  path: `${node.slug}`,
+				  component: `${node.slug==='blog' || node.slug==='news' || node.slug==='articles' ? blogTemplate : pageTemplate }`,
+				  context: {
+					slug: node.slug,
+				  },
+				});
+				resolve();
+			});
         }
       }
     })

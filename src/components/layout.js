@@ -8,40 +8,6 @@ import '../assets/scss/main.scss'
 import Footer from './Footer'
 
 const Layout = ({ children, location, meta_title }) => {
-
-  let content;
-  
-  if (location) {  
-	  if (location.pathname === '/') {
-		content = (
-		  <>
-			{children}
-		  </>
-		)
-	  }
-	  else if (location.pathname === '/blog' || location.pathname === '/blog/' || location.pathname === '/news/' || location.pathname === '/news') {
-		content = (
-		  <>
-			{children}
-		  </>
-		)
-	  } else {
-		content = (
-			<div id="page" className="body blurred">
-				<div id="wrapper">
-					<div id="main" style={{display:'flex'}}>
-						<article className="active timeout">
-							{children}
-						</article>
-					</div>
-					<Footer/>
-				</div>
-				<div id="bg"></div>
-			</div>
-		)
-	  }
-  }
-  
   return (
     <StaticQuery
       query={graphql`query layoutPrefsQuery {
@@ -82,7 +48,7 @@ const Layout = ({ children, location, meta_title }) => {
 			  >
 				<html lang="en" />
 			</Helmet>
-			{content}
+			{children}
         </>
       )}
     />
