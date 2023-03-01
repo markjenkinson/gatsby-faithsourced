@@ -4,9 +4,6 @@ import { Link } from 'gatsby'
 import Layout from '../components/layout'
 
 class NotFoundPage extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 	render() {
 		let close = <Link to="/" className="close" alt="Close" title="Close"></Link>
 		
