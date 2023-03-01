@@ -23,11 +23,20 @@ article {
 		}
 		
 		&.backgrounded {
-			padding-top: 2.5rem;
+			padding-top: _size(element-margin)m;
 		}
 		
 		img {
 			max-width: 100%;
+		}
+		
+		&.text-dark {
+			padding-top: _size(element-margin);
+			background-color: #fff;
+			
+			p, strong, h1, h2, h3, h4, h5, h6, h7 {
+				color: map-get($theme, "color_9");
+			}
 		}
 		
 		.col {
