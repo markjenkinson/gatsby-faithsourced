@@ -8,7 +8,7 @@ const Home = (props) => (
 		<StaticQuery
 			query={graphql`query HomeTilesQuery {
   allThirdPartyPages(
-    filter: {nav_level: {eq: 3}, parent_id: {eq: 0}, type: {eq: "templated_page"}}
+	filter: {type: {regex: "/templated_page|link/"}, nav_level: {eq: 3}, parent_id: {eq: 0}}
   ) {
     edges {
       node {
@@ -18,6 +18,7 @@ const Home = (props) => (
         name
         tile_text
         tile_ribbon_text
+        tile_button_text
         excerpt
         slug
         link_url
@@ -62,8 +63,11 @@ const Home = (props) => (
 							{node.tile_text && 
 								<p dangerouslySetInnerHTML={{ __html: node.tile_text}} />
 							}
+							{node.tile_button_text && 
+								<button dangerouslySetInnerHTML={{ __html: node.tile_button_text}} />
+							}
 						</header>
-						<Link to={`/${node.slug}`} className="link primary" onClick={(e) => {e.preventDefault();props.onGotoPage(node.slug)}}></Link>
+						<Link to={`${node.slug?node.slug:node.link_url?node.link_url:''}`} className="link primary" onClick={(e) => {e.preventDefault();props.onGotoPage(node.slug?node.slug:node.link_url?node.link_url:'')}}></Link>
 					</article>
 				))
 			)}
