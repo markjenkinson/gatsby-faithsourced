@@ -5,8 +5,6 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import '../assets/scss/main.scss'
 
-import Footer from './Footer'
-
 const Layout = ({ children, location, meta_title }) => {
   return (
     <StaticQuery

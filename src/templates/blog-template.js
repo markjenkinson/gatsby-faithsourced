@@ -1,7 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet'
 import { Link, navigate, graphql } from 'gatsby'
-import { GatsbyImage } from "gatsby-plugin-image";
 import striptags from 'striptags'
 
 import '../assets/scss/main.scss'
@@ -65,8 +64,7 @@ class blogPageTemplate extends React.Component {
 		const page = this.props.data.thirdPartyPages
 		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
 		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
-		let close = <Link to="/" className="close" onClick={(e) => { e.preventDefault(); this.handleGotoPage('/') }} alt="Close" title="Close"></Link>
-
+		
 		return <>
             <Helmet
                 title={meta_title}
