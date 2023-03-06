@@ -6,8 +6,8 @@ import Section from '../components/Section'
 class Sections extends React.Component {
 	render() {
 		return <>
-			{this.props.page.sections && this.props.page.sections.map(( sections ) => (
-				<Section params={sections.section} components={sections.components} onCloseArticle={this.props.onCloseArticle} />
+			{this.props.page.sections && this.props.page.sections.map(( section ) => (
+				<Section params={section.section} components={section.components} onCloseArticle={this.props.onCloseArticle} />
 			))}
         </>
 	}

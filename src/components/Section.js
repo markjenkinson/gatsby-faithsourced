@@ -9,32 +9,40 @@ import VideoComponent from '../components/VideoComponent'
 import SliderComponent from '../components/SliderComponent'
 
 class Section extends React.Component {
-	render() {
-		return (
-            <section id={`section-${this.props.params.anchor_id}`} className={`${this.props.params.custom_class}${this.props.params.custom_class && this.props.params.image_1_dummy === false ? ' ':''} ${this.props.params.image_1_dummy === false ? 'backgrounded' : ''}`} style={{backgroundImage: this.props.params.image_1_dummy === false ? 'url('+this.props.params.image_1_local?.childImageSharp?.gatsbyImageData.src+')' : 'none', backgroundSize: 'cover'}}>
-				{this.props.components && this.props.components.map(( components) => (
-					<>
-					{components.component.module === "text_blocks" && 
-						<TextBlockComponent params={components.options} data={components.object} />
-					}
-					{components.component.module === "quick_images" && 
-						<QuickImageComponent params={components.options} data={components.object} />
-					}
-					{components.component.module === "forms" && 
-						<FormComponent params={components.options} data={components.object} onCloseArticle={this.props.onCloseArticle} />
-					}
-					{components.component.module === "multimedia" && 
-						<VideoComponent params={components.options} data={components.object} />
-					}
-					{components.component.module === "photos" && 
-						<SliderComponent params={components.options} data={components.object} />
-					}
-					</>
-				))}
-			</section>
+    render() {
+        const { params, components = [], onCloseArticle} = this.props;
+
+        const componentMap = {
+            text_blocks: TextBlockComponent,
+            quick_images: QuickImageComponent,
+            forms: FormComponent,
+            multimedia: VideoComponent,
+            photos: SliderComponent
+        };
+
+        const Component = params.parallax_bg === '1' ? Parallax : React.Fragment;
+
+        return (
+            <Component
+                bgImage={params.parallax_bg === '1' ? params.image_1_local.publicURL : ""}
+                strength={params.parallax_bg === '1' ? "-200" : 0}
+                blur={params.parallax_bg === '1' ? { min: -15, max: 15 } : null}
+                className={params.parallax_bg === '1' ? "parallax-section" : ""}
+            >
+                <section id={`section-${params.anchor_id}`} 
+                	className={`${params.custom_class && params.image_1_dummy === false ? params.custom_class+' ':params.custom_class}${params.image_1_dummy === false ? 'backgrounded' : ''}`} 
+                	style={{backgroundImage: params.parallax_bg === '0' && params.image_1_dummy === false ? 'url('+params.image_1_local?.publicURL+')' : 'none', backgroundSize: 'cover'}}
+                >
+                    {components.map(({ component: { module }, options, object }) => {
+                        const Component = componentMap[module];
+                        return Component ? <Component params={options} data={object} onCloseArticle={onCloseArticle} /> : null;
+                    })}
+                </section>
+            </Component>
         );
-	}
+    }
 }
+
 
 Section.propTypes = {
 	params: PropTypes.object,
