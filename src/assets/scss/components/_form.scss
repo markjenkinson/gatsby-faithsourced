@@ -83,7 +83,7 @@ form {
 		));
 		background: transparent;
 		border-radius: _size(border-radius);
-		border: solid _size(border-width) _palette(border-alt);
+		border: solid _size(border-width) transparentize(_palette(border), 0.7);
 		color: inherit;
 		display: block;
 		outline: 0;
