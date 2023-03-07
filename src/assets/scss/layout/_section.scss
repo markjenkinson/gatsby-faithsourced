@@ -10,8 +10,7 @@ article {
 	}
 	
 	section {
-		padding: 0 2.5rem;
-		float: left;
+		padding: _size(element-margin);
 		width: 100%;
 
 		@include breakpoint(small) {
@@ -22,12 +21,48 @@ article {
 			padding: 0 1.5rem;
 		}
 		
-		&.backgrounded {
-			padding-top: _size(element-margin)m;
-		}
-		
 		img {
 			max-width: 100%;
+		}
+		
+		&.background-darken {
+			hr, h1.major, h2.major, h3.major, h4.major, h5.major, h6.major, h7.major {
+				border-bottom: 1px solid map-get($theme, "color_10");
+			}
+			
+			p, strong, h1, h2, h3, h4, h5, h6, h7 {
+				color: map-get($theme, "color_10");
+			}
+			
+			&:before {
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%; 
+				content: " ";
+				position: absolute;
+				background: rgba(0,0,0,0.4);
+			}
+		}
+		
+		&.background-lighten {
+			hr, h1.major, h2.major, h3.major, h4.major, h5.major, h6.major, h7.major {
+				border-bottom: 1px solid map-get($theme, "color_9");
+			}
+			
+			p, strong, h1, h2, h3, h4, h5, h6, h7 {
+				color: map-get($theme, "color_9");
+			}
+			
+			&:before {
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%; 
+				content: " ";
+				position: absolute;
+				background: rgba(255,255,255,0.6);
+			}
 		}
 		
 		&.text-dark {
@@ -41,9 +76,10 @@ article {
 		
 		.col {
 			float: left;
+			position: relative;
 			width: 100%;
 			
-			padding-bottom: 2.5rem;
+			margin-bottom: _size(element-margin);
 			
 			@include breakpoint(small) {
 			}
@@ -82,6 +118,9 @@ article {
 				}
 			}
 			
+			&:last-of-type {
+				margin: 0;
+			}
 		}
 		
 		&:first-of-type {
