@@ -153,9 +153,9 @@
 		margin-right: 0;
 		margin-bottom: _size(element-margin);
 		margin-left:  _size(element-margin);
-		padding-top: calc(_size(element-margin) / 4);
+		padding-top: _size(element-margin)/4;
 		padding-right: _size(element-margin);
-		padding-bottom: calc(_size(element-margin) / 4);
+		padding-bottom: _size(element-margin)/4;
 		padding-left: _size(element-margin);
 		
 		p:last-child {
