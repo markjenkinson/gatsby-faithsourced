@@ -27,6 +27,9 @@ const Footer = (props) => (
 				{!data.allThirdPartyPreferences.edges[0].node.copyright &&
 					<div className='copyright'><p>&copy; 2019. All rights reserved.</p></div>
 				}
+				{process.env.FAITHSITE_attribution === 'true' &&
+					<div className='attribution'><p>Website by <a href="https://faith.dev" target="_blank"> FaithSourced</a>.</p></div>
+				}
 				</>
 			)}
 		/>
