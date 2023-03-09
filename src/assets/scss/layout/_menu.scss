@@ -38,7 +38,7 @@
 				border-radius: 6px;
 				height: 4px;
 				width: 100%;
-				background: _palette(accent);
+				background: _palette(primary);
 				content: '';
 				transition: all .3s ease;
 			}
@@ -137,7 +137,7 @@
 					text-transform: uppercase;
 					
 					&:hover {
-						color: _palette(accent);
+						color: _palette(primary);
 					}
 					
 					&.active {
@@ -162,12 +162,6 @@
 				}
 			}
 		}
-	}
-}
-
-body.is-ie {
-	#menu {
-		background: transparentize(_palette(bg-alt), 0.025);
 	}
 }
 

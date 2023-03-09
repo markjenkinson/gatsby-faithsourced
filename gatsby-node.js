@@ -138,7 +138,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
 exports.sourceNodes = async ({ actions, store, cache, graphql }) => {
   try {
-    const { data } = await axios.get(process.env.GATSBY_API_URL + '/preferences/api/public/v1/styles/');
+    const { data } = await axios.get(process.env.GATSBY_API_URL + '/preferences/api/public/v2/styles/');
     await fse.writeFile(__dirname + '/src/assets/scss/dynamic/_theme.scss', data);
   } catch (err) {}
 }

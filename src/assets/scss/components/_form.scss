@@ -59,13 +59,13 @@ form {
 	}
 
 	label {
-		color: _palette(fg-bold);
+		color: _palette(on-bg);
 		display: block;
 		font-size: 0.8rem;
-		font-weight: _font(weight);
+		font-weight: _font(weight-bold);
 		letter-spacing: _font(letter-spacing);
 		line-height: 1.5;
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
+		margin: 0 0 (_size(element-margin) * 0.25) 0;
 		text-transform: uppercase;
 	}
 
@@ -83,7 +83,7 @@ form {
 		));
 		background: transparent;
 		border-radius: _size(border-radius);
-		border: solid _size(border-width) transparentize(_palette(border), 0.7);
+		border: solid _size(border-width) transparentize(_palette(border), 0.5);
 		color: inherit;
 		display: block;
 		outline: 0;
@@ -97,7 +97,7 @@ form {
 
 		&:focus {
 			background: _palette(border-bg);
-			border-color: _palette(border-alt-emphasis);
+			border-color: transparentize(_palette(border), 0.7);
 			box-shadow: 0px 0px 30px _size(border-width) _palette(border-bg);
 		}
 	}
@@ -172,7 +172,7 @@ form {
 		& + label {
 			@include icon;
 			@include vendor('user-select', 'none');
-			color: _palette(fg);
+			color: _palette(on-bg);
 			cursor: pointer;
 			display: inline-block;
 			font-size: 0.8rem;
@@ -205,8 +205,8 @@ form {
 
 		&:checked + label {
 			&:before {
-				background: _palette(fg-bold) !important;
-				border-color: _palette(fg-bold) !important;
+				background: _palette(on-bg) !important;
+				border-color: _palette(on-bg) !important;
 				color: _palette(bg);
 				content: '\f00c';
 			}
@@ -215,8 +215,8 @@ form {
 		&:focus + label {
 			&:before {
 				background: _palette(border-bg);
-				border-color: _palette(fg-bold);
-				box-shadow: 0 0 0 _size(border-width) _palette(fg-bold);
+				border-color: _palette(on-bg);
+				box-shadow: 0 0 0 _size(border-width) _palette(on-bg);
 			}
 		}
 	}
@@ -238,27 +238,27 @@ form {
 	}
 
 	::-webkit-input-placeholder {
-		color: _palette(fg-light) !important;
+		color: _palette(on-bg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-moz-placeholder {
-		color: _palette(fg-light) !important;
+		color: _palette(on-bg-light) !important;
 		opacity: 1.0;
 	}
 
 	::-moz-placeholder {
-		color: _palette(fg-light) !important;
+		color: _palette(on-bg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-ms-input-placeholder {
-		color: _palette(fg-light) !important;
+		color: _palette(on-bg-light) !important;
 		opacity: 1.0;
 	}
 
 	.formerize-placeholder {
-		color: _palette(fg-light) !important;
+		color: _palette(on-bg-light) !important;
 		opacity: 1.0;
 	}
 }

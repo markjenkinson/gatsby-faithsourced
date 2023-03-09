@@ -16,10 +16,10 @@
 			'opacity #{_duration(article)} ease-in-out',
 		));
 			
-		background-image: -moz-radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
-		background-image: -webkit-radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
-		background-image: -ms-radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
-		background-image: radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
+		background-image: -moz-radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
+		background-image: -webkit-radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
+		background-image: -ms-radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
+		background-image: radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
 		max-width: 100%;
 		text-align: center;
 
