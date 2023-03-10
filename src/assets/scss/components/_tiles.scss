@@ -156,6 +156,10 @@
 				&:after {
 					opacity: 0.7;
 				}
+				
+				button {
+					background-color: _palette(border-bg-accent);
+				}
 			}
 			
 			
