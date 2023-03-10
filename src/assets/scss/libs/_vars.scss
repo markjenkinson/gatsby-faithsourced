@@ -64,7 +64,7 @@ $palette: (
 	button-bg:					if(map-has-key($theme, 'color_button_background'), map-get($theme, 'color_button_background'), rgba(116,128,135,0.15)),
 	border-bg:					rgba(116,128,135,0.15),
 	border-bg-alt:				rgba(116,128,135,0.25),
-	border-bg-accent:			rgba(136,225,169,0.10),
+	border-bg-accent:			transparentize(map-get($theme, 'color_primary'), 0.75),
 	border-bg-accent-alt:		rgba(136,225,169,0.20),
 	tile-title:					if(map-has-key($theme, 'color_on_tile'), map-get($theme, 'color_on_tile'), map-get($theme, 'color_primary')),
 	tile-text:					if(map-has-key($theme, 'color_on_tile'), map-get($theme, 'color_on_tile'), #ffffff),
