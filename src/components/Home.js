@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { graphql, Link, StaticQuery } from 'gatsby'
 import { GatsbyImage } from "gatsby-plugin-image";
 
@@ -74,10 +73,5 @@ const Home = (props) => (
 		/>
 	</section>
 )
-
-Home.propTypes = {
-	onOpenArticle: PropTypes.func,
-	onGotoArticle: PropTypes.func
-}
 
 export default Home
