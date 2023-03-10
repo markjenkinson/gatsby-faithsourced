@@ -9,6 +9,8 @@ class SliderComponent extends React.Component {
 		const settings = {
 			dots: true,
 			infinite: true,
+			fade: false,
+			swipeToSlide: true,
 			speed: 500,
 			slidesToShow: 1,
 			slidesToScroll: 1
