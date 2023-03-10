@@ -1,0 +1,67 @@
+/* Custom */	
+
+.background-darken {
+	hr, h1.major, h2.major, h3.major, h4.major, h5.major, h6.major, h7.major {
+		border-bottom: 1px solid _palette(on-dark);
+	}
+	
+	p, strong, h1, h2, h3, h4, h5, h6, h7 {
+		color: _palette(on-dark);
+	}
+	
+	&:before {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		content: "";
+		position: absolute;
+		background: rgba(0, 0, 0, 0.5);
+	}
+}
+
+.background-lighten {
+	hr, h1.major, h2.major, h3.major, h4.major, h5.major, h6.major, h7.major {
+		border-bottom: 1px solid _palette(on-light);
+	}
+	
+	p, strong, h1, h2, h3, h4, h5, h6, h7 {
+		color: _palette(on-light);
+	}
+	
+	&:before {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; 
+		content: " ";
+		position: absolute;
+		background: rgba(255,255,255,0.6);
+	}
+}
+
+.text-light {
+	padding-top: _size(element-margin);
+	background-color: _palette(bg-dark);
+	
+	p, strong, h1, h2, h3, h4, h5, h6, h7 {
+		color: _palette(on-dark);
+	}
+}
+
+.text-light.background-darken {
+	background-color: transparent;
+}
+
+.text-dark {
+	padding-top: _size(element-margin);
+	background-color: _palette(bg-light);
+	
+	p, strong, h1, h2, h3, h4, h5, h6, h7 {
+		color: _palette(on-light);
+	}
+}
+
+.text-dark.background-lighten {
+	background-color: transparent;
+}

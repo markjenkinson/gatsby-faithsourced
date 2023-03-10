@@ -278,6 +278,26 @@ exports.createResolvers = async (
   })
   
   await createResolvers({
+    thirdParty__HomePageSlides: {
+      image_1_local: {
+        type: "File",
+        async resolve(source) {
+          let sourceUrl = source.image_1_url
+
+          return await createRemoteFileNode({
+            url: encodeURI(sourceUrl),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+  
+  await createResolvers({
     thirdParty__Preferences: {
       logo_bitmap_local: {
         type: "File",

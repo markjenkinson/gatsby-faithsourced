@@ -1,0 +1,62 @@
+/* Home Page Slider */
+
+.homepage-slider {
+	position: relative;
+	width: 100%;
+	height: calc(100vh - #{_size(element-margin)*2});
+	margin-bottom: _size(element-margin);
+	box-shadow: 0 0 60px 20px _palette(bg-overlay);
+
+	.slide {
+		height: calc(100vh - #{_size(element-margin)*2});
+		width: 100%;
+		background-size: cover;
+		background-position: center center;
+		
+		display: flex;
+		align-items: center;
+		justify-content: center;
+  
+		a {
+			&.link {
+				position: absolute;
+				display: block;
+				height: 100%;
+				width: 100%;
+				top: 0;
+				left: 0;
+			}
+			
+			&.button {
+				float: right;
+				border: none;
+			}
+		}
+		
+		.text_box {
+			position: relative;
+			z-index: 1;
+			width: 66.666%;
+			padding: _size(element-margin);
+			
+			h2 {
+				width: 75%;
+				font-size: 5rem;
+				line-height: 0.8;
+				letter-spacing: 0;
+				text-align: left;
+			}
+			
+			p {
+			}
+		}
+	}
+	
+	@include breakpoint(small) {
+		height: 100vw;
+		
+		.slide {
+			height: 100vw;
+		}
+	}
+}

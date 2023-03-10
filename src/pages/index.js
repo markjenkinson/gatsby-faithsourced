@@ -6,6 +6,7 @@ import Scroll from 'react-scroll';
 
 import Header from '../components/Header'
 import Home from '../components/Home'
+import HomePageSlider from '../components/HomePageSlider'
 import Footer from '../components/Footer'
 import Menu from '../components/Menu'
 
@@ -131,6 +132,7 @@ class IndexPage extends React.Component {
 					<div id="wrapper">
 						<Header glyph={sitePrefsedges[0].node.logo_glyph_img} wordmark={sitePrefsedges[0].node.logo_wordmark_img} title={sitePrefsedges[0].node.site_name} slogan={sitePrefsedges[0].node.logo_slogan} onScrollTo={this.handleScrollTo} timeout={this.state.timeout} onGotoPage={this.handleGotoPage} />
 						<div id="home" style={this.state.timeout ? {display: 'none'} : {}}>
+							<HomePageSlider onGotoPage={this.handleGotoPage}/>
 							<Home onGotoPage={this.handleGotoPage} />
 							<section id="blog" className="tiles" ref={(section) => { this.Blog = section; }}>
 								{blogRolledges.map(({ node }, i) => (

@@ -59,6 +59,16 @@ module.exports = {
 				typePrefix: "thirdParty__",
 				data: {},
 				method: "get",
+				url: `${process.env.GATSBY_API_URL}/home_page_promos/api/public/v1/slides/`,
+				name: 'HomePageSlides',
+				payloadKey: 'slides'
+			},
+		},
+		{
+			resolve: 'gatsby-source-apiserver', options: {
+				typePrefix: "thirdParty__",
+				data: {},
+				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v1/`,
 				name: 'Preferences',
 				payloadKey: 'preferences',
