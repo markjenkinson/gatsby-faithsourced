@@ -42,45 +42,50 @@
 			}
 
 			.close {
+				@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
 				display: block;
 				position: absolute;
 				border: none;
-				top: 0;
-				right: 0;
-				width: 4rem;
-				height: 4rem;
+				top: 0.75rem;
+				right: 0.75rem;
+				width: 40px;
+				height: 40px;
 				cursor: pointer;
 				text-indent: 4rem;
 				overflow: hidden;
 				white-space: nowrap;
-
-				&:before {
-					@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
+				border-radius: 100%;
+				background-color: _palette(bg);
+				opacity: .33;
+				
+				&:before, &:after {
 					content: '';
-					display: block;
 					position: absolute;
-					top: 0.75rem;
-					left: 0.75rem;
-					width: 2.5rem;
-					height: 2.5rem;
-					border-radius: 100%;
-					background-position: center;
-					background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="2" y1="2" x2="18" y2="18" /><line x1="18" y1="2" x2="2" y2="18" /></svg>');
-					background-size: 20px 20px;
-					background-repeat: no-repeat;
-					background-color: transparentize(_palette(bg), 0.75);
+					top: 18.5px;
+					left: 6px;
+					display: block;
+					cursor: pointer;
+					border-radius: 6px;
+					height: 3px;
+					width: 28px;
+					background: _palette(on-dark);
+					line-height: 1;				
+				}
+				
+				&:before {
+					transform: rotate(45deg);
+				}
+	
+				 &:after {
+					transform: rotate(-45deg);
 				}
 
 				&:hover {
-					&:before {
-						background-color: transparentize(_palette(bg), 0.25);
-					}
+					opacity: .75;
 				}
 
 				&:active {
-					&:before {
-						background-color: _palette(border-bg-alt);
-					}
+					opacity: .75;
 				}
 			}
 			
