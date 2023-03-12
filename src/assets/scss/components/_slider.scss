@@ -102,8 +102,14 @@ $slick-opacity-not-active: 0 !default;
 		height: 100%;
     }
     
-    @include breakpoint(small) {
-    	scale: 50%;
+    @include breakpoint(small) {    	
+    	 &:before {
+			width: 50%;
+		}
+	
+		 &:after {
+			height: 50%;
+		}
     }
 }
 
