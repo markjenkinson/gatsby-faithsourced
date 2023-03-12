@@ -14,11 +14,11 @@ article {
 		width: 100%;
 
 		@include breakpoint(small) {
-			padding: 0 2rem;	
+			padding: 0 2rem 2rem 2rem;	
 		}
 
 		@include breakpoint(xsmall) {
-			padding: 0 1.5rem;
+			padding: 0 1.5rem 1.5rem 1.5rem;
 		}
 		
 		img {
