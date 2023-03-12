@@ -54,8 +54,8 @@ $slick-opacity-not-active: 0 !default;
 .slick-next {
     position: absolute;
     z-index: 1;
-    height: 32px;
-    width: 48px;
+    height: 40px;
+    width: 40px;
     box-shadow: none;
     line-height: 0px;
     font-size: 0px;
@@ -63,19 +63,16 @@ $slick-opacity-not-active: 0 !default;
     background: transparent;
     color: transparent;
     opacity: $slick-opacity-default;
-    top: 50%;
-    -webkit-transform: translate(0, -50%);
-    -ms-transform: translate(0, -50%);
-    transform: translate(0, -50%);
+    top: calc(50% - 20px);
     padding: 0;
     border: none;
     outline: none;
-    &:hover, &:focus {
+	@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
+    &:hover {
         outline: none;
         opacity: $slick-opacity-on-hover;
         background: transparent;
         color: transparent;
-        @include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
         &:before, &:after {
 			background: _palette(primary);
         }
@@ -85,46 +82,47 @@ $slick-opacity-not-active: 0 !default;
     }
     &:before, &:after {
         position: absolute;
+        left: 0;
+		top: 0;
 		display: block;
 		cursor: pointer;
-		border-radius: 6px;
-		height: 4px;
-		width: 32px;
+		border-radius: _size(gui-weight)*2;
 		background: _palette(on-dark);
 		content: '';
-        line-height: 1;
         @include vendor('transition', 'all #{_duration(transition)} ease-in-out');
+    }
+    
+    &:before {
+		height: _size(gui-weight);
+		width: 100%;
+    }
+    
+     &:after {
+     	width: _size(gui-weight);
+		height: 100%;
+    }
+    
+    @include breakpoint(small) {
+    	scale: 50%;
     }
 }
 
 .slick-prev {
-    left: _size(element-margin)/2;
-
-    &:before {
-		bottom: calc(25% - 4px);
-		transform: rotate(45deg);
-    }
+    left: _size(element-margin);
+	transform: rotate(-45deg);
     
-     &:after {
-     	top: calc(25% - 4px);
-		transform: rotate(-45deg);
-    }
+	@include breakpoint(small) {
+		left: 0;
+	}
 }
 
 .slick-next {
-    right: _size(element-margin)/2;
+    right: _size(element-margin);
+    transform: rotate(135deg);
     
-    &:before {
-    	right: 0;
-    	top: calc(25% - 4px);
-		transform: rotate(45deg);
-    }
-    
-     &:after {
-     	right: 0;
-     	bottom: calc(25% - 4px);
-		transform: rotate(-45deg);
-    }
+	@include breakpoint(small) {
+		right: 0;
+	}
 }
 
 /* Dots */
@@ -191,5 +189,9 @@ $slick-opacity-not-active: 0 !default;
             	opacity: 1;
             }
         }
+    }
+    
+    @include breakpoint(small) {
+    	scale: 66.666%;
     }
 }

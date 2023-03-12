@@ -41,7 +41,7 @@
 			
 			h2 {
 				width: 75%;
-				font-size: 5rem;
+				font-size: 6vw;
 				line-height: 0.8;
 				letter-spacing: 0;
 				text-align: left;
@@ -53,10 +53,10 @@
 	}
 	
 	@include breakpoint(small) {
-		height: 100vw;
-		
 		.slide {
-			height: 100vw;
+			.text_box {
+				width: 100%;
+			}
 		}
 	}
 }

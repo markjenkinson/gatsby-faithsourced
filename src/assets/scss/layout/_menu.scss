@@ -35,8 +35,8 @@
 				position: absolute;
 				display: block;
 				cursor: pointer;
-				border-radius: 6px;
-				height: 4px;
+				border-radius: _size(gui-weight)*2;
+				height: _size(gui-weight);
 				width: 100%;
 				background: _palette(primary);
 				content: '';
