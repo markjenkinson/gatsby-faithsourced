@@ -94,7 +94,7 @@ class BlogPost extends React.Component {
                             <section>
                                 <div className="pagination-bar top">
                                     {prev?.slug && (<Link to={'/'+prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
-                                    <Link to="../" className="home" alt={post.news_group_name} title={post.news_group_name}></Link>
+                                    <Link to="../" className="home" alt={post.news_group_name} title={post.news_group_name}>{post.news_group_name}</Link>
                                     {next?.slug && (<Link to={'/'+next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
                                 </div>
                                 <h1 className="align-center">{post.title}</h1>
@@ -102,7 +102,7 @@ class BlogPost extends React.Component {
                                 <div dangerouslySetInnerHTML={{ __html: post.html }} />
                                 <div className="pagination-bar bottom">
                                     {prev?.slug && (<Link to={'/'+prev.slug} state={{blurred: 'blurred'}} className="previous" alt={"Previous Post: "+prev.title} title={"Previous Post: "+prev.title}>Previous</Link>)}
-                                    <Link to="../" className="home" onClick={(e) => {e.preventDefault();this.handleGotoPage('/blog')}} alt={post.news_group_name} title={post.news_group_name}></Link>
+                                    <Link to="../" className="home" onClick={(e) => {e.preventDefault();this.handleGotoPage('/blog')}} alt={post.news_group_name} title={post.news_group_name}>{post.news_group_name}</Link>
                                     {next?.slug && (<Link to={'/'+next.slug} state={{blurred: 'blurred'}} className="next" alt={"Next Post: "+next.title} title={"Next Post: "+next.title}>Next</Link>)}
                                 </div>
                             </section>
