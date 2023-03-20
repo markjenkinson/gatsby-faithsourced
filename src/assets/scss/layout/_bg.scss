@@ -6,70 +6,69 @@
 
 /* BG */
 
-	#bg {
-		@include vendor('transform', 'scale(1.0)');
-		-webkit-backface-visibility: hidden;
-		position: fixed;
+#bg {
+	@include vendor('transform', 'scale(1.0)');
+	-webkit-backface-visibility: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+
+	&:before, &:after {
+		content: '';
+		display: block;
+		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
+	}
+
+	&:before {
+		background-color: _palette(bg-overlay);
+		z-index: 2;
+	}
+
+	&:after {
+		@include vendor('transition', (
+			'transform #{_duration(article)} ease-in-out',
+			'filter #{_duration(article)} ease-in-out'
+		));
+		@include vendor('transform', 'scale(1.125)');
+		
+		background-image:		url('../../images/dynamic/background.#{map-get($theme, "site_bg_img_type")}');
+		background-position:	center;
+		background-size:		cover;
+		background-repeat:	no-repeat;
 		z-index: 1;
+	}
 
-		&:before, &:after {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		}
-
-		&:before {
-			background-color:		_palette(bg-overlay);
-			z-index: 2;
-		}
-
+	.body.blurred & {
 		&:after {
-			@include vendor('transition', (
-				'transform #{_duration(article)} ease-in-out',
-				'filter #{_duration(article)} ease-in-out'
-			));
-			@include vendor('transform', 'scale(1.125)');
-			
-			background-image:		url('../../images/dynamic/background.#{map-get($theme, "site_bg_img_type")}');
-			background-position:	center;
-			background-size:		cover;
-			background-repeat:	no-repeat;
-			z-index: 1;
-		}
-
-		.body.blurred & {
-			&:after {
-				@include vendor('transform', 'scale(1.0825)');
-				@include vendor('filter', 'blur(0.2rem)');
-			}
-		}
-		
-		.body.loaded & {
-			&:before {
-				@include vendor('transition', 'background-color #{_duration(bg)} ease-in-out');
-				@include vendor('transition-delay', '#{_duration(intro)}');
-			}
-		}
-
-		.body.is-loading & {
-			&:before {
-				background-color:	_palette(bg);
-			}
-		}
-		
-		.body.is-menu-visible & {
-			@include vendor('filter', 'blur(0.2em)');
-			
-			&:after {
-				@include vendor('transform', 'scale(1.0825)');
-			}
+			@include vendor('transform', 'scale(1.0825)');
+			@include vendor('filter', 'blur(0.5rem)');
 		}
 	}
+	
+	.body.loaded & {
+		&:before {
+			@include vendor('transition', 'background-color #{_duration(bg)} ease-in-out');
+			@include vendor('transition-delay', '#{_duration(intro)}');
+		}
+	}
+
+	.body.is-loading & {
+		&:before {
+			background-color: _palette(bg);
+		}
+	}
+	
+	.body.is-menu-visible & {			
+		&:after {
+			@include vendor('transform', 'scale(1.0825)');
+			@include vendor('filter', 'blur(0.5em)');
+		}
+	}
+}

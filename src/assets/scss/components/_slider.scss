@@ -54,8 +54,8 @@ $slick-opacity-not-active: 0 !default;
 .slick-next {
     position: absolute;
     z-index: 1;
-    height: 40px;
-    width: 40px;
+    height: 60px;
+    width: 60px;
     box-shadow: none;
     line-height: 0px;
     font-size: 0px;
@@ -63,9 +63,10 @@ $slick-opacity-not-active: 0 !default;
     background: transparent;
     color: transparent;
     opacity: $slick-opacity-default;
-    top: calc(50% - 20px);
+    top: calc(50% - 30px);
     padding: 0;
-    border: none;
+    border-radius: 0;
+    border: 10px solid transparent;
     outline: none;
 	@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
     &:hover {
@@ -114,7 +115,7 @@ $slick-opacity-not-active: 0 !default;
 }
 
 .slick-prev {
-    left: _size(element-margin);
+    left: _size(element-margin)/2;
 	transform: rotate(-45deg);
     
 	@include breakpoint(small) {
@@ -123,7 +124,7 @@ $slick-opacity-not-active: 0 !default;
 }
 
 .slick-next {
-    right: _size(element-margin);
+    right: _size(element-margin)/2;
     transform: rotate(135deg);
     
 	@include breakpoint(small) {

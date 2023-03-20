@@ -45,15 +45,16 @@
 				@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
 				display: block;
 				position: absolute;
-				top: _size(element-margin)/2;
-				width: 40px;
-				height: 40px;
-				border: none;
+				top: _size(element-margin)/12;
+				width: 60px;
+				height: 60px;
 				cursor: pointer;
 				white-space: nowrap;
 				line-height: 0;
 				opacity: 0.5;
-				color: rgba(0,0,0,0);
+				color: transparent;
+				border: 10px solid transparent;
+				border-radius: 0;
 				&:hover {					
 					opacity: 1;
 					
@@ -64,7 +65,7 @@
 			}
 			
 			.close {
-				right: _size(element-margin)/2;
+				right: _size(element-margin)/12;
 				
 				&:before, &:after {
 					content: '';
@@ -104,28 +105,28 @@
         		
         		&:before {
 					height: _size(gui-weight);
-					width: 50%;
+					width: 66.666%;
 				}
 	
 				&:after {
 					width: _size(gui-weight);
-					height: 50%;
+					height: 66.666%;
 				}
 			}
 			
 			.previous {
-				left: _size(element-margin);
+				left: _size(element-margin)/3;
 				transform: rotate(-45deg);				
 			}
 			
 			.next {
-				right: _size(element-margin);
+				right: _size(element-margin)/3;
 				transform: rotate(135deg);				
 			}
 			
 			.home {
-				top: _size(element-margin);
-				left: calc(50% - 15px);
+				top: _size(element-margin)/2;
+				left: calc(50% - 30px);
 				transform: rotate(45deg);
 			}
 			
@@ -133,7 +134,7 @@
 				position: absolute;
 				width: 100%;
 				left: 0;
-				height: 4rem;
+				padding: _size(element-margin) 0;
 				
 				&.top {
 					top: 0;					
