@@ -1,204 +1,199 @@
-///
-/// Dimension by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-///
-
 /* Type */
 
-	@font-face {
-		font-family: 'Faith Sourced Font';
-		src: url('../fonts/FaithSourcedFont.eot');
-		src: url('../fonts/FaithSourcedFont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/FaithSourcedFont.woff2') format('woff2'),
-		url('../fonts/FaithSourcedFont.woff') format('woff'),
-		url('../fonts/FaithSourcedFont.svg#FaithSourcedFont') format('svg');
-	}
-	
-	.font-custom {
-		font-family: _font(family-custom);
-		font-weight: normal;
-		font-style: normal;
-		font-size: .835em;
-		letter-spacing: .05em;
-	}
-	
-	html {
-		font-size: 16pt;
+@font-face {
+	font-family: 'Faith Sourced Font';
+	src: url('../fonts/FaithSourcedFont.eot');
+	src: url('../fonts/FaithSourcedFont.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/FaithSourcedFont.woff2') format('woff2'),
+	url('../fonts/FaithSourcedFont.woff') format('woff'),
+	url('../fonts/FaithSourcedFont.svg#FaithSourcedFont') format('svg');
+}
 
-		@include breakpoint(xlarge) {
-			font-size: 12pt;
-		}
+.font-custom {
+	font-family: _font(family-custom);
+	font-weight: normal;
+	font-style: normal;
+	font-size: .835em;
+	letter-spacing: .05em;
+}
 
-		@include breakpoint(small) {
-			font-size: 11pt;
-		}
+html {
+	font-size: 16pt;
 
-		@include breakpoint(xxsmall) {
-			font-size: 10pt;
-		}
-	}
-
-	body, input, select, textarea {
-		color: _palette(on-bg);
-		font-family: _font(family);
-		font-weight: _font(weight);
-		font-size: 1rem;
-		line-height: 1.65;
-	}
-
-	a {
-		@include vendor('transition', (
-			'color #{_duration(transition)} ease-in-out',
-			'background-color #{_duration(transition)} ease-in-out',
-			'border-bottom-color #{_duration(transition)} ease-in-out'
-		));
-		border-bottom: dotted 1px _palette(on-bg-light);
-		text-decoration: none;
-		color: inherit;
-
-		&:hover {
-			border-bottom-color: transparent;
-			color: _palette(primary);
-		}
-	}
-
-	strong, b {
-		color: _palette(emphasis);
-		font-weight: _font(weight-bold);
-	}
-
-	em, i {
-		font-style: italic;
-	}
-
-	p {
-		margin: 0 0 _size(element-margin) 0;
-	}
-
-	h1, h2, h3, h4, h5, h6, h7 {
-		color: _palette(primary);
-		font-weight: _font(weight-bold);
-		line-height: 1.5;
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
-		text-transform: uppercase;
-		letter-spacing: _font(letter-spacing-heading);
-		text-align: center;
-		
-		a {
-			color: inherit;
-			text-decoration: none;
-		}
-
-		&.major {
-			border-bottom: solid _size(border-width) _palette(on-bg-light);
-			padding-bottom: 0.5rem;
-			margin: 0 0 (_size(element-margin) * 1) 0;
-		}
-	}
-
-	h1 {
-		font-size: 2.25rem;
-		line-height: 0.8;
-	}
-
-	h2 {
-		font-size: 1.5rem;
-		line-height: 1;
-	}
-
-	h3 {
-		font-size: 1rem;
-	}
-
-	h4 {
-		font-size: 0.8rem;
-	}
-
-	h5 {
-		font-size: 0.7rem;
-	}
-
-	h6 {
-		font-size: 0.6rem;
+	@include breakpoint(xlarge) {
+		font-size: 12pt;
 	}
 
 	@include breakpoint(small) {
-		h1 {
-			font-size: 1.75rem;
-		}
-
-		h2 {
-			font-size: 1.25em;
-		}
+		font-size: 11pt;
 	}
 
-	sub {
-		font-size: 0.8rem;
-		position: relative;
-		top: 0.5rem;
+	@include breakpoint(xxsmall) {
+		font-size: 10pt;
+	}
+}
+
+body, input, select, textarea {
+	color: _palette(on-bg);
+	font-family: _font(family);
+	font-weight: _font(weight);
+	font-size: 1rem;
+	line-height: 1.65;
+}
+
+a {
+	@include vendor('transition', (
+		'color #{_duration(transition)} ease-in-out',
+		'background-color #{_duration(transition)} ease-in-out',
+		'border-bottom-color #{_duration(transition)} ease-in-out'
+	));
+	border-bottom: dotted 1px _palette(on-bg-light);
+	text-decoration: none;
+	color: inherit;
+
+	&:hover {
+		border-bottom-color: transparent;
+		color: _palette(primary);
+	}
+}
+
+strong, b {
+	color: _palette(emphasis);
+	font-weight: _font(weight-bold);
+}
+
+em, i {
+	font-style: italic;
+}
+
+p {
+	margin: 0 0 _size(element-margin) 0;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
+	font-family: _font(family-heading);
+	color: _palette(primary);
+	font-weight: _font(weight-heading);
+	line-height: 1.5;
+	margin: 0 0 (_size(element-margin) * 0.5) 0;
+	text-transform: _font(transform-heading);
+	letter-spacing: _font(letter-spacing-heading);
+	text-align: center;
+	
+	a {
+		color: inherit;
+		text-decoration: none;
 	}
 
-	sup {
-		font-size: 0.8rem;
-		position: relative;
-		top: -0.5rem;
+	&.major {
+		border-bottom: solid _size(border-width) _palette(on-bg-light);
+		padding-bottom: 0.5rem;
+		margin: 0 0 (_size(element-margin) * 1) 0;
+	}
+}
+
+h1 {
+	font-size: 2.25rem;
+	line-height: 0.8;
+}
+
+h2 {
+	font-size: 1.5rem;
+	line-height: 1;
+}
+
+h3 {
+	font-size: 1rem;
+}
+
+h4 {
+	font-size: 0.8rem;
+}
+
+h5 {
+	font-size: 0.7rem;
+}
+
+h6 {
+	font-size: 0.6rem;
+}
+
+@include breakpoint(small) {
+	h1 {
+		font-size: 1.75rem;
 	}
 
-	blockquote {
-		border-left: solid (_size(border-width) * 4) _palette(border);
-		font-style: italic;
-		margin-top: 0;
-		margin-right: 0;
-		margin-bottom: _size(element-margin);
-		margin-left:  _size(element-margin);
-		padding-top: _size(element-margin)/4;
-		padding-right: _size(element-margin);
-		padding-bottom: _size(element-margin)/4;
-		padding-left: _size(element-margin);
-		
-		p:last-child {
-			margin: 0;
-		}
+	h2 {
+		font-size: 1.25em;
 	}
+}
+
+sub {
+	font-size: 0.8rem;
+	position: relative;
+	top: 0.5rem;
+}
+
+sup {
+	font-size: 0.8rem;
+	position: relative;
+	top: -0.5rem;
+}
+
+blockquote {
+	border-left: solid (_size(border-width) * 4) _palette(border);
+	font-style: italic;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: _size(element-margin);
+	margin-left:  _size(element-margin);
+	padding-top: math.div(_size(element-margin), 4);
+	padding-right: _size(element-margin);
+	padding-bottom: math.div(_size(element-margin), 4);
+	padding-left: _size(element-margin);
+	
+	p:last-child {
+		margin: 0;
+	}
+}
+
+code {
+	background: _palette(border-bg);
+	border-radius: _size(border-radius);
+	font-family: _font(family-fixed);
+	font-size: 0.9rem;
+	margin: 0 0.25rem;
+	padding: 0.25rem 0.65rem;
+}
+
+pre {
+	-webkit-overflow-scrolling: touch;
+	font-family: _font(family-fixed);
+	font-size: 0.9rem;
+	margin: 0 0 _size(element-margin) 0;
 
 	code {
-		background: _palette(border-bg);
-		border-radius: _size(border-radius);
-		font-family: _font(family-fixed);
-		font-size: 0.9rem;
-		margin: 0 0.25rem;
-		padding: 0.25rem 0.65rem;
+		display: block;
+		line-height: 1.75;
+		padding: 1rem 1.5rem;
+		overflow-x: auto;
 	}
+}
 
-	pre {
-		-webkit-overflow-scrolling: touch;
-		font-family: _font(family-fixed);
-		font-size: 0.9rem;
-		margin: 0 0 _size(element-margin) 0;
+hr {
+	border: 0;
+	border-bottom: solid _size(border-width) _palette(on-bg-light);
+	margin: (_size(element-margin) * 1.375) 0;
+}
 
-		code {
-			display: block;
-			line-height: 1.75;
-			padding: 1rem 1.5rem;
-			overflow-x: auto;
-		}
-	}
+.align-left {
+	text-align: left;
+}
 
-	hr {
-		border: 0;
-		border-bottom: solid _size(border-width) _palette(on-bg-light);
-		margin: (_size(element-margin) * 1.375) 0;
-	}
+.align-center {
+	text-align: center;
+}
 
-	.align-left {
-		text-align: left;
-	}
-
-	.align-center {
-		text-align: center;
-	}
-
-	.align-right {
-		text-align: right;
-	}
+.align-right {
+	text-align: right;
+}

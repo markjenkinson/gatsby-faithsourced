@@ -45,7 +45,7 @@
 				@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
 				display: block;
 				position: absolute;
-				top: _size(element-margin)/12;
+				top: math.div(_size(element-margin), 12);
 				width: 60px;
 				height: 60px;
 				cursor: pointer;
@@ -65,12 +65,12 @@
 			}
 			
 			.close {
-				right: _size(element-margin)/12;
+				right: math.div(_size(element-margin), 12);
 				
 				&:before, &:after {
 					content: '';
 					position: absolute;
-					top: calc(50% - #{_size(gui-weight)/2});
+					top: calc(50% - #{math.div(_size(gui-weight), 2)});
 					left: 0px;
 					display: block;
 					cursor: pointer;
@@ -115,17 +115,17 @@
 			}
 			
 			.previous {
-				left: _size(element-margin)/3;
+				left: math.div(_size(element-margin), 3);
 				transform: rotate(-45deg);				
 			}
 			
 			.next {
-				right: _size(element-margin)/3;
+				right: math.div(_size(element-margin), 3);
 				transform: rotate(135deg);				
 			}
 			
 			.home {
-				top: _size(element-margin)/2;
+				top: math.div(_size(element-margin), 2);
 				left: calc(50% - 30px);
 				transform: rotate(45deg);
 			}
