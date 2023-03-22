@@ -130,11 +130,12 @@
 					border: 0;
 					border-top: solid 1px _palette(border);
 					display: block;
+					font-family: _font(family-gui);
 					font-size: 1.5em;
-					letter-spacing: _font(letter-spacing-alt);
+					letter-spacing: _font(letter-spacing-gui);
 					line-height: 1.1em;
 					text-decoration: none;
-					text-transform: uppercase;
+					text-transform: _font(transform-gui);
 					
 					&:hover {
 						color: _palette(primary);

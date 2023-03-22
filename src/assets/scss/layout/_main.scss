@@ -135,6 +135,7 @@
 				width: 100%;
 				left: 0;
 				padding: _size(element-margin) 0;
+				//background-color: transparentize(_palette(bg), .8);
 				
 				&.top {
 					top: 0;					

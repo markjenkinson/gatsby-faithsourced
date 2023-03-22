@@ -33,12 +33,29 @@ $size: (
 // Font.
 $font: (
 	family:						('Source Sans Pro', sans-serif),
+	family-heading:				if(map-has-key($theme, 'font_headline_family'), map-get($theme, 'font_headline_family'), ('Source Sans Pro', sans-serif)),
+	family-paragraph:			if(map-has-key($theme, 'font_paragraph_family'), map-get($theme, 'font_paragraph_family'), ('Source Sans Pro', sans-serif)),
+	family-gui:					if(map-has-key($theme, 'font_gui_family'), map-get($theme, 'font_gui_family'), ('Source Sans Pro', sans-serif)),
 	family-fixed:				('Courier New', monospace),
 	family-custom:				('Faith Sourced Font', sans-serif),
-	weight:						300,
-	weight-bold:				600,
+	weight:						normal,
+	weight-bold:				bold,
+	weight-heading:				if(map-has-key($theme, 'font_headline_weight'), map-get($theme, 'font_headline_weight'), bold),
+	weight-alt-heading:			if(map-has-key($theme, 'font_headline_weight_alt'), map-get($theme, 'font_headline_weight_alt'), normal),
+	weight-paragraph:			if(map-has-key($theme, 'font_paragraph_weight'), map-get($theme, 'font_paragraph_weight'), normal),
+	weight-alt-paragraph:		if(map-has-key($theme, 'font_paragraph_weight_alt'), map-get($theme, 'font_paragraph_weight_alt'), bold),
+	weight-gui:					if(map-has-key($theme, 'font_gui_weight'), map-get($theme, 'font_gui_weight'), normal),
+	weight-alt-gui:				if(map-has-key($theme, 'font_gui_weight_alt'), map-get($theme, 'font_gui_weight_alt'), bold),
 	letter-spacing:				0.2rem,
-	letter-spacing-heading:		0.3rem
+	letter-spacing-heading:		if(map-has-key($theme, 'font_headline_letterspacing'), map-get($theme, 'font_headline_letterspacing'), 0.3rem),
+	letter-spacing-paragraph:	if(map-has-key($theme, 'font_paragraph_letterspacing'), map-get($theme, 'font_paragraph_letterspacing'), 0.3rem),
+	letter-spacing-gui:			if(map-has-key($theme, 'font_gui_letterspacing'), map-get($theme, 'font_gui_letterspacing'), 0.3rem),
+	transform-heading:			if(map-has-key($theme, 'font_headline_transform'), map-get($theme, 'font_headline_transform'), none),
+	transform-paragrah:			if(map-has-key($theme, 'font_paragraph_transform'), map-get($theme, 'font_paragraph_transform'), none),
+	transform-gui:				if(map-has-key($theme, 'font_gui_transform'), map-get($theme, 'font_gui_transform'), none),
+	lineheight-heading:			if(map-has-key($theme, 'font_headline_line_height'), map-get($theme, 'font_headline_line_height'), normal),
+	lineheight-paragraph:		if(map-has-key($theme, 'font_paragraph_line_height'), map-get($theme, 'font_paragraph_line_height'), normal),
+	lineheight-gui:				if(map-has-key($theme, 'font_gui_line_height'), map-get($theme, 'font_gui_line_height'), normal),
 );
 
 // Palette.

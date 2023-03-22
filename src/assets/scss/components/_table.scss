@@ -28,14 +28,20 @@ table {
 	}
 
 	td {
+		font-family: _font(family-gui);
 		padding: 0.75em 0.75em;
+		
+		p {
+			margin: 0 0 math.div(_size(element-margin),4) 0;
+		}
 	}
 
 	th {
 		color: _palette(emphasis);
 		font-size: 0.9em;
-		font-weight: _font(weight-bold);
-		padding: 0 0.75em 0.75em 0.75em;
+		font-family: _font(family-gui);
+		font-weight: _font(weight-alt-gui);
+		padding: math.div(_size(element-margin),4);
 		text-align: left;
 	}
 

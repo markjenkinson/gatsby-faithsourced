@@ -20,16 +20,17 @@
 		color: _palette(primary);
 		cursor: pointer;
 		display: inline-block;
+		font-family: _font(family-gui);
 		font-size: 0.8rem;
-		font-weight: _font(weight);
+		font-weight: _font(weight-gui);
 		height: _size(element-height);
-		letter-spacing: _font(letter-spacing);
+		letter-spacing: _font(letter-spacing-gui);
 		line-height: _size(element-height);
 		outline: 0;
-		padding: 0 1.25rem 0 (1.25rem + (_font(letter-spacing) * 0.5));
+		padding: 0 1.25rem 0 (1.25rem + (_font(letter-spacing-gui) * 0.5));
 		text-align: center;
 		text-decoration: none;
-		text-transform: uppercase;
+		text-transform: _font(transform-gui);
 		white-space: nowrap;
 
 		&:hover {

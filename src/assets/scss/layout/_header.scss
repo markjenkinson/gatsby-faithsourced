@@ -118,7 +118,7 @@
 
 			p.tagline {
 				text-transform: uppercase;
-				letter-spacing: _font(letter-spacing);
+				letter-spacing: _font(letter-spacing-gui);
 				font-size: 0.8rem;
 				line-height: 2;
 			}
@@ -151,9 +151,10 @@
 						min-width: 7.5rem;
 						height: 2.75rem;
 						line-height: 2.75rem;
-						padding: 0 1.25rem 0 (1.25rem + _font(letter-spacing));
-						text-transform: uppercase;
-						letter-spacing: _font(letter-spacing);
+						padding: 0 1.25rem 0 (1.25rem + _font(letter-spacing-gui));
+						text-transform: _font(transform-gui);
+						letter-spacing: _font(letter-spacing-gui);
+						font-family: _font(family-gui);
 						font-size: 0.8rem;
 						border-bottom: 0;
 

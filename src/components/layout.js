@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import WebFont from 'webfontloader'
 
 import '../assets/scss/main.scss'
 
@@ -29,26 +30,42 @@ const Layout = ({ children, location, meta_title }) => {
       }
     }
   }
+  allThirdPartyFonts {
+    edges {
+      node {
+        family
+        variants
+      }
+    }
+  }
 }`}
-      render={data => (
-		<>
-			<Helmet
-				title={!meta_title ? (data.allThirdPartyPreferences.edges[0].node.site_title):(data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title)}
-				meta={[
-					{ name: 'description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
-					{ name: 'keywords', content: data.allThirdPartyPreferences.edges[0].node.meta_keywords },
-					{ property: 'og:url', content: data.allThirdPartyPreferences.edges[0].node.site_url + location.pathname},
-					{ property: 'og:type', content: 'website' },
-					{ property: 'og:title', content: !meta_title ? (data.allThirdPartyPreferences.edges[0].node.site_title):(data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title) },
-					{ property: 'og:image', content: data.allThirdPartyPreferences.edges[0].node.site_url + data.allThirdPartyPreferences.edges[0].node.logo_favicon_img_local?.publicURL },
-					{ property: 'og:description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
-				]}
-			  >
-				<html lang="en" />
-			</Helmet>
-			{children}
-        </>
-      )}
+	render={data => {
+		const fonts = data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
+		WebFont.load({
+			google: {
+				families: fonts,
+			},
+		});
+      
+		return (
+			<>
+				<Helmet
+					title={!meta_title ? (data.allThirdPartyPreferences.edges[0].node.site_title):(data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title)}
+					meta={[
+						{ name: 'description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
+						{ name: 'keywords', content: data.allThirdPartyPreferences.edges[0].node.meta_keywords },
+						{ property: 'og:url', content: data.allThirdPartyPreferences.edges[0].node.site_url + location.pathname},
+						{ property: 'og:type', content: 'website' },
+						{ property: 'og:title', content: !meta_title ? (data.allThirdPartyPreferences.edges[0].node.site_title):(data.allThirdPartyPreferences.edges[0].node.site_title + ' | ' + meta_title) },
+						{ property: 'og:image', content: data.allThirdPartyPreferences.edges[0].node.site_url + data.allThirdPartyPreferences.edges[0].node.logo_favicon_img_local?.publicURL },
+						{ property: 'og:description', content: data.allThirdPartyPreferences.edges[0].node.meta_description },
+					]}
+				  >
+					<html lang="en" />
+				</Helmet>
+				{children}
+			</>
+		  )}}
     />
   );
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet'
 import { Link, navigate, graphql } from 'gatsby'
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image"
 import striptags from 'striptags'
+import WebFont from 'webfontloader'
 
 import '../assets/scss/main.scss'
 
@@ -67,6 +68,14 @@ class BlogPost extends React.Component {
 		
 		const { next, prev } = this.props.pageContext
    		const meta_title = striptags(post.news_group_name)+' | '+striptags(post.title)
+   		
+   		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
+		WebFont.load({
+			google: {
+				families: fonts,
+			},
+		});
+
 		return <>
             <Helmet
                 title={meta_title}
@@ -152,6 +161,14 @@ export const query = graphql`query postQuery($slug: String!) {
         logo_slogan
         site_bg_img
         site_url
+      }
+    }
+  }
+  allThirdPartyFonts {
+    edges {
+      node {
+        family
+        variants
       }
     }
   }

@@ -1,7 +1,8 @@
-import React from 'react';
+import React from 'react'
 import Helmet from 'react-helmet'
 import { Link, navigate, graphql } from 'gatsby'
 import striptags from 'striptags'
+import WebFont from 'webfontloader'
 
 import '../assets/scss/main.scss'
 
@@ -64,6 +65,13 @@ class blogPageTemplate extends React.Component {
 		const page = this.props.data.thirdPartyPages
 		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
 		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
+		
+		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
+		WebFont.load({
+			google: {
+				families: fonts,
+			},
+		});
 		
 		return <>
             <Helmet
@@ -151,6 +159,14 @@ export const blogRollQuery = graphql`query BlogRollQuery($slug: String!) {
         logo_glyph_img
         logo_slogan
         site_bg_img
+      }
+    }
+  }
+  allThirdPartyFonts {
+    edges {
+      node {
+        family
+        variants
       }
     }
   }

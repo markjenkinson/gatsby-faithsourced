@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
 import Helmet from 'react-helmet'
 import { Link, navigate, graphql } from 'gatsby'
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image"
 import striptags from 'striptags'
+import WebFont from 'webfontloader'
 
 import '../assets/scss/main.scss'
 
@@ -82,6 +83,13 @@ class pageTemplate extends React.Component {
 		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
 		let close = <Link to="/" className="close" onClick={(e) => { e.preventDefault(); this.handleGotoPage('/') }} alt="Close" title="Close"></Link>
 
+		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
+		WebFont.load({
+			google: {
+				families: fonts,
+			},
+		});
+		
 		return <>
             <Helmet
                 title={meta_title}
@@ -228,6 +236,14 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
         logo_glyph_img
         logo_slogan
         site_bg_img
+      }
+    }
+  }
+  allThirdPartyFonts {
+    edges {
+      node {
+        family
+        variants
       }
     }
   }

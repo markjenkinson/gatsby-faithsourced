@@ -43,8 +43,11 @@
 			display: block;
 			text-align: center;
 			width: 100%;
+			font-family: _font(family-gui);
+			font-weight: _font(weight-gui);
+			letter-spacing: _font(letter-spacing-gui);
+			text-transform: _font(transform-gui);
 			font-size: 0.6em;
-			text-transform: uppercase;
 			margin-bottom: 1rem;
 			
 			i {
