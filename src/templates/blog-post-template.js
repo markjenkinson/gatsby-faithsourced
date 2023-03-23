@@ -35,6 +35,13 @@ class BlogPost extends React.Component {
 				this.setState({blurred: 'blurred'});
 			}, 325);
 		}
+		
+		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
+		WebFont.load({
+			google: {
+				families: fonts,
+			},
+		});
 	}
 
 	componentWillUnmount () {
@@ -68,13 +75,6 @@ class BlogPost extends React.Component {
 		
 		const { next, prev } = this.props.pageContext
    		const meta_title = striptags(post.news_group_name)+' | '+striptags(post.title)
-   		
-   		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
-		WebFont.load({
-			google: {
-				families: fonts,
-			},
-		});
 
 		return <>
             <Helmet

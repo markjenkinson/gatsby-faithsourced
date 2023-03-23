@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import WebFont from 'webfontloader'
 
 import '../assets/scss/main.scss'
 
@@ -30,23 +29,8 @@ const Layout = ({ children, location, meta_title }) => {
       }
     }
   }
-  allThirdPartyFonts {
-    edges {
-      node {
-        family
-        variants
-      }
-    }
-  }
 }`}
-	render={data => {
-		const fonts = data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
-		WebFont.load({
-			google: {
-				families: fonts,
-			},
-		});
-      
+	render={data => {      
 		return (
 			<>
 				<Helmet

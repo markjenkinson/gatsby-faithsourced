@@ -398,8 +398,7 @@ exports.createResolvers = async (
   })
 }
 
-exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
-
+exports.onCreateWebpackConfig = ({ actions, plugins, stage, loaders, getConfig }) => {
   if (stage === 'build-javascript') {
     const config = getConfig();
     const options = {
@@ -465,5 +464,18 @@ exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
     }
 
     actions.replaceWebpackConfig(config);
+  }
+  
+  if (stage === "build-html" || stage === "develop-html") { // custom webpack config to replace webfontloader with a dummy module during server rendering to prevent build errors
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /webfontloader/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
   }
 };

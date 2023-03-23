@@ -30,6 +30,13 @@ class blogPageTemplate extends React.Component {
 		this.timeoutId = setTimeout(() => {
 			this.setState({blurred: ''});
 		}, 100);
+		
+		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
+		WebFont.load({
+			google: {
+				families: fonts,
+			},
+		});
 	}
 
 	componentWillUnmount () {
@@ -65,13 +72,6 @@ class blogPageTemplate extends React.Component {
 		const page = this.props.data.thirdPartyPages
 		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
 		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
-		
-		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
-		WebFont.load({
-			google: {
-				families: fonts,
-			},
-		});
 		
 		return <>
             <Helmet

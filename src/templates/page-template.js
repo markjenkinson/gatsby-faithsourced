@@ -35,6 +35,13 @@ class pageTemplate extends React.Component {
 				this.setState({ scrolly: window.history.state.scrolly });
 			}
 		}, 125)
+		
+		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
+		WebFont.load({
+			google: {
+				families: fonts,
+			},
+		});
 	}
 
 	componentWillUnmount() {
@@ -82,13 +89,6 @@ class pageTemplate extends React.Component {
 		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
 		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
 		let close = <Link to="/" className="close" onClick={(e) => { e.preventDefault(); this.handleGotoPage('/') }} alt="Close" title="Close"></Link>
-
-		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
-		WebFont.load({
-			google: {
-				families: fonts,
-			},
-		});
 		
 		return <>
             <Helmet
