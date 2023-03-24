@@ -56,12 +56,15 @@ $font: (
 	lineheight-heading:			if(map-has-key($theme, 'font_headline_line_height'), map-get($theme, 'font_headline_line_height'), normal),
 	lineheight-paragraph:		if(map-has-key($theme, 'font_paragraph_line_height'), map-get($theme, 'font_paragraph_line_height'), normal),
 	lineheight-gui:				if(map-has-key($theme, 'font_gui_line_height'), map-get($theme, 'font_gui_line_height'), normal),
+	base-size-heading:			if(map-has-key($theme, 'font_headline_base_size'), map-get($theme, 'font_headline_base_size'), 48px),
+	base-size-paragraph:		if(map-has-key($theme, 'font_paragraph_base_size'), map-get($theme, 'font_paragraph_base_size'), 16px),
+	base-size-gui:				if(map-has-key($theme, 'font_gui_base_size'), map-get($theme, 'font_gui_base_size'), 12px),
 );
 
 // Palette.
 $palette: (
 	bg:							if(map-has-key($theme, 'color_background'), map-get($theme, 'color_background'), #1b1f22),
-	bg-overlay:					if(map-has-key($theme, 'color_background'), transparentize(map-get($theme, 'color_background'), 0.25), rgba(27,35,38,0.75)),
+	bg-overlay:					if(map-has-key($theme, 'color_background_overlay'), transparentize(map-get($theme, 'color_background_overlay'), 0.25), rgba(27,35,38,0.75)),
 	bg-light:					if(map-has-key($theme, 'color_background_light'), map-get($theme, 'color_background_light'), #ffffff),
 	bg-dark:					if(map-has-key($theme, 'color_background_dark'), map-get($theme, 'color_background_dark'), #222222),
 	on-bg:						if(map-has-key($theme, 'color_on_background'), map-get($theme, 'color_on_background'), #ffffff),

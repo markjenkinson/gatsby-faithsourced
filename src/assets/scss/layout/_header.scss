@@ -16,10 +16,10 @@
 			'opacity #{_duration(article)} ease-in-out',
 		));
 			
-		background-image: -moz-radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
-		background-image: -webkit-radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
-		background-image: -ms-radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
-		background-image: radial-gradient(transparentize(_palette(bg), 0.5) 25%, transparentize(_palette(bg), 1) 55%);
+		background-image: -moz-radial-gradient(transparentize(_palette(bg-overlay), 0.5) 25%, transparentize(_palette(bg-overlay), 1) 55%);
+		background-image: -webkit-radial-gradient(transparentize(_palette(bg-overlay), 0.5) 25%, transparentize(_palette(bg-overlay), 1) 55%);
+		background-image: -ms-radial-gradient(transparentize(_palette(bg-overlay), 0.5) 25%, transparentize(_palette(bg-overlay), 1) 55%);
+		background-image: radial-gradient(transparentize(_palette(bg-overlay), 0.5) 25%, transparentize(_palette(bg-overlay), 1) 55%);
 		max-width: 100%;
 		text-align: center;
 
@@ -100,7 +100,6 @@
 			}
 			
 			h1 {
-				color: #fff;
 				font-size: 4rem;
 			}
 			
@@ -154,6 +153,7 @@
 						padding: 0 1.25rem 0 (1.25rem + _font(letter-spacing-gui));
 						text-transform: _font(transform-gui);
 						letter-spacing: _font(letter-spacing-gui);
+						font-weight: _font(weight-gui);
 						font-family: _font(family-gui);
 						font-size: 0.8rem;
 						border-bottom: 0;

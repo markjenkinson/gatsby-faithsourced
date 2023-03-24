@@ -44,6 +44,10 @@
 			
 			&:hover {
 				color: _palette(primary);
+				
+				svg.logo {
+					fill: _palette(primary);
+				}
 			}
 			
 			svg.logo {

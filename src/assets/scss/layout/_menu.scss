@@ -136,13 +136,14 @@
 					line-height: 1.1em;
 					text-decoration: none;
 					text-transform: _font(transform-gui);
+					font-weight: _font(weight-gui);
 					
 					&:hover {
 						color: _palette(primary);
 					}
 					
 					&.active {
-						font-weight: _font(weight-bold);
+						font-weight: _font(weight-alt-gui);
 						cursor: default;
 						
 						&:hover {

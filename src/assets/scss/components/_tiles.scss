@@ -48,7 +48,6 @@
 
 			.title {
 				font-size: 1.75em;
-				line-height: 1;
 				color: _palette(tile-title);
 				
 				a {
@@ -213,16 +212,15 @@
 					background-color: _palette(tile-ribbon);
 					box-shadow: 0 5px 10px rgba(0,0,0,.1);
 					text-align: center;
-					line-height: 45px;
+					line-height: 48px;
 					
 					span {
 						display: inline-block;
 						color: _palette(tile-ribbon-text);
-						line-height: 1;
 						text-transform: _font(transform-heading);
 						vertical-align: middle;
 						font-family: _font(family-heading);
-						font-size: 16px;
+						font-size: 0.8rem;
 						font-weight: _font(weight-heading);
 						
 						a {

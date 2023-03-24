@@ -59,7 +59,7 @@
 					opacity: 1;
 					
 					&:before, &:after {
-						background: _palette(primary);
+						background: _palette(emphasis);
 					}
 				}
 			}
@@ -77,7 +77,7 @@
 					border-radius: _size(gui-weight)*2;
 					height: _size(gui-weight);
 					width: 100%;
-					background: _palette(on-dark);
+					background: _palette(on-bg);
 					@include vendor('transition', 'background #{_duration(transition)} ease-in-out');
 				}
 				
@@ -98,7 +98,7 @@
 					display: block;
 					cursor: pointer;
 					border-radius: _size(gui-weight)*2;
-					background: _palette(on-dark);
+					background: _palette(on-bg);
 					content: '';
 					@include vendor('transition', 'all #{_duration(transition)} ease-in-out');				
         		}
