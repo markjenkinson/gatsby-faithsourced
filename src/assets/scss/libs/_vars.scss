@@ -56,9 +56,9 @@ $font: (
 	lineheight-heading:			if(map-has-key($theme, 'font_headline_line_height'), map-get($theme, 'font_headline_line_height'), normal),
 	lineheight-paragraph:		if(map-has-key($theme, 'font_paragraph_line_height'), map-get($theme, 'font_paragraph_line_height'), normal),
 	lineheight-gui:				if(map-has-key($theme, 'font_gui_line_height'), map-get($theme, 'font_gui_line_height'), normal),
-	base-size-heading:			if(map-has-key($theme, 'font_headline_base_size'), map-get($theme, 'font_headline_base_size'), 48px),
-	base-size-paragraph:		if(map-has-key($theme, 'font_paragraph_base_size'), map-get($theme, 'font_paragraph_base_size'), 16px),
-	base-size-gui:				if(map-has-key($theme, 'font_gui_base_size'), map-get($theme, 'font_gui_base_size'), 12px),
+	base-size-heading:			if(map-has-key($theme, 'font_headline_base_size'), map-get($theme, 'font_headline_base_size'), 48pt),
+	base-size-paragraph:		if(map-has-key($theme, 'font_paragraph_base_size'), map-get($theme, 'font_paragraph_base_size'), 16pt),
+	base-size-gui:				if(map-has-key($theme, 'font_gui_base_size'), map-get($theme, 'font_gui_base_size'), 12pt),
 );
 
 // Palette.
