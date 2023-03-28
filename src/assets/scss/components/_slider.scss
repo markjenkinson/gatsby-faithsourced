@@ -74,6 +74,7 @@ $slick-opacity-not-active: 0 !default;
         opacity: $slick-opacity-on-hover;
         background: transparent;
         color: transparent;
+        border-color: transparent;
         &:before, &:after {
 			background: _palette(emphasis);
         }
@@ -88,7 +89,7 @@ $slick-opacity-not-active: 0 !default;
 		display: block;
 		cursor: pointer;
 		border-radius: _size(gui-weight)*2;
-		background: _palette(on-dark);
+		background-color: _palette(on-dark);
 		content: '';
         @include vendor('transition', 'all #{_duration(transition)} ease-in-out');
     }

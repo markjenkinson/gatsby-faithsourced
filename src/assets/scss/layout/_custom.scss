@@ -18,6 +18,16 @@
 		position: absolute;
 		background: rgba(0, 0, 0, 0.5);
 	}
+	
+	a {
+		&.link {
+		}
+		
+		&.button {
+			border-color: _palette(emphasis);
+			color: _palette(emphasis);
+		}
+	}
 }
 
 .background-lighten {

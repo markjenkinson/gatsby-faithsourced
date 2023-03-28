@@ -68,8 +68,8 @@ a {
 }
 
 strong, b {
-	color: _palette(emphasis);
-	font-weight: _font(weight-bold);
+	color: _palette(on-bg);
+	font-weight: _font(weight-alt-paragraph);
 }
 
 em, i {
