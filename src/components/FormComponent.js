@@ -77,12 +77,12 @@ class FormComponent extends React.Component {
 									<div class="input-wrapper" key={index}>
 									  <input
 										type="checkbox"
-										id={option.title}
-										name={field.namespace}
+										id={'field_'+field.alternative_id+'_'+option.alternative_id}
+										name={'field_'+field.alternative_id+'[]'}
 										value={option.title}
 										onChange={this.handleChange}
 									  />
-									  <label htmlFor={option.title} dangerouslySetInnerHTML={{ __html: option.title }} />
+									  <label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
 									</div>
 								  ))}
 							  </>
@@ -96,12 +96,12 @@ class FormComponent extends React.Component {
 									<div class="input-wrapper" key={index}>
 									  <input
 										type="radio"
-										id={option.title}
-										name={field.namespace}
+										id={'field_'+field.alternative_id+'_'+option.alternative_id}
+										name={'field_'+field.alternative_id+'[]'}
 										value={option.title}
 										onChange={this.handleChange}
 									  />
-									  <label htmlFor={option.title} dangerouslySetInnerHTML={{ __html: option.title }} />
+									  <label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
 									</div>
 								  ))}
 							  </>

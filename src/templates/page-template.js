@@ -197,10 +197,12 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 		  thank_you_title
 		  thank_you_text
 		  alternative_fields {
+		  	alternative_id
 			type
 			options {
 			  title
 			  default_selection
+			  alternative_id
 			}
 			default_value
 			description
