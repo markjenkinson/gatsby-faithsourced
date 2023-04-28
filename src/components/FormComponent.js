@@ -68,7 +68,45 @@ class FormComponent extends React.Component {
 								</div>
 								</>
 							}
-					
+							
+							{field.type === "checkbox" && (
+							  <>
+								<label dangerouslySetInnerHTML={{ __html: field.title }} />
+								{field.options &&
+								  field.options.map((option, index) => (
+									<div class="input-wrapper" key={index}>
+									  <input
+										type="checkbox"
+										id={option.title}
+										name={field.namespace}
+										value={option.title}
+										onChange={this.handleChange}
+									  />
+									  <label htmlFor={option.title} dangerouslySetInnerHTML={{ __html: option.title }} />
+									</div>
+								  ))}
+							  </>
+							)}
+
+							{field.type === "radio" && (
+							  <>
+								<label dangerouslySetInnerHTML={{ __html: field.title }} />
+								{field.options &&
+								  field.options.map((option, index) => (
+									<div class="input-wrapper" key={index}>
+									  <input
+										type="radio"
+										id={option.title}
+										name={field.namespace}
+										value={option.title}
+										onChange={this.handleChange}
+									  />
+									  <label htmlFor={option.title} dangerouslySetInnerHTML={{ __html: option.title }} />
+									</div>
+								  ))}
+							  </>
+							)}
+
 							{field.type === "textarea" &&
 								<>
 								<label dangerouslySetInnerHTML={{ __html: field.title}} />
