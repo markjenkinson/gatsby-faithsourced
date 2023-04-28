@@ -349,15 +349,6 @@
 			article {
 				width: 50%;
 				height: 60vw;
-				
-				&:nth-of-type(3n+1) {
-					width: 100%;
-					
-					.image.glyph {
-						width: 60vw;
-						margin: 0 auto;
-					}
-				}
 			}
 		}
 
@@ -370,13 +361,6 @@
 				height: auto;
 				max-height: none;
 				min-height: 100vw;
-				
-				&:nth-of-type(3n+1) {
-					.image.glyph {
-						width: calc(100% + 5rem);
-						margin: 0 -2.5rem;
-					}
-				}
 
 				.title {
 					font-size: 1.5em;

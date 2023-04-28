@@ -57,9 +57,9 @@
 		}
 
 		.logo-glyph {
-			width: 7.5rem;
-			height: 7.5rem;
-			line-height: 5.5rem;
+			width: 128px;
+			height: 128px;
+			line-height: 128px;
 			border: solid _size(border-width) _palette(border);
 			border-radius: 100%;
 			background-image:		url('../../images/dynamic/logo_glyph.#{map-get($theme, "logo_glyph_img_type")}');
@@ -236,9 +236,9 @@
 			}
 
 			.logo-glyph {
-				width: 4.75rem;
-				height: 4.75rem;
-				line-height: 4.75rem;
+				width: 96px;
+				height: 96px;
+				line-height: 96px;
 
 				.icon {
 					&:before {

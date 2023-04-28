@@ -14,11 +14,11 @@ article {
 		width: 100%;
 
 		@include breakpoint(small) {
-			padding: 0 2rem 2rem 2rem;	
+			padding: 0 _size(element-margin) _size(element-margin) _size(element-margin);	
 		}
 
 		@include breakpoint(xsmall) {
-			padding: 0 1.5rem 1.5rem 1.5rem;
+			padding: 0 _size(element-margin)*0.75 _size(element-margin)*0.75 _size(element-margin)*0.75;
 		}
 		
 		img {
@@ -80,6 +80,7 @@ article {
 			padding-top: 4rem;
 			
 			>.col:first-of-type > .image:first-of-type {
+				display: block;
 				border-radius: _size(border-radius-top);
 				margin-top: -4rem;
 			}

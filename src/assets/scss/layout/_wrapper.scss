@@ -24,15 +24,15 @@
 		}
 
 		@include breakpoint(xlarge) {
-			padding: 4.5rem 2rem;
+			padding: _size(element-margin)*2 _size(element-margin);
 		}
 
 		@include breakpoint(small) {
-			padding: 4.5rem 1rem;
+			padding: _size(element-margin)*1.5 _size(element-margin)*0.5;
 		}
 
 		@include breakpoint(xsmall) {
-			padding: 4.5rem 1rem;
+			padding: _size(element-margin) _size(element-margin)*0.5;
 		}
 
 		&.page {
