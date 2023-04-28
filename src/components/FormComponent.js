@@ -78,7 +78,7 @@ class FormComponent extends React.Component {
 									  <input
 										type="checkbox"
 										id={'field_'+field.alternative_id+'_'+option.alternative_id}
-										name={'field_'+field.alternative_id}
+										name={'field_'+field.alternative_id+'[]'}
 										value={option.title}
 										onChange={this.handleChange}
 									  />

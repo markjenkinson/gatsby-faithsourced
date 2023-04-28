@@ -150,6 +150,7 @@ form {
 	}
 	
 	.input-wrapper {
+		position: relative;
 		display: inline-block;
 		margin-bottom: math.div(_size(element-margin),4);
 	}
@@ -169,10 +170,11 @@ form {
 	input[type="radio"], {
 		@include vendor('appearance', 'none');
 		display: block;
-		float: left;
-		margin-right: -2rem;
+		position: absolute;
+		margin: 0;
 		opacity: 0;
-		width: 1rem;
+		height: (_size(element-height) * 0.6);
+		width: (_size(element-height) * 0.6);
 		z-index: -1;
 
 		& + label {
@@ -186,8 +188,8 @@ form {
 			font-size: 0.8rem;
 			font-weight: _font(weight);
 			margin: 0;
-			padding-left: (_size(element-height) * 0.6) + 1rem;
-			padding-right: 0.75rem;
+			padding-left: (_size(element-height) * 0.6) + 0.5rem;
+			padding-right: 1rem;
 			position: relative;
 			line-height: (_size(element-height) * 0.6);
 			
