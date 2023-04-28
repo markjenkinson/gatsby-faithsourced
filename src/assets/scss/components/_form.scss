@@ -148,6 +148,11 @@ form {
 			display: none;
 		}
 	}
+	
+	.input-wrapper {
+		display: inline-block;
+		margin-bottom: math.div(_size(element-margin),4);
+	}
 
 	input[type="text"],
 	input[type="password"],
@@ -178,11 +183,12 @@ form {
 			display: inline-block;
 			font-size: 0.8rem;
 			font-weight: _font(weight);
-			margin: 0 0 (_size(element-margin) * 0.25) 0;
+			margin: 0;
 			padding-left: (_size(element-height) * 0.6) + 1rem;
 			padding-right: 0.75rem;
 			position: relative;
-
+			line-height: (_size(element-height) * 0.6);
+			
 			&:before {
 				@include vendor('transition', (
 					'border-color #{_duration(transition)} ease-in-out',
@@ -190,16 +196,14 @@ form {
 					'background-color #{_duration(transition)} ease-in-out'
 				));
 				border-radius: _size(border-radius);
-				border: solid _size(border-width) _palette(border);
+				border: solid _size(border-width) transparentize(_palette(border), 0.5);
 				content: '';
 				display: inline-block;
 				height: (_size(element-height) * 0.6);
 				left: 0;
-				//line-height: (_size(element-height) * 0.575);
 				line-height: calc(#{_size(element-height) * 0.575} + 0em);
 				position: absolute;
 				text-align: center;
-				top: -0.125rem;
 				width: (_size(element-height) * 0.6);
 			}
 		}
