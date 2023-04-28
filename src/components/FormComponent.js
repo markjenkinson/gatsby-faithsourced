@@ -71,7 +71,7 @@ class FormComponent extends React.Component {
 							
 							{field.type === "checkbox" && (
 							  <>
-								<label dangerouslySetInnerHTML={{ __html: field.title }} />
+								<label htmlFor={'field_'+field.alternative_id} dangerouslySetInnerHTML={{ __html: field.title }} />
 								{field.options &&
 								  field.options.map((option, index) => (
 									<div class="input-wrapper" key={index}>
@@ -90,7 +90,7 @@ class FormComponent extends React.Component {
 
 							{field.type === "radio" && (
 							  <>
-								<label dangerouslySetInnerHTML={{ __html: field.title }} />
+								<label htmlFor={'field_'+field.alternative_id} dangerouslySetInnerHTML={{ __html: field.title }} />
 								{field.options &&
 								  field.options.map((option, index) => (
 									<div class="input-wrapper" key={index}>
