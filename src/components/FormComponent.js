@@ -70,26 +70,26 @@ class FormComponent extends React.Component {
 							}
 							
 							{field.type === "checkbox" && (
-							  <>
-								<label htmlFor={'field_'+field.alternative_id} dangerouslySetInnerHTML={{ __html: field.title }} />
+							  <fieldset>
+								<legend dangerouslySetInnerHTML={{ __html: field.title }} />
 								{field.options &&
 								  field.options.map((option, index) => (
 									<div class="input-wrapper" key={index}>
 									  <input
 										type="checkbox"
 										id={'field_'+field.alternative_id+'_'+option.alternative_id}
-										name={'field_'+field.alternative_id+'[]'}
+										name={'field_'+field.alternative_id}
 										value={option.title}
 										onChange={this.handleChange}
 									  />
 									  <label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
 									</div>
 								  ))}
-							  </>
+							  </fieldset>
 							)}
 
 							{field.type === "radio" && (
-							  <>
+							  <fieldset>
 								<label htmlFor={'field_'+field.alternative_id} dangerouslySetInnerHTML={{ __html: field.title }} />
 								{field.options &&
 								  field.options.map((option, index) => (
@@ -97,14 +97,14 @@ class FormComponent extends React.Component {
 									  <input
 										type="radio"
 										id={'field_'+field.alternative_id+'_'+option.alternative_id}
-										name={'field_'+field.alternative_id+'[]'}
+										name={'field_'+field.alternative_id}
 										value={option.title}
 										onChange={this.handleChange}
 									  />
 									  <label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
 									</div>
 								  ))}
-							  </>
+							  </fieldset>
 							)}
 
 							{field.type === "textarea" &&

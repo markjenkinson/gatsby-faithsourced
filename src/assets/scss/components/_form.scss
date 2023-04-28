@@ -58,7 +58,7 @@ form {
 		}
 	}
 
-	label {
+	label, legend {
 		color: _palette(on-bg);
 		display: block;
 		font-size: 0.8rem;
@@ -181,6 +181,8 @@ form {
 			color: _palette(on-bg);
 			cursor: pointer;
 			display: inline-block;
+			text-transform: none;
+			letter-spacing: normal;
 			font-size: 0.8rem;
 			font-weight: _font(weight);
 			margin: 0;
