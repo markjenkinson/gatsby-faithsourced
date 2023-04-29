@@ -3,9 +3,16 @@ import PropTypes from 'prop-types'
 
 function encode(data) {
 	return Object.keys(data)
-		.map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+		.map(key => {
+			if(Array.isArray(data[key])) {
+				return data[key].map(value => encodeURIComponent(key) + "[]=" + encodeURIComponent(value)).join("&");
+			} else {
+				return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+			}
+		})
 		.join("&");
 }
+
 
 class FormComponent extends React.Component {
 	constructor(props) {
@@ -77,8 +84,8 @@ class FormComponent extends React.Component {
 											<label>
 												<input
 													type="checkbox"
-													id={'field_'+field.alternative_id+'_'+option.alternative_id}
-													name={'field_'+field.alternative_id+'[]'}
+													id={'field_'+field.namespace+'_'+option.alternative_id}
+													name={field.namespace+'[]'}
 													value={option.title}
 													onChange={this.handleChange}
 												/>
