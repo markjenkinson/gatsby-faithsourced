@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function encode(data) {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
+	return Object.keys(data)
+		.map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+		.join("&");
 }
 
 class FormComponent extends React.Component {
@@ -23,9 +23,9 @@ class FormComponent extends React.Component {
 		e.preventDefault();
 		const form = e.target;
 		fetch("/", {
-	  	method: "POST",
-		headers: { "Content-Type": "application/x-www-form-urlencoded" },
-		body: encode({
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: encode({
 				"form-name": form.getAttribute("name"),
 				...this.state
 			})
@@ -70,41 +70,42 @@ class FormComponent extends React.Component {
 							}
 							
 							{field.type === "checkbox" && (
-							  <fieldset>
-								<legend dangerouslySetInnerHTML={{ __html: field.title }} />
-								{field.options &&
-								  field.options.map((option, index) => (
-									<div class="input-wrapper" key={index}>
-									  <input
-										type="checkbox"
-										id={'field_'+field.alternative_id+'_'+option.alternative_id}
-										name={'field_'+field.alternative_id+'[]'}
-										value={option.title}
-										onChange={this.handleChange}
-									  />
-									  <label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
-									</div>
-								  ))}
-							  </fieldset>
+								<fieldset>
+									<label dangerouslySetInnerHTML={{ __html: field.title }} />
+									{field.options && field.options.map((option, index) => (
+										<div class="input-wrapper" key={index}>
+											<label>
+												<input
+													type="checkbox"
+													id={'field_'+field.alternative_id+'_'+option.alternative_id}
+													name={'field_'+field.alternative_id+'[]'}
+													value={option.title}
+													onChange={this.handleChange}
+												/>
+												<span dangerouslySetInnerHTML={{ __html: option.title }} />
+											</label>
+										</div>
+									))}
+								</fieldset>
 							)}
 
 							{field.type === "radio" && (
-							  <fieldset>
-								<label htmlFor={'field_'+field.alternative_id} dangerouslySetInnerHTML={{ __html: field.title }} />
+								<fieldset>
+								<legend dangerouslySetInnerHTML={{ __html: field.title }} />
 								{field.options &&
-								  field.options.map((option, index) => (
+									field.options.map((option, index) => (
 									<div class="input-wrapper" key={index}>
-									  <input
+										<input
 										type="radio"
 										id={'field_'+field.alternative_id+'_'+option.alternative_id}
 										name={'field_'+field.alternative_id}
 										value={option.title}
 										onChange={this.handleChange}
-									  />
-									  <label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
+										/>
+										<label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
 									</div>
-								  ))}
-							  </fieldset>
+									))}
+								</fieldset>
 							)}
 
 							{field.type === "textarea" &&
