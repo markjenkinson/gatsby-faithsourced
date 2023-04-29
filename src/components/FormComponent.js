@@ -5,14 +5,13 @@ function encode(data) {
 	return Object.keys(data)
 		.map(key => {
 			if(Array.isArray(data[key])) {
-				return data[key].map(value => encodeURIComponent(key) + "[]=" + encodeURIComponent(value)).join("&");
+				return encodeURIComponent(key) + "=" + data[key].map(value =>  encodeURIComponent(value)).join(",");
 			} else {
 				return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
 			}
 		})
 		.join("&");
 }
-
 
 class FormComponent extends React.Component {
 	constructor(props) {
@@ -23,7 +22,17 @@ class FormComponent extends React.Component {
 	}
 	
 	handleChange = e => {
-		this.setState({ [e.target.name]: e.target.value });
+		const { name, value, type, checked } = e.target;
+		let newValue = type === 'checkbox' ? [...(this.state[name] || []), value] : value;
+		if (type === 'checkbox') {
+			if (!checked) {
+				newValue = newValue.filter(item => item !== value);
+			}
+		}
+		const updatedState = {
+			[name]: newValue,
+		};
+		this.setState(updatedState);
 	};
 
 	handleSubmit = e => {
@@ -85,7 +94,7 @@ class FormComponent extends React.Component {
 												<input
 													type="checkbox"
 													id={field.namespace+'_'+option.alternative_id}
-													name={field.namespace}
+													name={field.namespace+'[]'}
 													value={option.title}
 													onChange={this.handleChange}
 												/>
