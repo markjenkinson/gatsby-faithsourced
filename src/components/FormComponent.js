@@ -5,7 +5,7 @@ function encode(data) {
 	return Object.keys(data)
 		.map(key => {
 			if(Array.isArray(data[key])) {
-				return encodeURIComponent(key) + "=" + data[key].map(value =>  encodeURIComponent(value)).join(",");
+				return encodeURIComponent(key.replace('[]','')) + "=" + data[key].map(value => encodeURIComponent(value)).join(",");
 			} else {
 				return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
 			}
@@ -38,6 +38,7 @@ class FormComponent extends React.Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		const form = e.target;
+
 		fetch("/", {
 			method: "POST",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
