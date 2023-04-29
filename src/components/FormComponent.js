@@ -5,7 +5,7 @@ function encode(data) {
 	return Object.keys(data)
 		.map(key => {
 			if(Array.isArray(data[key])) {
-				return encodeURIComponent(key.replace('[]','')) + "=" + data[key].map(value => encodeURIComponent(value)).join(",");
+				return encodeURIComponent(key.replace('[]','')) + "=" + encodeURIComponent("<ul>") + data[key].map(value => encodeURIComponent("<li>"+value+"</li>")).join("") + encodeURIComponent("</ul>");
 			} else {
 				return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
 			}
