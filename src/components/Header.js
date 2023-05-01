@@ -44,13 +44,13 @@ const Header = (props) => {
 						<div className="content">
 								<div className="inner">
 										{props.title && props.wordmark && 
-												<h1 className="logo-wordmark">{props.title}</h1>
+											<h1 className="logo-wordmark">{props.title}</h1>
 										}
 										{props.title && !props.wordmark && 
-												<h1>{props.title}</h1>
+											<h1>{props.title}</h1>
 										}
 										{props.slogan &&
-												<p className="tagline">{props.slogan}</p>
+											<p className="tagline" dangerouslySetInnerHTML={{ __html: props.slogan}} />
 										}
 								</div>
 						</div>
