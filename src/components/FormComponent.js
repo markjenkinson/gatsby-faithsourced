@@ -88,7 +88,7 @@ class FormComponent extends React.Component {
 							
 							{field.type === "checkbox" && (
 								<fieldset>
-									<label dangerouslySetInnerHTML={{ __html: field.title }} />
+									<legend dangerouslySetInnerHTML={{ __html: field.title }} />
 									{field.options && field.options.map((option, index) => (
 										<div class="input-wrapper" key={index}>
 											<label>
@@ -108,19 +108,20 @@ class FormComponent extends React.Component {
 
 							{field.type === "radio" && (
 								<fieldset>
-								<legend dangerouslySetInnerHTML={{ __html: field.title }} />
-								{field.options &&
-									field.options.map((option, index) => (
-									<div class="input-wrapper" key={index}>
-										<input
-										type="radio"
-										id={'field_'+field.alternative_id+'_'+option.alternative_id}
-										name={'field_'+field.alternative_id}
-										value={option.title}
-										onChange={this.handleChange}
-										/>
-										<label htmlFor={'field_'+field.alternative_id+'_'+option.alternative_id} dangerouslySetInnerHTML={{ __html: option.title }} />
-									</div>
+									<legend dangerouslySetInnerHTML={{ __html: field.title }} />
+									{field.options && field.options.map((option, index) => (
+										<div class="input-wrapper" key={index}>
+											<label>
+												<input
+													type="radio"
+													id={field.namespace+'_'+option.alternative_id}
+													name={field.namespace}
+													value={option.title}
+													onChange={this.handleChange}
+												/>
+												<span dangerouslySetInnerHTML={{ __html: option.title }} />
+											</label>
+										</div>
 									))}
 								</fieldset>
 							)}
