@@ -23,6 +23,14 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	
 	@include breakpoint(xlarge) {
+		font-size: _font(base-size-paragraph);
+	}
+	
+	@include breakpoint(large) {
+		font-size: _font(base-size-paragraph)*0.9;
+	}
+	
+	@include breakpoint(medium) {
 		font-size: _font(base-size-paragraph)*0.8;
 	}
 
