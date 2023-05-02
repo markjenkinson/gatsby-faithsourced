@@ -1,4 +1,7 @@
 /* Custom */	
+.background-light-grey {
+	background: transparentize(_palette(bg-dark), 0.90)
+}
 
 .background-darken {
 	hr, h1.major, h2.major, h3.major, h4.major, h5.major, h6.major, h7.major {
