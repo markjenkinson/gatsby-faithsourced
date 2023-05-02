@@ -19,11 +19,10 @@
 	ul {
 		list-style: disc;
 		margin: 0 0 _size(element-margin) 0;
-		padding-left: 2.5em;
+		padding-left: _size(element-margin);
 
 		li {
 			line-height: _font(lineheight-paragraph);
-			padding-left: 0.25em;
 		}
 
 		&.alt {
