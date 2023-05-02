@@ -96,7 +96,7 @@ class FormComponent extends React.Component {
 													type="checkbox"
 													id={field.namespace+'_'+option.alternative_id}
 													name={field.namespace+'[]'}
-													value={option.title}
+													value={option.title.replace(/(<([^>]+)>)/gi, "")}
 													onChange={this.handleChange}
 												/>
 												<span dangerouslySetInnerHTML={{ __html: option.title }} />
@@ -116,7 +116,7 @@ class FormComponent extends React.Component {
 													type="radio"
 													id={field.namespace+'_'+option.alternative_id}
 													name={field.namespace}
-													value={option.title}
+													value={option.title.replace(/(<([^>]+)>)/gi, "")}
 													onChange={this.handleChange}
 												/>
 												<span dangerouslySetInnerHTML={{ __html: option.title }} />
