@@ -14,10 +14,6 @@
 	
 	.\31 2u & {
 		margin: 0 _size(element-margin)*-1;
-		
-		@include breakpoint(xsmall) {
-			margin: 0 _size(element-margin)*-0.75;
-		}
 	}	
 	
 	&.banner, &.hero {			
