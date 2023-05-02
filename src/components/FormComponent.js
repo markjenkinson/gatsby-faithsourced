@@ -53,7 +53,7 @@ class FormComponent extends React.Component {
 	
 	render() {
 		return (
-			<div className='col'>
+            <div className={`cell ${this.props.params.lg_width.value ? this.props.params.lg_width.value+'u(xlarge) ' : '12u'} ${this.props.params.md_width.value ? this.props.params.md_width.value+'u(large) ' : ''} ${this.props.params.sm_width.value ? this.props.params.sm_width.value+'u(small) ' : ''} ${this.props.params.xs_width.value ? this.props.params.xs_width.value+'u(xsmall) ' : ''}`}>
 				<form method="POST" data-netlify="true" onSubmit={this.handleSubmit} name={this.props.data.name}>
 					<div className={this.state.isSubmitted ? 'fadeOut' : 'fadeIn'}>
 						<h2 className="major" dangerouslySetInnerHTML={{ __html: this.props.data.name}} />

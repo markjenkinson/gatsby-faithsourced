@@ -174,6 +174,18 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 		  custom_class {
 			value
 		  }
+		  lg_width {
+			value
+		  }
+		  md_width {
+			value
+		  }
+		  sm_width {
+			value
+		  }
+		  xs_width {
+			value
+		  }
 		}
 		object {
 		  alternative_id

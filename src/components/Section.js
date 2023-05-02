@@ -33,10 +33,12 @@ class Section extends React.Component {
                 	className={`${params.custom_class && params.image_1_dummy === false ? params.custom_class+' ':params.custom_class}${params.image_1_dummy === false ? 'backgrounded' : ''}`} 
                 	style={{backgroundImage: params.parallax_bg === '0' && params.image_1_dummy === false ? 'url('+params.image_1_local?.publicURL+')' : 'none', backgroundSize: 'cover'}}
                 >
-                    {components.map(({ component: { module }, options, object }) => {
-                        const Component = componentMap[module];
-                        return Component ? <Component params={options} data={object} onCloseArticle={onCloseArticle} /> : null;
-                    })}
+					<div className='row'>
+						{components.map(({ component: { module }, options, object }) => {
+							const Component = componentMap[module];
+							return Component ? <Component params={options} data={object} onCloseArticle={onCloseArticle} /> : null;
+						})}
+					</div>
                 </section>
             </Component>
         );

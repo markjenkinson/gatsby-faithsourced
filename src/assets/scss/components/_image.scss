@@ -9,12 +9,16 @@
 	border: 0;
 	display: inline-block;
 	position: relative;
-	margin: 0 _size(element-margin)*-1;
+	
 	text-align: center;
 	
-	@include breakpoint(xsmall) {
-		margin: 0 _size(element-margin)*-0.75;
-	}
+	.\31 2u & {
+		margin: 0 _size(element-margin)*-1;
+		
+		@include breakpoint(xsmall) {
+			margin: 0 _size(element-margin)*-0.75;
+		}
+	}	
 	
 	&.banner, &.hero {			
 		width: calc(100% + 5rem);
@@ -41,6 +45,7 @@
 	&.glyph {
 		text-align: center;
 		padding: 0px _size(element-margin);
+		margin: 0 _size(element-margin)*-1;
 		
 		img {
 			display: inline;

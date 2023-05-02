@@ -6,7 +6,7 @@ class TextBlockComponent extends React.Component {
 	render() {
 		const CustomTag = `${this.props.data.header_level}`
 		return (
-            <div className='col'>
+            <div className={`cell ${this.props.params.lg_width.value ? this.props.params.lg_width.value+'u(xlarge) ' : '12u'} ${this.props.params.md_width.value ? this.props.params.md_width.value+'u(large) ' : ''} ${this.props.params.sm_width.value ? this.props.params.sm_width.value+'u(small) ' : ''} ${this.props.params.xs_width.value ? this.props.params.xs_width.value+'u(xsmall) ' : ''}`}>
 			{this.props.data.name &&
 				<>
 				{this.props.data.header_level && 

@@ -3,33 +3,24 @@ article {
 	.logo + section:first-of-type {
 		padding-top: 6rem;
 		
-		>.col:first-of-type > .image:first-of-type {
-			border-radius: _size(border-radius-top);
-			margin-top: -6rem;
+		.cell:first-of-type {
+			.image, .video-container {
+				border-radius: _size(border-radius-top);
+				margin-top: -6rem;
+			}
 		}
 	}
 	
 	section {
 		padding: _size(element-margin);
 		width: 100%;
-
-		@include breakpoint(small) {
-			padding: 0 _size(element-margin) _size(element-margin) _size(element-margin);	
-		}
-
-		@include breakpoint(xsmall) {
-			padding: 0 _size(element-margin)*0.75 _size(element-margin)*0.75 _size(element-margin)*0.75;
-		}
 		
 		img {
 			max-width: 100%;
 		}
 		
-		.col {
-			float: left;
-			position: relative;
-			width: 100%;
-			
+		.cell {
+			position: relative;			
 			margin-bottom: _size(element-margin);
 			
 			@include breakpoint(small) {
@@ -79,16 +70,12 @@ article {
 			overflow: hidden;
 			padding-top: 4rem;
 			
-			>.col:first-of-type > .image:first-of-type {
-				display: block;
-				border-radius: _size(border-radius-top);
-				margin-top: -4rem;
-			}
-			
-			@include breakpoint(small) {
-			}
-		
-			@include breakpoint(xsmall) {
+			.cell:first-of-type {				
+				.image, .video-container {
+					display: block;
+					border-radius: _size(border-radius-top);
+					margin-top: -4rem;
+				}
 			}
 		}
 	
@@ -97,19 +84,13 @@ article {
 			overflow: hidden;
 			padding-bottom: 4rem;
 			
-			> .col:last-of-type {
+			.cell:last-of-type {
 				padding-bottom: 0;
-			}
-			
-			> .col:last-of-type > .image:last-of-type, > .col:last-of-type > .video-container:last-of-type {
-				border-radius: _size(border-radius-bottom);
-				margin-bottom: -4rem;
-			}
-			
-			@include breakpoint(small) {
-			}
-		
-			@include breakpoint(xsmall) {
+				
+				.image, .video-container {
+					border-radius: _size(border-radius-bottom);
+					margin-bottom: -4rem;
+				}
 			}
 		}
 	}		

@@ -17,7 +17,7 @@ class VideoComponent extends React.Component {
 		}
     
 		return (
-			<div className='col'>
+            <div className={`cell ${this.props.params.lg_width.value ? this.props.params.lg_width.value+'u(xlarge) ' : '12u'} ${this.props.params.md_width.value ? this.props.params.md_width.value+'u(large) ' : ''} ${this.props.params.sm_width.value ? this.props.params.sm_width.value+'u(small) ' : ''} ${this.props.params.xs_width.value ? this.props.params.xs_width.value+'u(xsmall) ' : ''}`}>
 				<YouTube containerClassName='video-container' videoId={this.props.data.embedded_video_id} opts={opts} onReady={this._onReady}/>
 			</div>
 		)

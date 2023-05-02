@@ -26,7 +26,7 @@
 				'filter 1s ease',
 				'-webkit-filter 1s ease'
 			));
-			@include padding(0, 4rem);
+			@include padding(0, _size(element-margin)*1.5);
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -59,6 +59,10 @@
 			
 			p {
 				color: _palette(tile-text);
+				
+				&:last-of-type {
+					margin: 0;
+				}
 			}
 
 			.link.primary {

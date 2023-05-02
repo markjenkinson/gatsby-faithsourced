@@ -1,172 +1,172 @@
 /* Main */
 
-	#main {
-		@include vendor('flex-grow', '1');
-		@include vendor('flex-shrink', '1');
-		@include vendor('display', 'flex');
-		@include vendor('align-items', 'center');
-		@include vendor('justify-content', 'center');
-		@include vendor('flex-direction', 'column');
+#main {
+	@include vendor('flex-grow', '1');
+	@include vendor('flex-shrink', '1');
+	@include vendor('display', 'flex');
+	@include vendor('align-items', 'center');
+	@include vendor('justify-content', 'center');
+	@include vendor('flex-direction', 'column');
+	position: relative;
+	max-width: 100%;
+	z-index: 3;
+	display: none;
+
+	article {
+		@include vendor('transform', 'translateY(0.25rem)');
+		@include vendor('transition', (
+			'opacity #{_duration(article)} ease-in-out',
+			'transform #{_duration(article)} ease-in-out'
+		));
+
 		position: relative;
+		width: 40rem;
 		max-width: 100%;
-		z-index: 3;
-		display: none;
+		background-color: transparentize(_palette(bg), 0.15);
+		border-radius: _size(border-radius);
+		opacity: 0;
+		overflow: hidden;
+		box-shadow: 0 0 60px 20px _palette(bg-overlay);
 
-		article {
-			@include vendor('transform', 'translateY(0.25rem)');
-			@include vendor('transition', (
-				'opacity #{_duration(article)} ease-in-out',
-				'transform #{_duration(article)} ease-in-out'
-			));
+		&.timeout {
+			display: none;
+		}
 
-			position: relative;
-			width: 40rem;
-			max-width: 100%;
-			background-color: transparentize(_palette(bg), 0.15);
-			border-radius: _size(border-radius);
-			opacity: 0;
-			overflow: hidden;
-			box-shadow: 0 0 60px 20px _palette(bg-overlay);
+		&.active.timeout {
+			@include vendor('transform', 'translateY(0)');
+			opacity: 1;
+		}
 
-			&.timeout {
-				display: none;
-			}
+		&.active {
+			display: block !important;
+		}
 
-			&.active.timeout {
-				@include vendor('transform', 'translateY(0)');
+		.close, .previous, .next, .home {
+			@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
+			display: block;
+			position: absolute;
+			top: math.div(_size(element-margin), 12);
+			width: 60px;
+			height: 60px;
+			cursor: pointer;
+			white-space: nowrap;
+			line-height: 0;
+			opacity: 0.5;
+			color: transparent;
+			border: 10px solid transparent;
+			border-radius: 0;
+			&:hover {					
 				opacity: 1;
-			}
-
-			&.active {
-				display: block !important;
-			}
-
-			.close, .previous, .next, .home {
-				@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
-				display: block;
-				position: absolute;
-				top: math.div(_size(element-margin), 12);
-				width: 60px;
-				height: 60px;
-				cursor: pointer;
-				white-space: nowrap;
-				line-height: 0;
-				opacity: 0.5;
-				color: transparent;
-				border: 10px solid transparent;
-				border-radius: 0;
-				&:hover {					
-					opacity: 1;
-					
-					&:before, &:after {
-						background: _palette(emphasis);
-					}
-				}
-			}
-			
-			.close {
-				right: math.div(_size(element-margin), 12);
 				
 				&:before, &:after {
-					content: '';
-					position: absolute;
-					top: calc(50% - #{math.div(_size(gui-weight), 2)});
-					left: 0px;
-					display: block;
-					cursor: pointer;
-					border-radius: _size(gui-weight)*2;
-					height: _size(gui-weight);
-					width: 100%;
-					background: _palette(on-bg);
-					@include vendor('transition', 'background #{_duration(transition)} ease-in-out');
-				}
-				
-				&:before {
-					transform: rotate(45deg);
-				}
-	
-				 &:after {
-					transform: rotate(-45deg);
-				}
-			}
-			
-			.previous, .next, .home {
-				&:before, &:after {
-					position: absolute;
-					left: 0;
-					top: 0;
-					display: block;
-					cursor: pointer;
-					border-radius: _size(gui-weight)*2;
-					background: _palette(on-bg);
-					content: '';
-					@include vendor('transition', 'all #{_duration(transition)} ease-in-out');				
-        		}
-        		
-        		&:before {
-					height: _size(gui-weight);
-					width: 66.666%;
-				}
-	
-				&:after {
-					width: _size(gui-weight);
-					height: 66.666%;
-				}
-			}
-			
-			.previous {
-				left: math.div(_size(element-margin), 3);
-				transform: rotate(-45deg);				
-			}
-			
-			.next {
-				right: math.div(_size(element-margin), 3);
-				transform: rotate(135deg);				
-			}
-			
-			.home {
-				top: math.div(_size(element-margin), 2);
-				left: calc(50% - 30px);
-				transform: rotate(45deg);
-			}
-			
-			.pagination-bar {
-				position: absolute;
-				width: 100%;
-				left: 0;
-				padding: _size(element-margin) 0;
-				//background-color: transparentize(_palette(bg), .8);
-				
-				&.top {
-					top: 0;					
-				}
-				
-				&.bottom {
-					bottom: 0;
-				}
-			}
-			
-			.logo {
-				z-index: 100;
-				position: absolute;
-				left: calc(50% - 3.75rem);
-				top: -3.75rem;
-				width: 7.5rem;
-				height: 7.5rem;
-				line-height: 5.5rem;
-				border: solid _size(border-width) _palette(border);
-				border-radius: 100%;
-				overflow: hidden;
-				background-color: #2c393f;
-				
-				&.default {
-					background-image: url(map-get($theme, "logo_glyph_img"));
-					background-size: contain;
-				}
-				
-				img {
-					width: 100%;
+					background: _palette(emphasis);
 				}
 			}
 		}
+		
+		.close {
+			right: math.div(_size(element-margin), 12);
+			
+			&:before, &:after {
+				content: '';
+				position: absolute;
+				top: calc(50% - #{math.div(_size(gui-weight), 2)});
+				left: 0px;
+				display: block;
+				cursor: pointer;
+				border-radius: _size(gui-weight)*2;
+				height: _size(gui-weight);
+				width: 100%;
+				background: _palette(on-bg);
+				@include vendor('transition', 'background #{_duration(transition)} ease-in-out');
+			}
+			
+			&:before {
+				transform: rotate(45deg);
+			}
+
+			 &:after {
+				transform: rotate(-45deg);
+			}
+		}
+		
+		.previous, .next, .home {
+			&:before, &:after {
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: block;
+				cursor: pointer;
+				border-radius: _size(gui-weight)*2;
+				background: _palette(on-bg);
+				content: '';
+				@include vendor('transition', 'all #{_duration(transition)} ease-in-out');				
+			}
+			
+			&:before {
+				height: _size(gui-weight);
+				width: 66.666%;
+			}
+
+			&:after {
+				width: _size(gui-weight);
+				height: 66.666%;
+			}
+		}
+		
+		.previous {
+			left: math.div(_size(element-margin), 3);
+			transform: rotate(-45deg);				
+		}
+		
+		.next {
+			right: math.div(_size(element-margin), 3);
+			transform: rotate(135deg);				
+		}
+		
+		.home {
+			top: math.div(_size(element-margin), 2);
+			left: calc(50% - 30px);
+			transform: rotate(45deg);
+		}
+		
+		.pagination-bar {
+			position: absolute;
+			width: 100%;
+			left: 0;
+			padding: _size(element-margin) 0;
+			//background-color: transparentize(_palette(bg), .8);
+			
+			&.top {
+				top: 0;					
+			}
+			
+			&.bottom {
+				bottom: 0;
+			}
+		}
+		
+		.logo {
+			z-index: 100;
+			position: absolute;
+			left: calc(50% - 3.75rem);
+			top: -3.75rem;
+			width: 7.5rem;
+			height: 7.5rem;
+			line-height: 5.5rem;
+			border: solid _size(border-width) _palette(border);
+			border-radius: 100%;
+			overflow: hidden;
+			background-color: #2c393f;
+			
+			&.default {
+				background-image: url(map-get($theme, "logo_glyph_img"));
+				background-size: contain;
+			}
+			
+			img {
+				width: 100%;
+			}
+		}
 	}
+}
