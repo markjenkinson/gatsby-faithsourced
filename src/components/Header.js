@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, graphql, StaticQuery } from 'gatsby'
+import { Link, graphql, StaticQuery, withPrefix } from 'gatsby'
 
+const siteUrl = withPrefix()
+ 
 const Header = (props) => {
 		const renderNavMenu = (data) => {
 				return (
@@ -40,7 +42,7 @@ const Header = (props) => {
 				<header id="header" style={props.timeout ? {display: 'none'} : {}}>
 						{props.title && props.glyph &&
 							<>
-							{props.site_url === window.location.href ? (
+							{props.site_url.replace(/\/+$/, '') === siteUrl ? (
 							  <Link to={props.site_url} className="logo-glyph" alt={props.title} />
 							) : (
 							  <a href={props.site_url} className="logo-glyph" alt={props.title} target="_blank" rel="noopener noreferrer" />
@@ -56,7 +58,7 @@ const Header = (props) => {
 											<h1>{props.title}</h1>
 										}
 										{props.slogan &&
-											<p className="tagline" dangerouslySetInnerHTML={{ __html: props.slogan}} />
+											<p className="tagline" dangerouslySetInnerHTML={{ __html: siteUrl}} />
 										}
 								</div>
 						</div>
