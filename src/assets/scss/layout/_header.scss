@@ -26,16 +26,16 @@
 		> * {
 			@include vendor('transition', 'opacity #{_duration(article)} ease-in-out');
 			position: relative;
-			margin-top: 3.5rem;
+			margin-top: _size(element-margin);
 
 			&:before {
 				content: '';
 				display: block;
 				position: absolute;
-				top: calc(-3.5rem - 1px);
+				top: calc(-#{_size(element-margin)} - 1px);
 				left: calc(50% - #{_size(border-width) * 1});
 				width: _size(border-width);
-				height: calc(3.5rem + 1px);
+				height: calc(#{_size(element-margin)} + 1px);
 				background: _palette(border);
 			}
 		}
@@ -101,7 +101,7 @@
 					));
 					@include vendor('transition-delay', '0.25s');
 				}
-				padding: 3rem 2rem;
+				padding: _size(element-margin) 0;
 				max-height: 40rem;
 				overflow: hidden;
 
@@ -119,6 +119,7 @@
 				text-indent: -999999px;
 				width: 50vw;
 				min-width: 280px;
+				margin: 0;
 				
 				background-image: url('../../images/dynamic/logo_wordmark.#{map-get($theme, "logo_wordmark_img_type")}');
 				background-repeat: no-repeat;
@@ -149,6 +150,7 @@
 				letter-spacing: _font(letter-spacing-gui);
 				font-size: 0.8rem;
 				line-height: 2;
+				margin-top: _size(element-margin)*0.5;
 			}
 			
 			p {
@@ -278,7 +280,6 @@
 
 			.content {
 				.inner {
-					padding: 2.5rem 1rem;
 				}
 				
 				h1.logo-wordmark {
@@ -299,7 +300,6 @@
 
 			.content {
 				.inner {
-					padding: 2.5rem 0;
 				}
 			}
 
