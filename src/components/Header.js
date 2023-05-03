@@ -58,7 +58,7 @@ const Header = (props) => {
 											<h1>{props.title}</h1>
 										}
 										{props.slogan &&
-											<p className="tagline" dangerouslySetInnerHTML={{ __html: siteUrl}} />
+											<p className="tagline" dangerouslySetInnerHTML={{ __html: props.slogan}} />
 										}
 								</div>
 						</div>
