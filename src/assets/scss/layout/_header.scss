@@ -294,16 +294,7 @@
 					line-height: 1.875;
 				}
 			}
-		}
-
-		@include breakpoint(xsmall) {
-			padding-top: 1.5rem;
-
-			.content {
-				.inner {
-				}
-			}
-
+			
 			nav {
 				ul {
 					@include vendor('flex-direction', 'column');
@@ -319,8 +310,6 @@
 						}
 
 						a {
-							height: 3rem;
-							line-height: 3rem;
 							min-width: 0;
 							width: 100%;
 						}
