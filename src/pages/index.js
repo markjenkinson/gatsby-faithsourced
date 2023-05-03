@@ -139,7 +139,7 @@ class IndexPage extends React.Component {
             <Layout location={this.props.location}>
 				<div className={`body ${this.state.loading} ${this.state.isPanelVisible ? 'blurred' : ''} ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
 					<div id="wrapper">
-						<Header glyph={sitePrefsedges[0].node.logo_glyph_img} wordmark={sitePrefsedges[0].node.logo_wordmark_img} title={sitePrefsedges[0].node.site_name} slogan={sitePrefsedges[0].node.logo_slogan} onScrollTo={this.handleScrollTo} timeout={this.state.timeout} onGotoPage={this.handleGotoPage} />
+						<Header glyph={sitePrefsedges[0].node.logo_glyph_img} wordmark={sitePrefsedges[0].node.logo_wordmark_img} title={sitePrefsedges[0].node.site_name} site_url={sitePrefsedges[0].node.site_url} slogan={sitePrefsedges[0].node.logo_slogan} onScrollTo={this.handleScrollTo} timeout={this.state.timeout} onGotoPage={this.handleGotoPage} />
 						<div id="home" style={this.state.timeout ? {display: 'none'} : {}}>
 							<HomePageSlider onGotoPage={this.handleGotoPage}/>
 							<Home onGotoPage={this.handleGotoPage} />
@@ -206,6 +206,7 @@ export const listQuery = graphql`query ListQuery {
         logo_glyph_img
         logo_slogan
         site_bg_img
+        site_url
       }
     }
   }

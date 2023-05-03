@@ -39,7 +39,13 @@ const Header = (props) => {
 		return (
 				<header id="header" style={props.timeout ? {display: 'none'} : {}}>
 						{props.title && props.glyph &&
-								<div className="logo-glyph" alt={props.title}></div>
+							<>
+							{props.site_url === window.location.href ? (
+							  <Link to={props.site_url} className="logo-glyph" alt={props.title} />
+							) : (
+							  <a href={props.site_url} className="logo-glyph" alt={props.title} target="_blank" rel="noopener noreferrer" />
+							)}
+							</>
 						}
 						<div className="content">
 								<div className="inner">
