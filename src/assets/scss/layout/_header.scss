@@ -101,7 +101,7 @@
 					));
 					@include vendor('transition-delay', '0.25s');
 				}
-				padding: _size(element-margin) 0;
+				padding: _size(element-margin)*2 _size(element-margin);
 				max-height: 40rem;
 				overflow: hidden;
 
@@ -280,6 +280,7 @@
 
 			.content {
 				.inner {
+					padding: _size(element-margin);
 				}
 				
 				h1.logo-wordmark {
