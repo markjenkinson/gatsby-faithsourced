@@ -64,17 +64,6 @@
 			border-radius: 100%;
 			background-image:		url('../../images/dynamic/logo_glyph.#{map-get($theme, "logo_glyph_img_type")}');
 			background-size: contain;
-			z-index: 1;
-			
-			@include vendor('transition', (
-				'transform #{_duration(transition)} ease-in',
-				'background-color #{_duration(transition)} ease-in'
-			));
-			
-			&:hover {
-				@include vendor('transform', 'scale(1.05)');
-				background-color: map-get($theme, 'color_background_overlay');
-			}
 			
 			& + .content {
 				border-style: solid;
