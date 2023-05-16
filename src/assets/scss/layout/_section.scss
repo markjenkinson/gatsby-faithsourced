@@ -15,6 +15,14 @@ article {
 		padding: _size(element-margin);
 		width: 100%;
 		
+		@include breakpoint(small) {
+			padding: math.div(_size(element-margin), 1.5);
+		}
+
+		@include breakpoint(xsmall) {
+			padding: math.div(_size(element-margin), 2);
+		}
+		
 		img {
 			max-width: 100%;
 		}
@@ -39,7 +47,7 @@ article {
 			
 			.video-container {
 				position: relative;
-				margin: 0 -2.5rem;
+				margin: 0 _size(element-margin)*-1;
 				height: 0; 
 				padding-bottom: 64.25%; /*16:9*/
 				overflow: hidden;
@@ -50,12 +58,12 @@ article {
 				}
 				
 				@include breakpoint(small) {
-					margin: 0 -2.5rem;
+					margin: 0 math.div(_size(element-margin), 1.5)*-1;
 					padding-bottom: 64.25%; /*16:9*/
 				}
 				
 				@include breakpoint(xsmall) {
-					margin: 0 -1.5rem;
+					margin: 0 math.div(_size(element-margin), 2)*-1;
 					padding-bottom: 63.25%; /*16:9*/
 				}
 			}
