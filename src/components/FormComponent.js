@@ -18,6 +18,7 @@ class FormComponent extends React.Component {
 		super(props)
 		this.state = {
 			isSubmitted: false,
+			errors: {},
 		}
 	}
 	
@@ -34,26 +35,64 @@ class FormComponent extends React.Component {
 		};
 		this.setState(updatedState);
 	};
+	
+	validateForm = () => {
+		const { data } = this.props;
+		const validationErrors = {};
+
+		data.alternative_fields.forEach((field) => {
+			if (field.required && field.namespace) {
+				if (field.type === 'checkbox' || field.type === 'radio') {
+					const selectedOptions = this.state[field.namespace+'[]'] || [];
+					if (selectedOptions.length === 0) {
+						if (field.type === 'checkbox') {
+							validationErrors[field.namespace] = `Please select at least one ${field.title.toUpperCase()} option.`;
+						}
+						else {
+							validationErrors[field.namespace] = `The ${field.title.toUpperCase()} field is required.`;
+						}
+					}
+				} else if (!this.state[field.namespace]) {
+					validationErrors[field.namespace] = `The ${field.title.toUpperCase()} field is required.`;
+				}
+			}
+		});
+		
+		this.setState({ errors: validationErrors });
+
+		const errorKeys = Object.keys(validationErrors);
+		return errorKeys.length === 0 ? null : errorKeys[0];
+	};
 
 	handleSubmit = e => {
 		e.preventDefault();
 		const form = e.target;
+		
+		const firstErrorKey = this.validateForm();
 
-		fetch("/", {
-			method: "POST",
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			body: encode({
-				"form-name": form.getAttribute("name"),
-				...this.state
+		if (firstErrorKey) {
+			// Scroll to the first error
+			const errorElement = document.getElementById(firstErrorKey);
+			if (errorElement) {
+				errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
+		} else {
+			fetch("/", {
+				method: "POST",
+				headers: { "Content-Type": "application/x-www-form-urlencoded" },
+				body: encode({
+					"form-name": form.getAttribute("name"),
+					...this.state
+				})
 			})
-		})
-		.then(() => this.setState({isSubmitted: true}))
-		.catch(error => alert(error));
+			.then(() => this.setState({isSubmitted: true}))
+			.catch(error => alert(error));
+		}
 	};
 	
 	render() {
 		return (
-            <div className={`cell ${this.props.params.lg_width.value ? this.props.params.lg_width.value+'u(xlarge) ' : '12u'} ${this.props.params.md_width.value ? this.props.params.md_width.value+'u(large) ' : ''} ${this.props.params.sm_width.value ? this.props.params.sm_width.value+'u(small) ' : ''} ${this.props.params.xs_width.value ? this.props.params.xs_width.value+'u(xsmall) ' : ''}`}>
+			<div className={`cell ${this.props.params.lg_width.value ? this.props.params.lg_width.value+'u(xlarge) ' : '12u'} ${this.props.params.md_width.value ? this.props.params.md_width.value+'u(large) ' : ''} ${this.props.params.sm_width.value ? this.props.params.sm_width.value+'u(small) ' : ''} ${this.props.params.xs_width.value ? this.props.params.xs_width.value+'u(xsmall) ' : ''}`}>
 				<form method="POST" data-netlify="true" onSubmit={this.handleSubmit} name={this.props.data.name}>
 					<div className={this.state.isSubmitted ? 'fadeOut' : 'fadeIn'}>
 						<h2 className="major" dangerouslySetInnerHTML={{ __html: this.props.data.name}} />
@@ -69,6 +108,9 @@ class FormComponent extends React.Component {
 								<>
 								<label dangerouslySetInnerHTML={{ __html: field.title}} />
 								<input type="text" name={field.namespace} id={field.namespace} onChange={this.handleChange} />
+								{this.state.errors[field.namespace] && (
+									<div className="alert">{this.state.errors[field.namespace]}</div>
+								)}
 								</>
 							}
 					
@@ -83,11 +125,14 @@ class FormComponent extends React.Component {
 										))}
 									</select>
 								</div>
+								{this.state.errors[field.namespace] && (
+									<div className="alert">{this.state.errors[field.namespace]}</div>
+								)}
 								</>
 							}
 							
 							{field.type === "checkbox" && (
-								<fieldset>
+								<fieldset id={field.namespace}>
 									<legend dangerouslySetInnerHTML={{ __html: field.title }} />
 									{field.options && field.options.map((option, index) => (
 										<div class="input-wrapper" key={index}>
@@ -101,13 +146,17 @@ class FormComponent extends React.Component {
 												/>
 												<span dangerouslySetInnerHTML={{ __html: option.title }} />
 											</label>
+											
 										</div>
 									))}
+									{this.state.errors[field.namespace] && (
+										<div className="alert">{this.state.errors[field.namespace]}</div>
+									)}
 								</fieldset>
 							)}
 
 							{field.type === "radio" && (
-								<fieldset>
+								<fieldset id={field.namespace}>
 									<legend dangerouslySetInnerHTML={{ __html: field.title }} />
 									{field.options && field.options.map((option, index) => (
 										<div class="input-wrapper" key={index}>
@@ -123,6 +172,9 @@ class FormComponent extends React.Component {
 											</label>
 										</div>
 									))}
+									{this.state.errors[field.namespace] && (
+										<div className="alert">{this.state.errors[field.namespace]}</div>
+									)}
 								</fieldset>
 							)}
 
@@ -130,6 +182,9 @@ class FormComponent extends React.Component {
 								<>
 								<label dangerouslySetInnerHTML={{ __html: field.title}} />
 								<textarea name={field.namespace} id={field.namespace} rows="4" onChange={this.handleChange} />
+								{this.state.errors[field.namespace] && (
+									<div className="alert">{this.state.errors[field.namespace]}</div>
+								)}
 								</>
 							}
 							</div>
