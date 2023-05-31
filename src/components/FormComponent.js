@@ -41,7 +41,7 @@ class FormComponent extends React.Component {
 		const validationErrors = {};
 
 		data.alternative_fields.forEach((field) => {
-			if (field.required && field.namespace) {
+			if (field.required === "1" && field.namespace) {
 				if (field.type === 'checkbox' || field.type === 'radio') {
 					const selectedOptions = this.state[field.namespace+'[]'] || [];
 					if (selectedOptions.length === 0) {
