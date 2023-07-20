@@ -95,6 +95,41 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-sitemap`, options: {
+				query: `
+					{
+						allThirdPartyPreferences {
+							edges {
+								node {
+									site_url
+								}
+							}
+						}
+						allSitePage {
+							nodes {
+								path
+							}
+						}
+					}
+				`,
+				resolveSiteUrl: ({ allThirdPartyPreferences }) => {
+					return allThirdPartyPreferences.edges[0].node.site_url;
+				},
+				resolvePages: ({
+					allSitePage: { nodes: allPages },
+				}) => {
+					return allPages.map(page => {
+						return { ...page }
+					})
+				},
+				serialize: ({ path }) => {
+					return {
+						url: path,
+					}
+				}
+			},
+		},
+		{
 			resolve: `gatsby-plugin-feed`, options: {
 				query: `
 					{
