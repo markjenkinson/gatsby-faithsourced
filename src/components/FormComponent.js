@@ -24,16 +24,21 @@ class FormComponent extends React.Component {
 	
 	handleChange = e => {
 		const { name, value, type, checked } = e.target;
-		let newValue = type === 'checkbox' ? [...(this.state[name] || []), value] : value;
 		if (type === 'checkbox') {
-			if (!checked) {
+			let newValue = [...(this.state[name] || [])];
+			if (checked) {
+				newValue.push(value);
+			} else {
 				newValue = newValue.filter(item => item !== value);
 			}
+			this.setState({ [name]: newValue });
+		} else if (type === 'radio') {
+			if (checked) {
+				this.setState({ [name]: value });
+			}
+		} else {
+			this.setState({ [name]: value });
 		}
-		const updatedState = {
-			[name]: newValue,
-		};
-		this.setState(updatedState);
 	};
 	
 	validateForm = () => {
@@ -42,7 +47,7 @@ class FormComponent extends React.Component {
 
 		data.alternative_fields.forEach((field) => {
 			if (field.required === "1" && field.namespace) {
-				if (field.type === 'checkbox' || field.type === 'radio') {
+				if (field.type === 'checkbox') {
 					const selectedOptions = this.state[field.namespace+'[]'] || [];
 					if (selectedOptions.length === 0) {
 						if (field.type === 'checkbox') {
@@ -52,7 +57,8 @@ class FormComponent extends React.Component {
 							validationErrors[field.namespace] = `The ${field.title.toUpperCase()} field is required.`;
 						}
 					}
-				} else if (!this.state[field.namespace]) {
+				}
+				else if (!this.state[field.namespace]) {
 					validationErrors[field.namespace] = `The ${field.title.toUpperCase()} field is required.`;
 				}
 			}
