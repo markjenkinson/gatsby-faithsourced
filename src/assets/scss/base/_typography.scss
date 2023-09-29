@@ -41,6 +41,10 @@ html {
 	@include breakpoint(xxsmall) {
 		font-size: _font(base-size-paragraph)*0.625;
 	}
+	
+	@media print {
+		font-size: _font(base-size-paragraph)*0.5;
+	}
 }
 
 body {
@@ -57,6 +61,10 @@ input, select, textarea {
 	font-weight: _font(weight-gui);
 	font-size: 1rem;
 	line-height: _font(lineheight-gui);
+	
+	@media print {
+		font-size: _font(base-size-paragraph)*0.5;
+	}
 }
 
 a {

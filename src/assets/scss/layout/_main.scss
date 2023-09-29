@@ -27,7 +27,11 @@
 		opacity: 0;
 		overflow: hidden;
 		box-shadow: 0 0 60px 20px _palette(bg-overlay);
-
+		
+		@media print {
+			box-shadow: none;
+		}
+		
 		&.timeout {
 			display: none;
 		}
@@ -87,6 +91,10 @@
 
 			 &:after {
 				transform: rotate(-45deg);
+			}
+			
+			@media print {
+				display: none;
 			}
 		}
 		

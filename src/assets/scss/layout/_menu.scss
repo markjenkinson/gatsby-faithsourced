@@ -52,6 +52,9 @@
 			}
 		}
 	}
+	@media print {
+		display: none;
+	}
 }
 
 #menu {
@@ -164,6 +167,10 @@
 				}
 			}
 		}
+	}
+	
+	@media print {
+		display: none;
 	}
 }
 

@@ -15,6 +15,10 @@ article {
 		padding: _size(element-margin);
 		width: 100%;
 		
+		@media print {
+			padding: _size(element-margin) 0;
+		}
+		
 		@include breakpoint(small) {
 			padding: math.div(_size(element-margin), 1.5);
 		}

@@ -71,4 +71,8 @@
 			@include vendor('filter', 'blur(0.5em)');
 		}
 	}
+	
+	@media print {
+		display: none;
+	}
 }
