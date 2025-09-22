@@ -37,7 +37,6 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-apiserver', options: {
 				typePrefix: "thirdParty__",
-				data: {},
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/news/api/public/v1/posts/?news_group_id=1`,
 				name: 'Posts',
@@ -47,7 +46,6 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-apiserver', options: {
 				typePrefix: "thirdParty__",
-				data: {},
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/core/api/public/v1/pages/`,
 				name: 'Pages',
@@ -57,7 +55,6 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-apiserver', options: {
 				typePrefix: "thirdParty__",
-				data: {},
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/home_page_promos/api/public/v1/slides/`,
 				name: 'HomePageSlides',
@@ -67,7 +64,6 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-apiserver', options: {
 				typePrefix: "thirdParty__",
-				data: {},
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v2/`,
 				name: 'Preferences',
@@ -77,7 +73,6 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-apiserver', options: {
 				typePrefix: "thirdParty__",
-				data: {},
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v2/`,
 				name: 'Fonts',
@@ -87,7 +82,6 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-apiserver', options: {
 				typePrefix: "thirdParty__",
-				data: {},
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v2/`,
 				name: 'SocialChannels',
