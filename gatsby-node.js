@@ -136,267 +136,106 @@ exports.createPages = async ({ actions, graphql }) => {
   }
 }
 
-exports.sourceNodes = async ({ actions, store, cache, graphql }) => {
+exports.sourceNodes = async ({ actions, store, cache, graphql, reporter }) => {
   try {
-    const { data } = await axios.get(process.env.GATSBY_API_URL + '/preferences/api/public/v2/styles/');
-    await fse.writeFile(__dirname + '/src/assets/scss/dynamic/_theme.scss', data);
-  } catch (err) {}
-}
-
-const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
-
-exports.createResolvers = async (
-  {
-    actions,
-    cache,
-    createNodeId,
-    createResolvers,
-    store,
-    reporter,
-  },
-) => {
-  const { createNode } = actions
-
-  await createResolvers({
-    thirdParty__Pages: {
-      tile_icon_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.tile_icon_url
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
+    const { data } = await axios.get(
+      process.env.GATSBY_API_URL + "/preferences/api/public/v2/styles/",
+      {
+        headers: {
+          ...cfHeaders,           // 👈 reuse the CF Access headers
+          Accept: "application/json",
         },
-      },
-    },
-  })
-  
-  await createResolvers({
-    thirdParty__Pages: {
-      tile_thumbnail_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.tile_thumbnail_url
+      }
+    );
 
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
-  
+    await fse.writeFile(
+      __dirname + "/src/assets/scss/dynamic/_theme.scss",
+      data
+    );
+  } catch (err) {
+    reporter?.warn(`[sourceNodes] Failed to fetch styles: ${err.message}`);
+  }
+};
+
+// gatsby-node.js
+const { createRemoteFileNode } = require("gatsby-source-filesystem");
+require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
+
+const cfHeaders =
+  process.env.CF_ACCESS_CLIENT_ID && process.env.CF_ACCESS_CLIENT_SECRET
+    ? {
+        "CF-Access-Client-Id": process.env.CF_ACCESS_CLIENT_ID,
+        "CF-Access-Client-Secret": process.env.CF_ACCESS_CLIENT_SECRET,
+      }
+    : {};
+
+exports.createResolvers = async ({
+  actions, cache, createNodeId, createResolvers, store, reporter,
+}) => {
+  const { createNode } = actions;
+
+  const fileFromUrl = async (url, parentId) => {
+    if (!url || typeof url !== "string") return null;
+    if (!/^https?:\/\//i.test(url)) {
+      reporter.warn(`[image] Skipping non-http url: ${url}`);
+      return null;
+    }
+    try {
+      return await createRemoteFileNode({
+        url, // avoid over-encoding; only encode if you know you need it
+        parentNodeId: parentId,
+        createNode, createNodeId, cache, store, reporter,
+        httpHeaders: cfHeaders, // ← pass CF Access headers here
+      });
+    } catch (e) {
+      reporter.warn(`[image] Download failed ${url}: ${e.message}`);
+      return null;
+    }
+  };
+
+  // Small helper to reduce boilerplate
+  const makeFileResolver = (fieldWithUrl) => ({
+    type: "File",
+    resolve: (source) => fileFromUrl(source[fieldWithUrl], source.id),
+  });
+
   await createResolvers({
+    // Pages & nested types
+    thirdParty__Pages: {
+      tile_icon_local:          makeFileResolver("tile_icon_url"),
+      tile_thumbnail_local:     makeFileResolver("tile_thumbnail_url"),
+    },
     thirdParty__PagesSectionsSection: {
-      image_1_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.image_1_url
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
+      image_1_local:            makeFileResolver("image_1_url"),
     },
-  })
-  
-  await createResolvers({
     thirdParty__PagesSectionsComponentsObject: {
-      image_1_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.image_1_url
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
+      image_1_local:            makeFileResolver("image_1_url"),
     },
-  })
-  
-  await createResolvers({
     thirdParty__PagesSectionsComponentsObjectPhotos: {
-      image_1_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.image_1_url
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
+      image_1_local:            makeFileResolver("image_1_url"),
     },
-  })
-  
-  await createResolvers({
+
+    // Posts
     thirdParty__Posts: {
-      image_1_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.image_1_url
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
+      image_1_local:            makeFileResolver("image_1_url"),
     },
-  })
-  
-  await createResolvers({
+
+    // Home page slides
     thirdParty__HomePageSlides: {
-      image_1_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.image_1_url
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
+      image_1_local:            makeFileResolver("image_1_url"),
     },
-  })
-  
-  await createResolvers({
+
+    // Preferences
     thirdParty__Preferences: {
-      logo_bitmap_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.logo_bitmap
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
+      logo_bitmap_local:        makeFileResolver("logo_bitmap"),
+      logo_wordmark_img_local:  makeFileResolver("logo_wordmark_img"),
+      logo_glyph_img_local:     makeFileResolver("logo_glyph_img"),
+      logo_favicon_img_local:   makeFileResolver("logo_favicon_img"),
+      site_bg_img_local:        makeFileResolver("site_bg_img"),
     },
-  })
-  
-  await createResolvers({
-    thirdParty__Preferences: {
-      logo_wordmark_img_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.logo_wordmark_img
+  });
+};
 
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
-  
-  await createResolvers({
-    thirdParty__Preferences: {
-      logo_glyph_img_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.logo_glyph_img
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
-  
-  await createResolvers({
-    thirdParty__Preferences: {
-      logo_favicon_img_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.logo_favicon_img
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
-  
-  await createResolvers({
-    thirdParty__Preferences: {
-      site_bg_img_local: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.site_bg_img
-
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
-}
 
 exports.onCreateWebpackConfig = ({ actions, plugins, stage, loaders, getConfig }) => {
   if (stage === 'build-javascript') {

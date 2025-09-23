@@ -2,6 +2,14 @@ require("dotenv").config({
 	path: `.env.${process.env.NODE_ENV}`,
 })
 
+const cfHeaders =
+  process.env.CF_ACCESS_CLIENT_ID && process.env.CF_ACCESS_CLIENT_SECRET
+    ? {
+        'CF-Access-Client-Id': process.env.CF_ACCESS_CLIENT_ID,
+        'CF-Access-Client-Secret': process.env.CF_ACCESS_CLIENT_SECRET,
+      }
+    : {};
+
 module.exports = {
 	plugins: [
 		'gatsby-plugin-image',
@@ -39,6 +47,10 @@ module.exports = {
 				typePrefix: "thirdParty__",
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/news/api/public/v1/posts/?news_group_id=1`,
+				headers: {
+				  ...cfHeaders,
+				  Accept: 'application/json',
+				},
 				name: 'Posts',
 				payloadKey: 'posts',
 			},
@@ -48,6 +60,10 @@ module.exports = {
 				typePrefix: "thirdParty__",
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/core/api/public/v1/pages/`,
+				headers: {
+				  ...cfHeaders,
+				  Accept: 'application/json',
+				},
 				name: 'Pages',
 				payloadKey: 'pages'
 			},
@@ -57,6 +73,10 @@ module.exports = {
 				typePrefix: "thirdParty__",
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/home_page_promos/api/public/v1/slides/`,
+				headers: {
+				  ...cfHeaders,
+				  Accept: 'application/json',
+				},
 				name: 'HomePageSlides',
 				payloadKey: 'slides'
 			},
@@ -66,6 +86,10 @@ module.exports = {
 				typePrefix: "thirdParty__",
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v2/`,
+				headers: {
+				  ...cfHeaders,
+				  Accept: 'application/json',
+				},
 				name: 'Preferences',
 				payloadKey: 'preferences',
 			},
@@ -75,6 +99,10 @@ module.exports = {
 				typePrefix: "thirdParty__",
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v2/`,
+				headers: {
+				  ...cfHeaders,
+				  Accept: 'application/json',
+				},
 				name: 'Fonts',
 				payloadKey: 'fonts',
 			},
@@ -84,6 +112,10 @@ module.exports = {
 				typePrefix: "thirdParty__",
 				method: "get",
 				url: `${process.env.GATSBY_API_URL}/preferences/api/public/v2/`,
+				headers: {
+				  ...cfHeaders,
+				  Accept: 'application/json',
+				},
 				name: 'SocialChannels',
 				payloadKey: 'social',
 			},
