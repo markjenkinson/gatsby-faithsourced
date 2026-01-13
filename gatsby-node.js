@@ -182,7 +182,7 @@ exports.createResolvers = async ({
     }
     try {
       return await createRemoteFileNode({
-        url, // avoid over-encoding; only encode if you know you need it
+        url,
         parentNodeId: parentId,
         createNode, createNodeId, cache, store, reporter,
         httpHeaders: cfHeaders,
@@ -193,14 +193,13 @@ exports.createResolvers = async ({
     }
   };
 
-  // Small helper to reduce boilerplate
   const makeFileResolver = (fieldWithUrl) => ({
     type: "File",
     resolve: (source) => fileFromUrl(source[fieldWithUrl], source.id),
   });
 
   await createResolvers({
-    // Pages & nested types
+    // Pages
     thirdParty__Pages: {
       tile_icon_local:          makeFileResolver("tile_icon_url"),
       tile_thumbnail_local:     makeFileResolver("tile_thumbnail_url"),
@@ -220,7 +219,7 @@ exports.createResolvers = async ({
       image_1_local:            makeFileResolver("image_1_url"),
     },
 
-    // Home page slides
+    // Home Page Slides
     thirdParty__HomePageSlides: {
       image_1_local:            makeFileResolver("image_1_url"),
     },
@@ -305,7 +304,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins, stage, loaders, getConfig }
     actions.replaceWebpackConfig(config);
   }
   
-  if (stage === "build-html" || stage === "develop-html") { // custom webpack config to replace webfontloader with a dummy module during server rendering to prevent build errors
+  if (stage === "build-html" || stage === "develop-html") {
     actions.setWebpackConfig({
       module: {
         rules: [
