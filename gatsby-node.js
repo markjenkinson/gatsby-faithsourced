@@ -142,7 +142,7 @@ exports.sourceNodes = async ({ actions, store, cache, graphql, reporter }) => {
       process.env.GATSBY_API_URL + "/preferences/api/public/v2/styles/",
       {
         headers: {
-          ...cfHeaders,           // 👈 reuse the CF Access headers
+          ...cfHeaders,
           Accept: "application/json",
         },
       }
@@ -185,7 +185,7 @@ exports.createResolvers = async ({
         url, // avoid over-encoding; only encode if you know you need it
         parentNodeId: parentId,
         createNode, createNodeId, cache, store, reporter,
-        httpHeaders: cfHeaders, // ← pass CF Access headers here
+        httpHeaders: cfHeaders,
       });
     } catch (e) {
       reporter.warn(`[image] Download failed ${url}: ${e.message}`);
@@ -193,29 +193,12 @@ exports.createResolvers = async ({
     }
   };
 
+  // Small helper to reduce boilerplate
   const makeFileResolver = (fieldWithUrl) => ({
-	  type: "File",
-	  async resolve(source, args, context, info) {
-		const url = source?.[fieldWithUrl];
-		if (!url || typeof url !== "string") return null;
-	
-		// Build a stable, unique parentNodeId even for nested objects
-		const parentType = info?.parentType?.name || "UnknownType";
-		const baseId =
-		  source?.id ??
-		  source?.alternative_id ??
-		  source?.anchor_id ??
-		  source?.file_name ??
-		  url; // last resort fallback
-	
-		const parentNodeId = createNodeId(
-		  `${parentType}:${baseId}:${fieldWithUrl}:${url}`
-		);
-	
-		return await fileFromUrl(url, parentNodeId);
-	  },
-	});
-	
+    type: "File",
+    resolve: (source) => fileFromUrl(source[fieldWithUrl], source.id),
+  });
+
   await createResolvers({
     // Pages & nested types
     thirdParty__Pages: {
