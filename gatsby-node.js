@@ -194,18 +194,10 @@ exports.createResolvers = async ({
   };
 
   // Small helper to reduce boilerplate
-	const makeFileResolver = (fieldWithUrl) => ({
-		type: "File",
-		async resolve(source, args, context) {
-			const url = source[fieldWithUrl];
-			if (!url) return null;
-	
-			const parentKey = `${source.internal.type}:${source.id}:${fieldWithUrl}:${url}`;
-			return await fileFromUrl(url, parentKey, context);
-		},
-	});
-
-
+  const makeFileResolver = (fieldWithUrl) => ({
+    type: "File",
+    resolve: (source) => fileFromUrl(source[fieldWithUrl], source.id),
+  });
 
   await createResolvers({
     // Pages & nested types
