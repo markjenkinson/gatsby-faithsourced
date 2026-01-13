@@ -193,12 +193,29 @@ exports.createResolvers = async ({
     }
   };
 
-  // Small helper to reduce boilerplate
   const makeFileResolver = (fieldWithUrl) => ({
-    type: "File",
-    resolve: (source) => fileFromUrl(source[fieldWithUrl], source.id),
-  });
-
+	  type: "File",
+	  async resolve(source, args, context, info) {
+		const url = source?.[fieldWithUrl];
+		if (!url || typeof url !== "string") return null;
+	
+		// Build a stable, unique parentNodeId even for nested objects
+		const parentType = info?.parentType?.name || "UnknownType";
+		const baseId =
+		  source?.id ??
+		  source?.alternative_id ??
+		  source?.anchor_id ??
+		  source?.file_name ??
+		  url; // last resort fallback
+	
+		const parentNodeId = createNodeId(
+		  `${parentType}:${baseId}:${fieldWithUrl}:${url}`
+		);
+	
+		return await fileFromUrl(url, parentNodeId);
+	  },
+	});
+	
   await createResolvers({
     // Pages & nested types
     thirdParty__Pages: {
