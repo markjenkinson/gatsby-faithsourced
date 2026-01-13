@@ -170,70 +170,144 @@ const cfHeaders =
     : {};
 
 exports.createResolvers = async ({
-  actions, cache, createNodeId, createResolvers, store, reporter,
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+  getNode,
 }) => {
   const { createNode } = actions;
 
-  const fileFromUrl = async (url, parentId) => {
-    if (!url || typeof url !== "string") return null;
-    if (!/^https?:\/\//i.test(url)) {
-      reporter.warn(`[image] Skipping non-http url: ${url}`);
+  // --- helpers ---
+  const isHttpUrl = (url) => typeof url === "string" && /^https?:\/\//i.test(url);
+
+  const urlCacheKey = (url) => `remote-file-node-id:${url}`;
+
+  // Poll for childImageSharp to appear on the File node (bounded)
+  const waitForSharp = async (fileNodeId, { tries = 10, delayMs = 50 } = {}) => {
+    for (let i = 0; i < tries; i++) {
+      const fileNode = getNode(fileNodeId);
+      if (!fileNode) return null;
+
+      // Gatsby attaches the child relationship once transformer runs
+      // childImageSharp node id will appear in children or via a field depending on Gatsby version
+      // We just need the transformer to have run before query uses childImageSharp
+      const hasSharpChild =
+        Array.isArray(fileNode.children) &&
+        fileNode.children.some((childId) => {
+          const child = getNode(childId);
+          return child?.internal?.type === "ImageSharp";
+        });
+
+      if (hasSharpChild) return fileNode;
+
+      // small sleep
+      await new Promise((r) => setTimeout(r, delayMs));
+    }
+    return getNode(fileNodeId) || null;
+  };
+
+  const fileFromUrl = async (url, source, fieldWithUrl) => {
+    if (!isHttpUrl(url)) {
+      if (url) reporter.warn(`[image] Skipping non-http url: ${url}`);
       return null;
     }
+
+    // 1) Reuse an existing File node id for this URL if we already created it
+    const cachedId = await cache.get(urlCacheKey(url));
+    if (cachedId) {
+      const existing = getNode(cachedId);
+      if (existing) return existing;
+      // stale cache, fall through
+    }
+
+    // 2) Create a stable unique parentNodeId to avoid collisions across types/fields/objects
+    const parentType = source?.internal?.type || "UnknownType";
+    const baseId =
+      source?.id ??
+      source?.alternative_id ??
+      source?.anchor_id ??
+      source?.file_name ??
+      "no-id";
+
+    const parentNodeId = createNodeId(
+      `${parentType}:${baseId}:${fieldWithUrl}:${url}`
+    );
+
+    // 3) Create the remote file node
+    let fileNode;
     try {
-      return await createRemoteFileNode({
+      fileNode = await createRemoteFileNode({
         url,
-        parentNodeId: parentId,
-        createNode, createNodeId, cache, store, reporter,
+        parentNodeId,
+        createNode,
+        createNodeId,
+        cache,
+        store,
+        reporter,
         httpHeaders: cfHeaders,
       });
     } catch (e) {
       reporter.warn(`[image] Download failed ${url}: ${e.message}`);
       return null;
     }
+
+    if (!fileNode?.id) return null;
+
+    // 4) Cache by URL so parallel resolvers reuse the same file node
+    await cache.set(urlCacheKey(url), fileNode.id);
+
+    // 5) Best-effort wait for Sharp to attach ImageSharp
+    //    (prevents “File exists but no childImageSharp yet” intermittency)
+    await waitForSharp(fileNode.id, { tries: 12, delayMs: 75 });
+
+    return getNode(fileNode.id) || fileNode;
   };
 
   const makeFileResolver = (fieldWithUrl) => ({
     type: "File",
-    resolve: (source) => fileFromUrl(source[fieldWithUrl], source.id),
+    async resolve(source) {
+      const url = source?.[fieldWithUrl];
+      return await fileFromUrl(url, source, fieldWithUrl);
+    },
   });
 
-  await createResolvers({
-    // Pages
+  createResolvers({
     thirdParty__Pages: {
-      tile_icon_local:          makeFileResolver("tile_icon_url"),
-      tile_thumbnail_local:     makeFileResolver("tile_thumbnail_url"),
+      tile_icon_local: makeFileResolver("tile_icon_url"),
+      tile_thumbnail_local: makeFileResolver("tile_thumbnail_url"),
     },
+
     thirdParty__PagesSectionsSection: {
-      image_1_local:            makeFileResolver("image_1_url"),
+      image_1_local: makeFileResolver("image_1_url"),
     },
     thirdParty__PagesSectionsComponentsObject: {
-      image_1_local:            makeFileResolver("image_1_url"),
+      image_1_local: makeFileResolver("image_1_url"),
     },
     thirdParty__PagesSectionsComponentsObjectPhotos: {
-      image_1_local:            makeFileResolver("image_1_url"),
+      image_1_local: makeFileResolver("image_1_url"),
     },
 
-    // Posts
     thirdParty__Posts: {
-      image_1_local:            makeFileResolver("image_1_url"),
+      image_1_local: makeFileResolver("image_1_url"),
     },
 
-    // Home Page Slides
     thirdParty__HomePageSlides: {
-      image_1_local:            makeFileResolver("image_1_url"),
+      image_1_local: makeFileResolver("image_1_url"),
     },
 
-    // Preferences
     thirdParty__Preferences: {
-      logo_bitmap_local:        makeFileResolver("logo_bitmap"),
-      logo_wordmark_img_local:  makeFileResolver("logo_wordmark_img"),
-      logo_glyph_img_local:     makeFileResolver("logo_glyph_img"),
-      logo_favicon_img_local:   makeFileResolver("logo_favicon_img"),
-      site_bg_img_local:        makeFileResolver("site_bg_img"),
+      logo_bitmap_local: makeFileResolver("logo_bitmap"),
+      logo_wordmark_img_local: makeFileResolver("logo_wordmark_img"),
+      logo_glyph_img_local: makeFileResolver("logo_glyph_img"),
+      logo_favicon_img_local: makeFileResolver("logo_favicon_img"),
+      site_bg_img_local: makeFileResolver("site_bg_img"),
     },
   });
 };
+
 
 
 exports.onCreateWebpackConfig = ({ actions, plugins, stage, loaders, getConfig }) => {
