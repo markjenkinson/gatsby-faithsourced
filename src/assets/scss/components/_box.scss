@@ -8,9 +8,10 @@
 
 	.box {
 		border-radius: _size(border-radius);
-		border: solid _size(border-width) _palette(border);
+		border: solid _size(border-width) _palette(on-bg-light);
 		margin-bottom: _size(element-margin);
 		padding: 1.5em;
+		text-align: center;
 
 		> :last-child,
 		> :last-child > :last-child,
@@ -22,5 +23,13 @@
 			border: 0;
 			border-radius: 0;
 			padding: 0;
+		}
+		
+		&:last-of-type {
+			margin: 0;
+		}
+		
+		.description {
+			margin: 0 0 (_size(element-margin) * 0.5) 0;
 		}
 	}

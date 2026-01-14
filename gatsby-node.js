@@ -279,25 +279,22 @@ exports.createResolvers = async ({
       tile_icon_local: makeFileResolver("tile_icon_url"),
       tile_thumbnail_local: makeFileResolver("tile_thumbnail_url"),
     },
-
     thirdParty__PagesSectionsSection: {
       image_1_local: makeFileResolver("image_1_url"),
     },
     thirdParty__PagesSectionsComponentsObject: {
       image_1_local: makeFileResolver("image_1_url"),
+      file_url_local: makeFileResolver("file_url"),
     },
     thirdParty__PagesSectionsComponentsObjectPhotos: {
       image_1_local: makeFileResolver("image_1_url"),
     },
-
     thirdParty__Posts: {
       image_1_local: makeFileResolver("image_1_url"),
     },
-
     thirdParty__HomePageSlides: {
       image_1_local: makeFileResolver("image_1_url"),
     },
-
     thirdParty__Preferences: {
       logo_bitmap_local: makeFileResolver("logo_bitmap"),
       logo_wordmark_img_local: makeFileResolver("logo_wordmark_img"),

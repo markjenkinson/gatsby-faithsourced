@@ -191,6 +191,8 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 		  alternative_id
 		  body
 		  name
+		  title
+		  description
 		  header_level
 		  image_1_url
 		  image_1_link
@@ -206,6 +208,9 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 			publicURL
 		  }
 		  file_name
+		  file_url_local {
+		  	publicURL
+		  }
 		  embedded_video_id
 		  custom_submit_button_text
 		  thank_you_title

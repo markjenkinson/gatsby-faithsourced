@@ -5,7 +5,7 @@ import { Parallax, Background } from 'react-parallax'
 import TextBlockComponent from '../components/TextBlockComponent'
 import QuickImageComponent from '../components/QuickImageComponent'
 import FormComponent from '../components/FormComponent'
-import VideoComponent from '../components/VideoComponent'
+import MultimediaComponent from '../components/MultimediaComponent'
 import SliderComponent from '../components/SliderComponent'
 
 class Section extends React.Component {
@@ -16,7 +16,7 @@ class Section extends React.Component {
             text_blocks: TextBlockComponent,
             quick_images: QuickImageComponent,
             forms: FormComponent,
-            multimedia: VideoComponent,
+            multimedia: MultimediaComponent,
             photos: SliderComponent
         };
 
