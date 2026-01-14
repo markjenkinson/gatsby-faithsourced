@@ -64,6 +64,12 @@
 			border-radius: 100%;
 			background-image:		url('../../images/dynamic/logo_glyph.#{map-get($theme, "logo_glyph_img_type")}');
 			background-size: contain;
+			background-repeat: no-repeat;
+			
+			&.page-not-found {
+				margin-bottom: -64px;
+				z-index: 1;
+			}
 			
 			& + .content {
 				border-style: solid;

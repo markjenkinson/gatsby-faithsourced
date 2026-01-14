@@ -10,8 +10,6 @@ import HomePageSlider from '../components/HomePageSlider'
 import Footer from '../components/Footer'
 import Menu from '../components/Menu'
 
-import WebFont from 'webfontloader'
-
 class IndexPage extends React.Component {
 	constructor(props) {
 		super(props)
@@ -69,13 +67,6 @@ class IndexPage extends React.Component {
 		//this.ScrollEvents.scrollEvent.register('end', function(to, element) {});
 		
 		//this.ScrollSpy.update();
-		
-		const fonts = this.props.data.allThirdPartyFonts.edges.map(edge => `${edge.node.family}:${edge.node.variants}`);
-		WebFont.load({
-			google: {
-				families: fonts,
-			},
-		});
 	}
 
 	componentWillUnmount () {
@@ -207,14 +198,6 @@ export const listQuery = graphql`query ListQuery {
         logo_slogan
         site_bg_img
         site_url
-      }
-    }
-  }
-  allThirdPartyFonts {
-    edges {
-      node {
-        family
-        variants
       }
     }
   }
