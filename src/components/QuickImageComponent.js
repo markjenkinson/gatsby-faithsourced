@@ -1,15 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
+const isExternalLink = (url) => {
+  if (!url || typeof url !== "string") return false;
+  return /^(https?:)?\/\//i.test(url); // https:// or //example.com
+};
+
 class QuickImageComponent extends React.Component {
-	render() {
-		return (
-            <div className={`cell ${this.props.params.lg_width.value ? this.props.params.lg_width.value+'u(xlarge) ' : '12u'} ${this.props.params.md_width.value ? this.props.params.md_width.value+'u(large) ' : ''} ${this.props.params.sm_width.value ? this.props.params.sm_width.value+'u(small) ' : ''} ${this.props.params.xs_width.value ? this.props.params.xs_width.value+'u(xsmall) ' : ''}`}>
-				<span className={`image ${this.props.params.custom_class.value ? this.props.params.custom_class.value : ''}`}><GatsbyImage image={this.props.data.image_1_local?.childImageSharp?.gatsbyImageData} /></span>
-			</div>
-        );
-	}
+  render() {
+    const { data, params } = this.props;
+    const link = data.image_1_link;
+
+    const image = (
+      <GatsbyImage
+        image={data.image_1_local?.childImageSharp?.gatsbyImageData}
+        alt={data.image_1_alt || ""} title={data.image_1_alt || ""}
+      />
+    );
+
+    const wrappedImage = link ? (
+      isExternalLink(link) ? (
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          {image}
+        </a>
+      ) : (
+        <Link to={link}>
+          {image}
+        </Link>
+      )
+    ) : (
+      image
+    );
+
+    return (
+      <div
+        className={`cell ${
+          params.lg_width.value ? params.lg_width.value + "u(xlarge) " : "12u"
+        } ${params.md_width.value ? params.md_width.value + "u(large) " : ""} ${
+          params.sm_width.value ? params.sm_width.value + "u(small) " : ""
+        } ${params.xs_width.value ? params.xs_width.value + "u(xsmall) " : ""}`}
+      >
+        <span className={`image ${params.custom_class.value || ""}`}>
+          {wrappedImage}
+        </span>
+      </div>
+    );
+  }
 }
 
 QuickImageComponent.propTypes = {

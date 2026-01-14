@@ -193,6 +193,8 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 		  name
 		  header_level
 		  image_1_url
+		  image_1_link
+		  image_1_alt
 		  image_1_dummy
 		  image_1_local {
 			childImageSharp {

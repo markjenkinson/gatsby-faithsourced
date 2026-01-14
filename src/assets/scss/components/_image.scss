@@ -33,6 +33,11 @@
 		}
 	}
 	
+	a {
+		border-bottom: 0;
+		display: inline-block;
+	}
+	
 	&.banner:after {
 		@include vendor('pointer-events', 'none');
 		background-color: _palette(bg-overlay);
