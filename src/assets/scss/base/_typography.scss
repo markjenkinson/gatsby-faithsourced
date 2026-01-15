@@ -57,10 +57,10 @@ body {
 
 input, select, textarea {
 	color: _palette(on-bg);
-	font-family: _font(family-gui);
-	font-weight: _font(weight-gui);
+	font-family: _font(family-paragraph);
+	font-weight: _font(weight-paragraph);
 	font-size: 1rem;
-	line-height: _font(lineheight-gui);
+	line-height: _font(lineheight-paragraph);
 	
 	@media print {
 		font-size: _font(base-size-paragraph)*0.5;
