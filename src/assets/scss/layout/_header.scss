@@ -145,6 +145,7 @@
 				letter-spacing: _font(letter-spacing-gui);
 				font-size: 0.8rem;
 				line-height: 2;
+				color: _palette(on-bg-image);
 				margin-top: _size(element-margin)*0.5;
 			}
 			
@@ -183,10 +184,11 @@
 						font-family: _font(family-gui);
 						font-size: 0.8rem;
 						border-bottom: 0;
+						color: _palette(on-bg-image);
 
 						&:hover {
 							background-color: _palette(border-bg);
-							color: _palette(on-bg);
+							color: _palette(on-bg-image);
 						}
 
 						&:active {

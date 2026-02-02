@@ -68,6 +68,7 @@ $palette: (
 	bg-light:					if(map-has-key($theme, 'color_background_light'), map-get($theme, 'color_background_light'), #ffffff),
 	bg-dark:					if(map-has-key($theme, 'color_background_dark'), map-get($theme, 'color_background_dark'), #222222),
 	on-bg:						if(map-has-key($theme, 'color_on_background'), map-get($theme, 'color_on_background'), #ffffff),
+	on-bg-image:				if(map-has-key($theme, 'color_on_background_image'), map-get($theme, 'color_on_background_image'), if(map-has-key($theme, 'color_on_background'), map-get($theme, 'color_on_background'), #ffffff)),
 	on-bg-light:				if(map-has-key($theme, 'color_on_background'), transparentize(map-get($theme, 'color_on_background'), 0.75), rgba(255,255,255,0.25)),
 	on-dark:					if(map-has-key($theme, 'color_on_dark'), map-get($theme, 'color_on_dark'), #ffffff),
 	on-light:					if(map-has-key($theme, 'color_on_light'), map-get($theme, 'color_on_light'), #46565d),

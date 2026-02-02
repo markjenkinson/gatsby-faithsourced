@@ -16,7 +16,8 @@
 	max-width: 100%;
 	margin-top: 2rem;
 	text-align: center;
-
+	color: _palette(on-bg-image);
+	
 	.copyright {
 		font-family: _font(family-gui);
 		letter-spacing: _font(letter-spacing-gui);
@@ -32,7 +33,6 @@
 	
 	.attribution {
 		font-family: _font(family-gui);
-		
 		font-size: 0.7rem;
 		
 		p {
@@ -55,7 +55,7 @@
 				vertical-align: middle;
 				width: 24px;
 				height: 24px;
-				fill: _palette(on-bg);
+				fill: _palette(on-bg-image);
 			}
 		}
 	}
