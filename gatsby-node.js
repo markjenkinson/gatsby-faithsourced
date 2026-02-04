@@ -107,7 +107,7 @@ exports.createPages = async ({ actions, graphql }) => {
   if (dynamic_images_saved === false) {
     try {
       const faviconData = await fse.readFile(__dirname + '/public' + result.data.sitePreferences.edges[0].node.logo_favicon_img_local?.publicURL);
-      await fse.writeFile(__dirname + '/src/images/dynamic/favicon.' + result.data.sitePreferences.edges[0].node.logo_favicon_img_type, faviconData);
+      await fse.writeFile(__dirname + '/src/images/dynamic/favicon.png', faviconData);
     } catch (err) {
 
     }
