@@ -55,13 +55,11 @@
 			cursor: pointer;
 			white-space: nowrap;
 			line-height: 0;
-			opacity: 0.5;
 			color: transparent;
 			border: 10px solid transparent;
 			border-radius: 0;
-			&:hover {					
-				opacity: 1;
-				
+					
+			&:hover {				
 				&:before, &:after {
 					background: _palette(emphasis);
 				}
@@ -83,6 +81,18 @@
 				width: 100%;
 				background: _palette(on-bg);
 				@include vendor('transition', 'background #{_duration(transition)} ease-in-out');
+			}
+			
+			&.on-background-image {				
+				&:before, &:after {
+					background: _palette(on-bg-image);
+				}
+				
+				&:hover {					
+					&:before, &:after {
+						background: _palette(emphasis);
+					}
+				}
 			}
 			
 			&:before {
@@ -109,6 +119,18 @@
 				background: _palette(on-bg);
 				content: '';
 				@include vendor('transition', 'all #{_duration(transition)} ease-in-out');				
+			}
+			
+			&.on-background-image {				
+				&:before, &:after {
+					background: _palette(on-bg-image);
+				}
+				
+				&:hover {					
+					&:before, &:after {
+						background: _palette(emphasis);
+					}
+				}
 			}
 			
 			&:before {

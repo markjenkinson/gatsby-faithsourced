@@ -10,6 +10,7 @@
 		@include icon;
 		border-bottom: none;
 		position: relative;
+		border: solid _size(border-width) _palette(border-on-bg-image);
 		color: _palette(on-bg-image);
 		> .label {
 			display: none;

@@ -60,7 +60,7 @@
 			width: 128px;
 			height: 128px;
 			line-height: 128px;
-			border: solid _size(border-width) _palette(border);
+			border: solid _size(border-width) _palette(border-on-bg-image);
 			border-radius: 100%;
 			background-image:		url('../../images/dynamic/logo_glyph.#{map-get($theme, "logo_glyph_img_type")}');
 			background-size: contain;
@@ -73,7 +73,7 @@
 			
 			& + .content {
 				border-style: solid;
-				border-color: _palette(border);
+				border-color: _palette(border-on-bg-image);
 				border-top-width: _size(border-width);
 				border-bottom-width: _size(border-width);
 			}
@@ -160,13 +160,13 @@
 				margin-bottom: 0;
 				list-style: none;
 				padding-left: 0;
-				border: solid _size(border-width) _palette(border);
+				border: solid _size(border-width) _palette(border-on-bg-image);
 				border-radius: _size(button-radius);
 				overflow: hidden;
 				
 				li {
 					padding-left: 0;
-					border-left: solid _size(border-width) _palette(border);
+					border-left: solid _size(border-width) _palette(border-on-bg-image);
 
 					&:first-child {
 						border-left: 0;

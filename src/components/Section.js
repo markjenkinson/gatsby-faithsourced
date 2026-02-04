@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Parallax, Background } from 'react-parallax'
 
 import TextBlockComponent from '../components/TextBlockComponent'
+import TeaserComponent from '../components/TeaserComponent'
 import QuickImageComponent from '../components/QuickImageComponent'
 import FormComponent from '../components/FormComponent'
 import MultimediaComponent from '../components/MultimediaComponent'
@@ -14,6 +15,7 @@ class Section extends React.Component {
 
         const componentMap = {
             text_blocks: TextBlockComponent,
+            teasers: TeaserComponent,
             quick_images: QuickImageComponent,
             forms: FormComponent,
             multimedia: MultimediaComponent,

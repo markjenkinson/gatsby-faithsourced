@@ -104,11 +104,13 @@ class pageTemplate extends React.Component {
 
 
 	render() {
-		const page = this.props.data.thirdPartyPages
-		const prefs = this.props.data.allThirdPartyPreferences.edges[0]
-		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title)
-		let close = <Link to="/" className="close" onClick={(e) => { e.preventDefault(); this.handleGotoPage('/') }} alt="Close" title="Close"></Link>
-		let back = this.state.canGoBack ? (<a href="#" className="previous" onClick={this.handleBack} alt="Back" title="Back">Back</a>) : null
+		const page = this.props.data.thirdPartyPages;
+		const prefs = this.props.data.allThirdPartyPreferences.edges[0];
+		const meta_title = striptags(prefs.node.site_title) + ' | ' + striptags(page.title);
+		const hasHeaderImage = page?.sections?.[0]?.components?.[0]?.component?.module === 'quick_images';
+
+		let close = <Link to="/" className={`close${hasHeaderImage ? ' on-background-image' : ''}`} onClick={(e) => { e.preventDefault(); this.handleGotoPage('/') }} alt="Close" title="Close"></Link>
+		let back = this.state.canGoBack ? (<a href="#" className={`previous${hasHeaderImage ? ' on-background-image' : ''}`} onClick={this.handleBack} alt="Back" title="Back">Back</a>) : null
 		
 		return <>
 						<Helmet
@@ -127,14 +129,14 @@ class pageTemplate extends React.Component {
 						<div id="page" className={`body blurred ${this.state.isMenuVisible ? 'is-menu-visible' : ''}`}>
 								<div id="wrapper">
 										<div id="main" style={{ display: 'flex' }}>
-												<article className={`active ${this.state.isPanelVisible ? 'timeout' : ''}`} style={{ display: 'none' }}>
-														{page.tile_icon_dummy === false &&
-																<div className="logo"><GatsbyImage image={page.tile_icon_local?.childImageSharp?.gatsbyImageData} /></div>
-														}
-														<Sections slug={page.slug} page={page} onCloseArticle={this.onCloseArticle} />
-													 	{back}
-														{close}
-												</article>
+											<article className={`active ${this.state.isPanelVisible ? 'timeout' : ''}`} style={{ display: 'none' }}>
+													{page.tile_icon_dummy === false &&
+															<div className="logo"><GatsbyImage image={page.tile_icon_local?.childImageSharp?.gatsbyImageData} /></div>
+													}
+													<Sections slug={page.slug} page={page} onCloseArticle={this.onCloseArticle} />
+													{back}
+													{close}
+											</article>
 										</div>
 										<Footer />
 								</div>
@@ -213,7 +215,10 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 			body
 			name
 			title
+			sub_title
 			description
+			pretty_url
+			button_text
 			header_level
 			image_1_url
 			image_1_link

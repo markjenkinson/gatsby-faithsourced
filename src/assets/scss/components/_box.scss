@@ -6,30 +6,35 @@
 
 /* Box */
 
-	.box {
-		border-radius: _size(border-radius);
-		border: solid _size(border-width) _palette(on-bg-light);
-		margin-bottom: _size(element-margin);
-		padding: 1.5em;
-		text-align: center;
+.box {
+	border-radius: _size(border-radius);
+	border: solid _size(border-width) transparentize(_palette(border), 0.5);
+	padding: 1.5em;
+	text-align: center;
+	overflow: hidden;
+	
+	h2 {
+		margin: 0 0 (_size(element-margin) * 0.5) 0;
+	}
 
-		> :last-child,
-		> :last-child > :last-child,
-		> :last-child > :last-child > :last-child {
-			margin-bottom: 0;
-		}
-
-		&.alt {
-			border: 0;
-			border-radius: 0;
-			padding: 0;
-		}
+	&.alt {
+		border: 0;
+		border-radius: 0;
+		padding: 0;
+	}
+	
+	.description {
+		font-size: 0.8rem;
+		margin: 0 0 (_size(element-margin) * 0.5) 0;
+	}
+	
+	.image {
+		margin-left: -1.5rem;
+		margin-right: -1.5rem;
+		top: -1.5rem;
 		
-		&:last-of-type {
-			margin: 0;
-		}
-		
-		.description {
-			margin: 0 0 (_size(element-margin) * 0.5) 0;
+		img {
+			height: 6rem;
 		}
 	}
+}

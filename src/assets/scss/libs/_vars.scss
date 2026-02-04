@@ -79,6 +79,7 @@ $palette: (
 	accent:						map-get($theme, "color_primary"),
 	accent-dark:				map-get($theme, "color_primary_shade"),
 	accent-alt:					map-get($theme, "color_primary_highlight"),
+	border-on-bg-image:			if(map-has-key($theme, 'color_on_background_image'), map-get($theme, 'color_on_background_image'), if(map-has-key($theme, 'color_border'), map-get($theme, 'color_border'), #ffffff)),
 	border:						if(map-has-key($theme, 'color_border'), map-get($theme, 'color_border'), #ffffff),
 	input-border:				if(map-has-key($theme, 'color_border'), map-get($theme, 'color_border'), #ffffff),
 	input-bg:					if(map-has-key($theme, 'color_input_background'), map-get($theme, 'color_input_background'), rgba(116,128,135,0.15)),
