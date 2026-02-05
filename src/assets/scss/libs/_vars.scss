@@ -64,11 +64,12 @@ $font: (
 // Palette.
 $palette: (
 	bg:							if(map-has-key($theme, 'color_background'), map-get($theme, 'color_background'), #1b1f22),
-	bg-overlay:					if(map-has-key($theme, 'color_background_overlay'), transparentize(map-get($theme, 'color_background_overlay'), 0.25), rgba(27,35,38,0.75)),
+	bg-overlay:					if(map-has-key($theme, 'color_background_overlay'), transparentize(map-get($theme, 'color_background_overlay'), 0.25), rgba(0,0,0,0)),
 	bg-light:					if(map-has-key($theme, 'color_background_light'), map-get($theme, 'color_background_light'), #ffffff),
 	bg-dark:					if(map-has-key($theme, 'color_background_dark'), map-get($theme, 'color_background_dark'), #222222),
 	on-bg:						if(map-has-key($theme, 'color_on_background'), map-get($theme, 'color_on_background'), #ffffff),
 	on-bg-image:				if(map-has-key($theme, 'color_on_background_image'), map-get($theme, 'color_on_background_image'), if(map-has-key($theme, 'color_on_background'), map-get($theme, 'color_on_background'), #ffffff)),
+	on-tile-bg-image:			if(map-has-key($theme, 'color_on_tile_background_image'), map-get($theme, 'color_on_tile_background_image'), if(map-has-key($theme, 'color_on_background'), map-get($theme, 'color_on_background'), #ffffff)),
 	on-bg-light:				if(map-has-key($theme, 'color_on_background'), transparentize(map-get($theme, 'color_on_background'), 0.75), rgba(255,255,255,0.25)),
 	on-dark:					if(map-has-key($theme, 'color_on_dark'), map-get($theme, 'color_on_dark'), #ffffff),
 	on-light:					if(map-has-key($theme, 'color_on_light'), map-get($theme, 'color_on_light'), #46565d),
