@@ -145,7 +145,7 @@
 		
 		&:hover {
 			&:before {
-				opacity: if(map-has-key($theme, 'color_primary_compliment_1'), 1, 0.2);
+				opacity: if(map-has-key($theme, 'color_primary_compliment_1'), .8, 0.2);
 			}
 			&:after {
 				opacity: if(map-has-key($theme, 'color_primary_compliment_1'), 0, 0.8);

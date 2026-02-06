@@ -39,26 +39,28 @@ class MultimediaComponent extends React.Component {
 						onReady={this._onReady}
 					/>
 				) : (
-					<div className="multimedia-container box">
-						{data.title && <h2>{data.title}</h2>}
-
-						{data.description && (
-							<div
-								className="description"
-								dangerouslySetInnerHTML={{ __html: data.description }}
-							/>
-						)}
-
-						{data.file_name && (
-							<a
-								href={data.file_url_local.publicURL}
-								target="_blank"
-								class="button special"
-								rel="noopener noreferrer"
-							>
-								View
-							</a>
-						)}
+					<div className="box multimedia-container">
+						<div className="content">
+							{data.title && <h2>{data.title}</h2>}
+	
+							{data.description && (
+								<div
+									className="description"
+									dangerouslySetInnerHTML={{ __html: data.description }}
+								/>
+							)}
+	
+							{data.file_name && (
+								<a
+									href={data.file_url_local.publicURL}
+									target="_blank"
+									class="button special"
+									rel="noopener noreferrer"
+								>
+									View
+								</a>
+							)}
+						</div>
 					</div>
 				)}
 			</div>
