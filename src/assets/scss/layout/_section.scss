@@ -96,7 +96,7 @@ article {
 			.cell:last-of-type {
 				padding-bottom: 0;
 				
-				.image, .video-container {
+				.image:not(.cell > .box .image), .video-container {
 					border-radius: _size(border-radius-bottom);
 					margin-bottom: -3rem;
 				}

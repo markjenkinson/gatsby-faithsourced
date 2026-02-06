@@ -175,10 +175,10 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 		image_1_dummy
 		image_1_local {
 			childImageSharp {
-			gatsbyImageData(layout: FULL_WIDTH)
+				gatsbyImageData(layout: FULL_WIDTH)
+				}
+				publicURL
 			}
-			publicURL
-		}
 		}
 		components {
 		component {
@@ -195,19 +195,22 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 		}
 		options {
 			custom_class {
-			value
+				value
 			}
 			lg_width {
-			value
+				value
 			}
 			md_width {
-			value
+				value
 			}
 			sm_width {
-			value
+				value
 			}
 			xs_width {
-			value
+				value
+			}
+			image_1_layout {
+				value
 			}
 		}
 		object {
@@ -218,6 +221,8 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 			sub_title
 			description
 			pretty_url
+			url
+			link_type
 			button_text
 			header_level
 			image_1_url

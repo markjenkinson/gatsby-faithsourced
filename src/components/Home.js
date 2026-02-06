@@ -24,6 +24,7 @@ const Home = (props) => (
         link_target
         link_mode
         link_hash
+        custom_class
         tile_icon_local {
           childImageSharp {
              gatsbyImageData(
@@ -50,7 +51,18 @@ const Home = (props) => (
 }`}
 			render={data => (
 				data.allThirdPartyPages.edges.map(({ node }, i) => (
-					<article key={i} className={node.tile_thumbnail_dummy === false && "image-tile"} style={(node.tile_thumbnail_dummy === false) ? {backgroundImage: `url(${node.tile_thumbnail_local?.publicURL})`} : {} }>
+					<article
+					  key={i}
+					  className={[
+						node.tile_thumbnail_dummy === false ? 'image-tile' : '',
+						node.custom_class || ''
+					  ].filter(Boolean).join(' ')}
+					  style={
+						node.tile_thumbnail_dummy === false
+						  ? { backgroundImage: `url(${node.tile_thumbnail_local?.publicURL})` }
+						  : {}
+					  }
+					>
 						{node.tile_ribbon_text && 
 							<div className="ribbon ribbon-top-right"><div><span dangerouslySetInnerHTML={{ __html: node.tile_ribbon_text}} /></div></div>
 						}
