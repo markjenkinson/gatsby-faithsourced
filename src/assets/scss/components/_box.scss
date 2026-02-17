@@ -29,6 +29,18 @@
 	
 	.content {
 		padding: 1.5em;
+		
+		.box-row {
+			padding-bottom: 1.5em;
+			margin-bottom: 1.5em;
+			border-bottom: solid _size(border-width) transparentize(_palette(border), 0.75);
+		
+			&:last-of-type {
+				border: none;
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+		}
 	}
 	
 	.image {

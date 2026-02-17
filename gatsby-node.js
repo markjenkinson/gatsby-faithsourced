@@ -289,6 +289,9 @@ exports.createResolvers = async ({
     thirdParty__PagesSectionsComponentsObjectPhotos: {
       image_1_local: makeFileResolver("image_1_url"),
     },
+    thirdParty__PagesSectionsComponentsObjectMultimedia_files: {
+      file_url_local: makeFileResolver("file_url"),
+    },
     thirdParty__Posts: {
       image_1_local: makeFileResolver("image_1_url"),
     },

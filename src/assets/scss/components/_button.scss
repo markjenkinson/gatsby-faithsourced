@@ -31,7 +31,15 @@
 		text-decoration: none;
 		text-transform: _font(transform-gui);
 		white-space: nowrap;
-
+		
+		&.small {
+			font-size: 0.6rem;
+			padding: 0 1rem;
+			height: auto;
+			line-height: 2;
+			margin: 0 .25rem;
+		}
+		
 		&:hover {
 			background-color: _palette(border-bg-accent);
 			border-color: _palette(border-bg-accent);

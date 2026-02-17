@@ -7,6 +7,7 @@ import TeaserComponent from '../components/TeaserComponent'
 import QuickImageComponent from '../components/QuickImageComponent'
 import FormComponent from '../components/FormComponent'
 import MultimediaComponent from '../components/MultimediaComponent'
+import MultimediaGroupComponent from '../components/MultimediaGroupComponent'
 import SliderComponent from '../components/SliderComponent'
 
 class Section extends React.Component {
@@ -14,12 +15,13 @@ class Section extends React.Component {
         const { params, components = [], onCloseArticle} = this.props;
 
         const componentMap = {
-            text_blocks: TextBlockComponent,
-            teasers: TeaserComponent,
-            quick_images: QuickImageComponent,
-            forms: FormComponent,
-            multimedia: MultimediaComponent,
-            photos: SliderComponent
+            text_block_bootstrapped: TextBlockComponent,
+            teaser_text_bootstrapped: TeaserComponent,
+            quick_image_bootstrapped: QuickImageComponent,
+            form_bootstrapped: FormComponent,
+            multimedia_file: MultimediaComponent,
+            multimedia_group: MultimediaGroupComponent,
+            gallery_bootstrapped: SliderComponent
         };
 
         const Component = params.parallax_bg === '1' ? Parallax : React.Fragment;
@@ -36,8 +38,8 @@ class Section extends React.Component {
                 	style={{backgroundImage: params.parallax_bg === '0' && params.image_1_dummy === false ? 'url('+params.image_1_local?.publicURL+')' : 'none', backgroundSize: 'cover'}}
                 >
 					<div className='row'>
-						{components.map(({ component: { module }, options, object }) => {
-							const Component = componentMap[module];
+						{components.map(({ component: { component_type }, options, object }) => {
+							const Component = componentMap[component_type];
 							return Component ? <Component params={options} data={object} onCloseArticle={onCloseArticle} /> : null;
 						})}
 					</div>

@@ -261,16 +261,25 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 			namespace
 			}
 			photos {
-			title
-			description
-			image_1_url
-			image_1_dummy
-			image_1_local {
-				childImageSharp {
-				gatsbyImageData(layout: FULL_WIDTH)
+				title
+				description
+				image_1_url
+				image_1_dummy
+				image_1_local {
+					childImageSharp {
+					gatsbyImageData(layout: FULL_WIDTH)
+					}
+					publicURL
 				}
-				publicURL
 			}
+			multimedia_files {
+				title
+				description
+				file_name
+				type
+				file_url_local {
+					publicURL
+				}
 			}
 		}
 		}

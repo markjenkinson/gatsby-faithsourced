@@ -32,6 +32,9 @@
     "tween": "0.9.0",
     "webfontloader": "^1.6.28"
   },
+  "overrides": {
+    "sharp": "0.31.1"
+  },
   "keywords": [
     "gatsby"
   ],
