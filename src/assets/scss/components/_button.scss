@@ -93,6 +93,51 @@
 			cursor: default;
 			opacity: 0.25;
 		}
+		
+		&.anima {
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+			transition: padding-left .3s;
+			
+			&:hover {
+				padding-left: 1.65rem;
+				&:before {
+					margin-left: -1rem;
+				}
+			}
+			
+			&.dir-down {
+				&:before {
+					margin-left: -1rem;
+					margin-top: -2rem;
+				}
+				
+				&:hover {
+					&:before {
+						margin-top: 0;
+					}
+				}
+			}
+			
+			&:before {
+				font: normal normal normal 14px/1 FontAwesome;
+				content: "";
+				position: absolute;
+				line-height: 2;
+				margin-left: -50%;
+				font-size: 14px;
+				transition: all .3s;
+			}
+			
+			&.download:before {
+				content: "\f0ab";
+			}
+			
+			&.view:before {
+				content: "\f0a9";
+			}
+		}
 	}
 
 	input[type="submit"],

@@ -18,26 +18,26 @@ class MultimediaGroupComponent extends React.Component {
 										/>
 									)}
 
-									{multimedia_file.file_name && (
+									{multimedia_file.file_name && multimedia_file.type == "4"  && (
 									  <a
 										href={multimedia_file.file_url_local.publicURL}
-										target={multimedia_file.type == "9" ? "_self" : "_blank"}
+										target="_blank"
 										rel="noopener noreferrer"
-										className="button small"
+										className="button small anima view"
 									  >
-										{multimedia_file.type == "9" ? "Download" : "View"}
+										View
 									  </a>
 									)}
-									
-									{multimedia_file.file_name && multimedia_file.type == "4" && (
-									  <a
-										href={multimedia_file.file_url_local.publicURL}
-										target="_self"
-										rel="noopener noreferrer"
-										className="button small"
-									  >
-										Download
-									  </a>
+									{multimedia_file.file_name  &&
+										(multimedia_file.type == "4" || multimedia_file.type == "9") && (
+										  <a
+											href={multimedia_file.file_url_local.publicURL}
+											target="_self"
+											rel="noopener noreferrer"
+											className="button small anima dir-down download"
+										  >
+											Download
+										  </a>
 									)}
 								</div>
 							))}
