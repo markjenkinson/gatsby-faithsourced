@@ -74,12 +74,12 @@ form {
 		}
 	}
 
-	label, legend {
+	legend, label {
 		color: _palette(on-bg);
 		display: block;
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 		font-family: _font(family-gui);
-		font-weight: _font(weight-alt-gui);
+		font-weight: _font(weight-gui);
 		letter-spacing: _font(letter-spacing-gui);
 		line-height: _font(lineheight-gui);
 		text-transform: _font(transform-gui);
@@ -187,10 +187,12 @@ form {
 			color: _palette(on-bg);
 			cursor: pointer;
 			display: inline-block;
-			text-transform: none;
-			letter-spacing: normal;
+			font-family: _font(family-gui);
+			font-weight: _font(weight-alt-gui);
+			letter-spacing: _font(letter-spacing-gui);
+			line-height: _font(lineheight-gui);
+			text-transform: _font(transform-gui);
 			font-size: 0.8rem;
-			font-weight: _font(weight);
 			margin: 0;
 			
 			span {
