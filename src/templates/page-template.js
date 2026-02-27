@@ -162,128 +162,129 @@ export const PageQuery = graphql`query PageQuery($slug: String!) {
 			}
 		}
 		sections {
-		section {
-		alternative_id
-		placement
-		position
-		name
-		anchor_id
-		custom_class
-		contained
-		padded
-		parallax_bg
-		image_1_dummy
-		image_1_local {
-			childImageSharp {
-				gatsbyImageData(layout: FULL_WIDTH)
-				}
-				publicURL
-			}
-		}
-		components {
-		component {
+			section {
 			alternative_id
-			module
-			type
-			component_type
-			container_type
-			style
-			custom_class
-			reference
 			placement
 			position
-		}
-		options {
-			custom_class {
-				value
-			}
-			lg_width {
-				value
-			}
-			md_width {
-				value
-			}
-			sm_width {
-				value
-			}
-			xs_width {
-				value
-			}
-			image_1_layout {
-				value
-			}
-		}
-		object {
-			alternative_id
-			body
 			name
-			title
-			sub_title
-			description
-			pretty_url
-			url
-			link_type
-			button_text
-			header_level
-			image_1_url
-			image_1_link
-			image_1_alt
+			anchor_id
+			custom_class
+			contained
+			padded
+			parallax_bg
 			image_1_dummy
 			image_1_local {
-			childImageSharp {
-				gatsbyImageData(
-					placeholder: BLURRED
-					quality: 70 # 50 by default
-				)
-			}
-			publicURL
-			}
-			file_name
-			file_url_local {
-				publicURL
-			}
-			embedded_video_id
-			custom_submit_button_text
-			thank_you_title
-			thank_you_text
-			alternative_fields {
-				alternative_id
-			type
-			options {
-				title
-				default_selection
-				alternative_id
-			}
-			default_value
-			description
-			required
-			title
-			namespace
-			}
-			photos {
-				title
-				description
-				image_1_url
-				image_1_dummy
-				image_1_local {
-					childImageSharp {
+				childImageSharp {
 					gatsbyImageData(layout: FULL_WIDTH)
 					}
 					publicURL
 				}
 			}
-			multimedia_files {
-				title
-				description
-				file_name
-				type
-				file_url_local {
-					publicURL
+			components {
+				component {
+					alternative_id
+					module
+					type
+					component_type
+					container_type
+					style
+					custom_class
+					reference
+					placement
+					position
+				}
+				options {
+					custom_class {
+						value
+					}
+					lg_width {
+						value
+					}
+					md_width {
+						value
+					}
+					sm_width {
+						value
+					}
+					xs_width {
+						value
+					}
+					image_1_layout {
+						value
+					}
+				}
+				object {
+					alternative_id
+					body
+					name
+					title
+					sub_title
+					description
+					pretty_url
+					url
+					link_type
+					type
+					button_text
+					header_level
+					image_1_url
+					image_1_link
+					image_1_alt
+					image_1_dummy
+					image_1_local {
+						childImageSharp {
+							gatsbyImageData(
+								placeholder: BLURRED
+								quality: 70 # 50 by default
+							)
+						}
+						publicURL
+					}
+					file_name
+					file_url_local {
+						publicURL
+					}
+					embedded_video_id
+					custom_submit_button_text
+					thank_you_title
+					thank_you_text
+					alternative_fields {
+						alternative_id
+						type
+						options {
+							title
+							default_selection
+							alternative_id
+						}
+						default_value
+						description
+						required
+						title
+						namespace
+					}
+					photos {
+						title
+						description
+						image_1_url
+						image_1_dummy
+						image_1_local {
+							childImageSharp {
+								gatsbyImageData(layout: FULL_WIDTH)
+							}
+							publicURL
+						}
+					}
+					multimedia_files {
+						title
+						description
+						file_name
+						type
+						file_url_local {
+							publicURL
+						}
+					}
 				}
 			}
 		}
-		}
-	}
 	}
 	allThirdPartyPreferences {
 		edges {

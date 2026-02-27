@@ -54,11 +54,22 @@ class MultimediaComponent extends React.Component {
 								<a
 									href={data.file_url_local.publicURL}
 									target="_blank"
-									class="button special"
+									class="button small anima view"
 									rel="noopener noreferrer"
 								>
 									View
 								</a>
+							)}
+							{data.file_name  &&
+								(data.type == "4" || data.type == "9") && (
+								  <a
+									href={data.file_url_local.publicURL}
+									target="_self"
+									rel="noopener noreferrer"
+									className="button small anima dir-down download"
+								  >
+									Download
+								  </a>
 							)}
 						</div>
 					</div>
