@@ -7,9 +7,17 @@ class MultimediaGroupComponent extends React.Component {
             <div className={`cell ${this.props.params.lg_width.value ? this.props.params.lg_width.value+'u(xlarge) ' : '12u'} ${this.props.params.md_width.value ? this.props.params.md_width.value+'u(large) ' : ''} ${this.props.params.sm_width.value ? this.props.params.sm_width.value+'u(small) ' : ''} ${this.props.params.xs_width.value ? this.props.params.xs_width.value+'u(xsmall) ' : ''}`}>
 					<div className="box multimedia-container">
 						<div className="content">
+							{this.props.data.name && <h2>{this.props.data.name}</h2>}
+	
+							{this.props.data.description && (
+								<div
+									className="description"
+									dangerouslySetInnerHTML={{ __html: this.props.data.description }}
+								/>
+							)}
 							{this.props.data.multimedia_files && this.props.data.multimedia_files.map(( multimedia_file ) => (
 								<div className="box-row">
-									{multimedia_file.title && <h2>{multimedia_file.title}</h2>}
+									{multimedia_file.title && <h3>{multimedia_file.title}</h3>}
 
 									{multimedia_file.description && (
 										<div
