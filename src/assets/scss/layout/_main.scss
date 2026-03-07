@@ -85,12 +85,13 @@
 			
 			&.on-background-image {				
 				&:before, &:after {
-					background: _palette(bg);
+					background: #ffffff;
+					box-shadow: 0 0 20px 0px _palette(bg-dark);
 				}
 				
 				&:hover {					
 					&:before, &:after {
-						background: _palette(on-bg-image);
+						background: _palette(primary);
 					}
 				}
 			}
@@ -123,12 +124,13 @@
 			
 			&.on-background-image {				
 				&:before, &:after {
-					background: _palette(bg);
+					background: #ffffff;
+					box-shadow: 0 0 20px 0px _palette(bg-dark);
 				}
 				
 				&:hover {					
 					&:before, &:after {
-						background: _palette(on-bg-image);
+						background: _palette(primary);
 					}
 				}
 			}
