@@ -35,6 +35,22 @@ form {
 			min-height: 32px;
 			line-height: 32px;
 		}
+		
+		legend, label {
+			color: _palette(on-bg);
+			display: block;
+			font-size: 0.9rem;
+			font-family: _font(family-gui);
+			font-weight: _font(weight-gui);
+			letter-spacing: _font(letter-spacing-gui);
+			line-height: _font(lineheight-gui);
+			text-transform: _font(transform-gui);
+			margin: 0 0 (_size(element-margin) * 0.25) 0;
+			
+			@media print {
+				font-size: 0.6rem;
+			}
+		}
 	}
 
 	.actions {
@@ -71,22 +87,6 @@ form {
 				width: 100%;
 				float: none;
 			}
-		}
-	}
-
-	legend, label {
-		color: _palette(on-bg);
-		display: block;
-		font-size: 0.9rem;
-		font-family: _font(family-gui);
-		font-weight: _font(weight-gui);
-		letter-spacing: _font(letter-spacing-gui);
-		line-height: _font(lineheight-gui);
-		text-transform: _font(transform-gui);
-		margin: 0 0 (_size(element-margin) * 0.25) 0;
-		
-		@media print {
-			font-size: 0.6rem;
 		}
 	}
 
@@ -187,11 +187,11 @@ form {
 			color: _palette(on-bg);
 			cursor: pointer;
 			display: inline-block;
-			font-family: _font(family-gui);
-			font-weight: _font(weight-alt-gui);
-			letter-spacing: _font(letter-spacing-gui);
-			line-height: _font(lineheight-gui);
-			text-transform: _font(transform-gui);
+			font-family: _font(family-paragraph);
+			font-weight: _font(weight-paragraph);
+			letter-spacing: _font(letter-spacing-paragraph);
+			line-height: _font(lineheight-paragraph);
+			text-transform: _font(transform-paragraph);
 			font-size: 0.8rem;
 			margin: 0;
 			

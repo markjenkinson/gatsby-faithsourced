@@ -51,7 +51,7 @@ $font: (
 	letter-spacing-paragraph:	if(map-has-key($theme, 'font_paragraph_letterspacing'), map-get($theme, 'font_paragraph_letterspacing'), 0.3rem),
 	letter-spacing-gui:			if(map-has-key($theme, 'font_gui_letterspacing'), map-get($theme, 'font_gui_letterspacing'), 0.3rem),
 	transform-heading:			if(map-has-key($theme, 'font_headline_transform'), map-get($theme, 'font_headline_transform'), none),
-	transform-paragrah:			if(map-has-key($theme, 'font_paragraph_transform'), map-get($theme, 'font_paragraph_transform'), none),
+	transform-paragraph:		if(map-has-key($theme, 'font_paragraph_transform'), map-get($theme, 'font_paragraph_transform'), normal),
 	transform-gui:				if(map-has-key($theme, 'font_gui_transform'), map-get($theme, 'font_gui_transform'), none),
 	lineheight-heading:			if(map-has-key($theme, 'font_headline_line_height'), map-get($theme, 'font_headline_line_height'), normal),
 	lineheight-paragraph:		if(map-has-key($theme, 'font_paragraph_line_height'), map-get($theme, 'font_paragraph_line_height'), normal),
