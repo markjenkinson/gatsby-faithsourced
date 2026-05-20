@@ -31,7 +31,15 @@ article {
 			max-width: 100%;
 		}
 		
+		.row {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: stretch;
+		}
+		
 		.cell {
+			display: flex;
+			flex-direction: column;
 			position: relative;			
 			margin-bottom: _size(element-margin);
 			

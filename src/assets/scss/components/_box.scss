@@ -11,6 +11,8 @@
 	border: solid _size(border-width) transparentize(_palette(border), 0.75);
 	text-align: center;
 	overflow: hidden;
+	background-color: _palette(bg);
+	height: 100%;
 	
 	h2 {
 		margin: 0 0 (_size(element-margin) * 0.5) 0;
@@ -59,7 +61,7 @@
 		gap: 2rem;
   
 		.image {
-			flex: 0 0 40%;
+			flex: 0 0 54.2%;
 			top: auto;
 			
 			img {
