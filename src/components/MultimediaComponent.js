@@ -50,7 +50,7 @@ class MultimediaComponent extends React.Component {
 								/>
 							)}
 	
-							{data.file_name && (
+							{data.file_name && data.type != "9" && (
 								<a
 									href={data.file_url_local.publicURL}
 									target="_blank"
