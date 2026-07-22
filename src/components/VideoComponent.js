@@ -10,6 +10,7 @@ class VideoComponent extends React.Component {
 			playerVars: { // https://developers.google.com/youtube/player_parameters
 				autoplay: 0,
 				controls: 0,
+				cc_load_policy: 0,
 				showinfo: 0,
 				wmode: 'opaque',
 				rel: 0
