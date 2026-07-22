@@ -143,6 +143,10 @@ h6 {
 	font-size: 0.6rem;
 }
 
+li {
+	text-align: left;
+}
+
 @include breakpoint(small) {
 	h1 {
 		font-size: 1.75rem;
