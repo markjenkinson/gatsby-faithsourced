@@ -33,7 +33,9 @@
     "webfontloader": "^1.6.28"
   },
   "overrides": {
-    "sharp": "0.31.1"
+    "sharp": "0.31.1",
+    "sanitize-html": "2.13.1",
+    "htmlparser2": "9.1.0"
   },
   "keywords": [
     "gatsby"
