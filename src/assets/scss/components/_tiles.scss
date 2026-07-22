@@ -189,7 +189,7 @@
 			
 			&:after {
 				opacity: 0.3;
-				background-color: _palette(bg-dark);
+				background-color: _palette(primary);
 			}
 			
 			button {
@@ -366,7 +366,7 @@
 		margin: 0 -1rem;
 		
 		article {
-			@include padding(3rem, 1.5rem);
+			padding: 1.5rem 1.5rem 3rem 1.5rem;
 			width: 100%;
 			height: auto;
 			max-height: none;
